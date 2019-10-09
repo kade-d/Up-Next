@@ -1,10 +1,10 @@
 # FP-UpNext
 Desktop Java Application for minigames
 
-To run the build from Intellij Idea:
-Build the project (Ctrl+F9).
+<h2>To run the build from Intellij Idea:</h2>
+Build the project (Ctrl+F9).<br>
 
-Click on the Maven tool side toolbar.
-Click the "m" icon in the Maven side window.
-Set command line options to "clean javafx:run".
-Click "Execute".
+Click on the Maven tool side toolbar.<br>
+Click the "m" icon in the Maven side window.<br>
+Set command line options to "clean javafx:run".<br>
+Click "Execute".<br>
