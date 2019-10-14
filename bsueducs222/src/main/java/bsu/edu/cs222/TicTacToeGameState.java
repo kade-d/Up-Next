@@ -2,9 +2,9 @@ package bsu.edu.cs222;
 
 public class TicTacToeGameState {
 
-    private int[] row1 = new int[3];
-    private int[] row2 = new int[3];
-    private int[] row3 = new int[3];
+    public int[] row1 = new int[3];
+    public int[] row2 = new int[3];
+    public int[] row3 = new int[3];
 
     public int checkBoard(){
         if(checkHorizontals() != 0){
