@@ -22,8 +22,8 @@ public class AppTest
     @Test
     public void ticTacToeCellsAreFlaggedCorrectly() {
         TicTacToe ticTacToe = new TicTacToe();
-        ticTacToe.playerMove(0);
-        assertEquals(ticTacToe.gameState.row1[0], 1);
+        ticTacToe.playerMove(5);
+        assertEquals(ticTacToe.gameState.cells[5], 1);
     }
 
     @Test
@@ -32,6 +32,6 @@ public class AppTest
         ticTacToe.playerMove(0);
         ticTacToe.playerMove(1);
         ticTacToe.playerMove(2);
-        assertEquals(ticTacToe.victor, "Player");
+        assertEquals("Player",ticTacToe.victor);
     }
 }
