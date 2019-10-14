@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+    /*@author Kade Dentel
+    * */
+
 public class MainMenu extends Application {
 
     @Override
@@ -22,14 +25,11 @@ public class MainMenu extends Application {
         catch (IOException e){
             e.printStackTrace();
         }
-
         Scene scene = new Scene(page, 800, 600); //Controls size of window
 
-        stage.setTitle("Project 1: Wiki");
-
+        stage.setTitle("Project 1: Up Next");
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static void main(String[] args) {
