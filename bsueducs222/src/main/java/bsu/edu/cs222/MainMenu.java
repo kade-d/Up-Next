@@ -15,7 +15,7 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage stage) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
 
         AnchorPane page = new AnchorPane();
 
