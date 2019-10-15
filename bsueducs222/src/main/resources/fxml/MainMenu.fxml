@@ -7,6 +7,6 @@
 
 <AnchorPane prefHeight="598.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
     <Label layoutX="347.0" layoutY="25.0" text="Up Next Main Menu" />
-    <Button fx:id="GauntletModeButton" layoutX="32.0" layoutY="70.0" mnemonicParsing="false" prefHeight="99.0" prefWidth="175.0" text="Gauntlet Mode" />
+    <Button fx:id="GauntletModeButton" layoutX="32.0" layoutY="70.0" mnemonicParsing="false" onAction="#startTicTacToe" prefHeight="99.0" prefWidth="175.0" text="Gauntlet Mode" />
     <Pane fx:id="GameWindow" layoutX="264.0" layoutY="70.0" opacity="0.57" prefHeight="500.0" prefWidth="500.0" />
 </AnchorPane>
