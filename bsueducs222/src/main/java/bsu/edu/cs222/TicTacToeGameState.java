@@ -2,9 +2,32 @@ package bsu.edu.cs222;
 
 public class TicTacToeGameState {
 
+    public int[] cells = new int[9];
     public int[] row1 = new int[3];
     public int[] row2 = new int[3];
     public int[] row3 = new int[3];
+
+    public void addMove(int cell, int player){
+        if(cells[cell] == 0){
+            cells[cell] = player;
+            addMoveToRow(cell, player);
+        }
+        else{
+            System.out.println("Cell is already used.");
+        }
+    }
+
+    private void addMoveToRow(int cell, int player){
+        if(cell <= 2){
+            row1[cell] = player;
+        }
+        else if(cell <= 5){
+            row2[cell - 3] = player;
+        }
+        else if(cell <= 8){
+            row3[cell - 6] = player;
+        }
+    }
 
     public int checkBoard(){
         if(checkHorizontals() != 0){

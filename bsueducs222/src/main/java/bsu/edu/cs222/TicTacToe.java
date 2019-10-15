@@ -12,28 +12,12 @@ public class TicTacToe {
     }
 
     public void playerMove(int cell){
-        if(cell <= 2){
-            gameState.row1[cell] = 1;
-        }
-        else if(cell <= 5){
-            gameState.row2[cell - 3] = 1;
-        }
-        else if(cell <= 8){
-            gameState.row3[cell - 6] = 1;
-        }
+        gameState.addMove(cell, 1);
         checkVictory();
     }
 
     public void computerMove(int cell){
-        if(cell <= 2){
-            gameState.row1[cell] = 2;
-        }
-        else if(cell <= 5){
-            gameState.row2[cell - 3] = 2;
-        }
-        else if(cell <= 8){
-            gameState.row3[cell - 6] = 2;
-        }
+        gameState.addMove(cell, 2);
         checkVictory();
     }
 
