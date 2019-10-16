@@ -18,6 +18,7 @@ public class Controller {
     @FXML
     private Button gauntletModeButton;
 
+
     public void initialize(){
         setGauntletModeButtonAction();
     }
@@ -27,7 +28,6 @@ public class Controller {
             @Override
             public void handle(ActionEvent event) {
                 startTicTacToe();
-
             }
         });
     }
@@ -45,4 +45,5 @@ public class Controller {
         }
         gamePane.getChildren().add(ticTacToePane);
     }
+
 }
