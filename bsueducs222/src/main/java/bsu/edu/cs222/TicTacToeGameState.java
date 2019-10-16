@@ -1,19 +1,43 @@
 package bsu.edu.cs222;
 
+import java.util.ArrayList;
+
 public class TicTacToeGameState {
 
     public int[] cells = new int[9];
     public int[] row1 = new int[3];
     public int[] row2 = new int[3];
     public int[] row3 = new int[3];
+    public int[] col1 = new int[3];
+    public int[] col2 = new int[3];
+    public int[] col3 = new int[3];
+    public int[] diag1 = new int[3];
+    public int[] diag2 = new int[3];
+    public ArrayList<int[]> lines = new ArrayList<>();
+
+    public TicTacToeGameState() {
+        updateLines();
+    }
+
+    public void updateLines(){
+        lines.clear();
+        lines.add(row1);
+        lines.add(row2);
+        lines.add(row3);
+        lines.add(col1);
+        lines.add(col2);
+        lines.add(col3);
+        lines.add(diag1);
+        lines.add(diag2);
+    }
 
     public void addMove(int cell, int player){
         if(cells[cell] == 0){
             cells[cell] = player;
             addMoveToRow(cell, player);
-        }
-        else{
-            System.out.println("Cell is already used.");
+            addMoveToColumn(cell, player);
+            addMoveToDiagonal(cell, player);
+            updateLines();
         }
     }
 
@@ -26,6 +50,37 @@ public class TicTacToeGameState {
         }
         else if(cell <= 8){
             row3[cell - 6] = player;
+        }
+    }
+
+    private void addMoveToColumn(int cell, int player){
+        if(cell % 3 == 0){
+            col1[cell / 3] = player;
+        }
+        else if(cell % 3 == 1){
+            col2[cell / 3] = player;
+        }
+        else if(cell % 3 == 2){
+            col3[cell / 3] = player;
+        }
+    }
+
+    private void addMoveToDiagonal(int cell, int player){
+        if(cell == 0){
+            diag1[0] = player;
+        }
+        if(cell == 2){
+            diag2[0] = player;
+        }
+        if(cell == 4){
+            diag1[1] = player;
+            diag2[1] = player;
+        }
+        if(cell == 6){
+            diag2[2] = player;
+        }
+        if(cell == 8){
+            diag1[2] = player;
         }
     }
 
@@ -101,5 +156,17 @@ public class TicTacToeGameState {
 
     private boolean cellIsEmpty(int num){
         return (num == 0);
+    }
+
+    public ArrayList<Integer> findOpenCells(){
+        ArrayList<Integer> openCells = new ArrayList<>();
+
+        for(int i = 0; i < 9; i++){
+            if(cells[i] == 0){
+                openCells.add(i);
+            }
+        }
+
+        return openCells;
     }
 }
