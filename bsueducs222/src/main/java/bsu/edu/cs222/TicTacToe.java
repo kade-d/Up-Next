@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TicTacToe {
 
-    //TODO Author: Adam
+    //Author: Adam
 
     public TicTacToeGameState gameState = new TicTacToeGameState();
     public String victor = null;
@@ -18,16 +18,34 @@ public class TicTacToe {
         ArrayList<int[]> lines = gameState.lines;
         int lineIndex = -1;
         int cellIndex = -1;
+        int priorityLineIndex = -1;
+        int priorityCellIndex = -1;
         for(int i = 0; i < lines.size(); i++) {
             if(findCellToBeMarked(lines.get(i)) != -1){
-                lineIndex = i;
-                cellIndex = findCellToBeMarked(lines.get(i));
+                if(findCellToBeMarked(lines.get(i)) > 2){
+                    priorityLineIndex = i;
+                    priorityCellIndex = findCellToBeMarked(lines.get(i)) - 3;
+                    System.out.println("Line: " + priorityLineIndex + " Cell: " + priorityCellIndex);
+                }
+                else {
+                    lineIndex = i;
+                    cellIndex = findCellToBeMarked(lines.get(i));
+                }
             }
         }
         if(lineIndex == -1){
+            if(gameState.cells[4] == 0 && Math.floor(Math.random() * 2) == 0){
+                return 4;
+            }
             return -1;
         }
-        else {
+        else if(priorityCellIndex != -1){
+            int cell = findCellIndexFromLineIndex(priorityLineIndex, priorityCellIndex);
+            gameState.addMove(cell, 2);
+            checkVictory();
+            return cell;
+        }
+        else{
             int cell = findCellIndexFromLineIndex(lineIndex, cellIndex);
             gameState.addMove(cell, 2);
             checkVictory();
@@ -53,7 +71,9 @@ public class TicTacToe {
                 oCellsInARow = 0;
             }
             if(oCellsInARow == 2 && totalXCells == 0){
-                return findEmptyCell(line);
+                if(findEmptyCell(line) != -1) {
+                    return findEmptyCell(line) + 3;
+                }
             }
             if(xCellsInARow == 2 && totalOCells == 0){
                 return findEmptyCell(line);
