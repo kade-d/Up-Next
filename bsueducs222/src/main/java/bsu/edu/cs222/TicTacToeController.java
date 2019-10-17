@@ -1,9 +1,8 @@
 package bsu.edu.cs222;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-
-import java.awt.*;
 
 public class TicTacToeController {
 
@@ -15,7 +14,7 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellZero() {
-        cell0.setLabel("X");
+        cell0.setText("X");
         System.out.println("Cell 0 selected");
         playerMove(0);
     }
