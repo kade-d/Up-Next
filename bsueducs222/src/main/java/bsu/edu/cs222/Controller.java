@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -17,6 +18,9 @@ public class Controller {
 
     @FXML
     private Button gauntletModeButton;
+
+    @FXML
+    private Label gameName;
 
 
     public void initialize(){
@@ -44,6 +48,7 @@ public class Controller {
             e.printStackTrace();
         }
         gamePane.getChildren().add(ticTacToePane);
+        gameName.setText("Tic Tac Toe");
     }
 
 }
