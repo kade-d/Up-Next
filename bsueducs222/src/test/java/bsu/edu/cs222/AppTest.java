@@ -34,4 +34,25 @@ public class AppTest
         ticTacToe.playerMove(2);
         assertEquals("Player",ticTacToe.victor);
     }
+
+    @Test
+    public void ticTacToeRowsAreCorrectlyMarked() {
+        TicTacToe ticTacToe = new TicTacToe();
+        ticTacToe.playerMove(4);
+        assertEquals(1, ticTacToe.gameState.row2[1]);
+    }
+
+    @Test
+    public void ticTacToeColumnsAreCorrectlyMarked() {
+        TicTacToe ticTacToe = new TicTacToe();
+        ticTacToe.playerMove(4);
+        assertEquals(1, ticTacToe.gameState.col2[1]);
+    }
+
+    @Test
+    public void ticTacToeDiagonalsAreCorrectlyMarked() {
+        TicTacToe ticTacToe = new TicTacToe();
+        ticTacToe.playerMove(4);
+        assertEquals(1, ticTacToe.gameState.diag1[1]);
+    }
 }
