@@ -2,10 +2,12 @@ package bsu.edu.cs222;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -223,7 +225,8 @@ public class TicTacToeController {
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             System.out.println(winner + " won!");
             gameIsPlaying = false;
-            updateGauntletProgress();
+            refreshScene();
+            saveWinToXML();
         }
     }
 
@@ -253,19 +256,25 @@ public class TicTacToeController {
         return null;
     }
 
-    private void updateGauntletProgress(){
-        Controller controller = null;
-        try{
-            FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
-            AnchorPane page = loader.load();
-            controller = loader.getController();
-        }
-        catch (IOException e){
+    private void saveWinToXML(){
+        FileIO fileIO = new FileIO();
+        String filePath = fileIO.findXMLPath();
+        ArrayList<Game> gameProgress = new ArrayList<>();
+        Game game = new Game("TicTacToe", true);
+        gameProgress.add(game);
+        fileIO.saveToXML(filePath, gameProgress);
+    }
+
+    private void refreshScene(){
+        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
+        Stage stage = (Stage) board.getScene().getWindow();
+        AnchorPane page = new AnchorPane();
+        try {
+            page = loader.load();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        if(controller != null){
-            controller.addGauntletProgress("TicTacToe", true);
-            controller.startGauntletMode();
-        }
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
     }
 }

@@ -13,51 +13,73 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Controller {
+public class Controller extends MainMenu{
 
     @FXML
-    private Pane gamePane;
+    Pane gamePane;
 
     @FXML
     private Button gauntletModeButton;
 
     @FXML
-    public Button nextGameButton;
+    private Button restartGauntletModeButton;
 
     @FXML
-    private Label gameName;
+    Label gameName;
 
-    private HashMap<String, Boolean> gauntletProgress = new HashMap<>();
+    private ArrayList<Game> gauntletProgress = new ArrayList<>();
 
 
     public void initialize(){
         setGauntletModeButtonAction();
+        setRestartGauntletModeButtonAction();
+        updateGauntletProgress();
     }
 
-    void addGauntletProgress(String game, Boolean gameCompleted) {
-        this.gauntletProgress.put(game, gameCompleted);
+    private void updateGauntletProgress(){
+        FileIO fileIO = new FileIO();
+        String filePath = fileIO.findXMLPath();
+        gauntletProgress = fileIO.readXML(filePath);
     }
 
     private void setGauntletModeButtonAction(){
         gauntletModeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                updateGauntletProgress();
                 startGauntletMode();
+                hideModeButtons();
             }
         });
     }
 
-    void startGauntletMode(){
-        System.out.println(gauntletProgress);
-        if(gauntletProgress.isEmpty()){
+    private void setRestartGauntletModeButtonAction(){
+        restartGauntletModeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                startGauntletModeFromBeginning();
+                hideModeButtons();
+            }
+        });
+    }
+
+    private void hideModeButtons(){
+        gauntletModeButton.setVisible(false);
+        restartGauntletModeButton.setVisible(false);
+    }
+
+    private void startGauntletMode(){
+        if(gauntletProgress.size() == 0){
+            System.out.println("Size = 0");
             startTicTacToe();
-        }
-        else if (gauntletProgress.get("TicTacToe").equals(true)){
-            startMemoryCard();
         }
         else{
-            startTicTacToe();
+            startMemoryCard();
         }
+    }
+
+    private void startGauntletModeFromBeginning(){
+        startTicTacToe();
     }
 
     private void startTicTacToe(){
@@ -76,7 +98,6 @@ public class Controller {
     }
 
     private void startMemoryCard(){
-        nextGameButton.setVisible(true);
         FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MemoryMatch.fxml"));
         AnchorPane memoryCardPane = new AnchorPane();
 
