@@ -1,20 +1,28 @@
 package bsu.edu.cs222;
 
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-import org.xml.sax.*;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class FileIO {
+class FileIO {
 
-    public String findXMLPath(){
+    String findXMLPath() {
         String filePath = new File("").getAbsolutePath();
         filePath = filePath.concat("\\GameProgress.xml");
 
@@ -22,7 +30,7 @@ public class FileIO {
     }
 
 
-    public ArrayList<Game> readXML(String filePath) {
+    ArrayList<Game> readXML(String filePath) {
 
         ArrayList<Game> gameProgress = new ArrayList<>();
         Document dom;
@@ -36,9 +44,9 @@ public class FileIO {
             String gameName = "";
             String gameCompleted = "";
 
-            for(int i = 0; i < nList.getLength(); i++){
+            for (int i = 0; i < nList.getLength(); i++) {
                 Node node = nList.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     gameName = element.getElementsByTagName("gameName").item(0).getTextContent();
                     gameCompleted = element.getElementsByTagName("gameCompleted").item(0).getTextContent();
@@ -49,18 +57,13 @@ public class FileIO {
             }
 
 
-        } catch (ParserConfigurationException pce) {
-            System.out.println(pce.getMessage());
-        } catch (SAXException se) {
-            System.out.println(se.getMessage());
-        } catch (IOException ioe) {
-            System.err.println(ioe.getMessage());
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            System.err.println(e.getMessage());
         }
-
         return gameProgress;
     }
 
-    public void saveToXML(String filePath, ArrayList<Game> gameProgress) {
+    void saveToXML(String filePath, ArrayList<Game> gameProgress) {
         Document dom;
         Element e;
 
