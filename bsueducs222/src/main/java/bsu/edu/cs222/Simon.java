@@ -5,15 +5,5 @@ import javafx.scene.control.Button;
 
 public class Simon {
     //Author: Clay Grider
-
-
     public SimonController controller = new SimonController();
-
-    public void playerMove(){
-    }
-
-    public void start(){
-
-    }
-
 }
