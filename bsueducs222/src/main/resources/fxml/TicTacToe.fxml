@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.TicTacToeController">
+   <children>
+      <GridPane fx:id="board" gridLinesVisible="true" prefHeight="500.0" prefWidth="500.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="cell0" mnemonicParsing="false" onAction="#handleCellZero" prefHeight="167.0" prefWidth="167.0">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCellOne" prefHeight="167.0" prefWidth="167.0" GridPane.columnIndex="1">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell2" layoutX="177.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCellTwo" prefHeight="167.0" prefWidth="167.0" GridPane.columnIndex="2">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell3" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCellThree" prefHeight="167.0" prefWidth="167.0" GridPane.rowIndex="1">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell4" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCellFour" prefHeight="167.0" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell5" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCellFive" prefHeight="167.0" prefWidth="167.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell6" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCellSix" prefHeight="167.0" prefWidth="167.0" GridPane.rowIndex="2">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell7" layoutX="344.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleCellSeven" prefHeight="167.0" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+            <Button fx:id="cell8" layoutX="177.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleCellEight" prefHeight="167.0" prefWidth="167.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="78.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
