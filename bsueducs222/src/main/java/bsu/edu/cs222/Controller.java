@@ -102,6 +102,7 @@ public class Controller extends MainMenu {
         catch (IOException e){
             e.printStackTrace();
         }
+        gamePane.getChildren().clear();
         gamePane.getChildren().add(ticTacToePane);
         gameName.setText("Tic Tac Toe");
     }
@@ -116,12 +117,12 @@ public class Controller extends MainMenu {
         catch (IOException e){
             e.printStackTrace();
         }
-        gamePane.getChildren().removeAll();
+        gamePane.getChildren().clear();
         gamePane.getChildren().add(memoryCardPane);
         gameName.setText("Memory Match");
     }
 
-    private void startSimon(){
+    void startSimon() {
         FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/Simon.fxml"));
         AnchorPane simonPane = new AnchorPane();
 
@@ -131,7 +132,7 @@ public class Controller extends MainMenu {
         catch (IOException e){
             e.printStackTrace();
         }
-        gamePane.getChildren().removeAll();
+        gamePane.getChildren().clear();
         gamePane.getChildren().add(simonPane);
         gameName.setText("Simon");
     }

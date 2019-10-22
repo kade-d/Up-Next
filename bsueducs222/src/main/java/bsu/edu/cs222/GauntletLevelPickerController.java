@@ -1,6 +1,7 @@
 package bsu.edu.cs222;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,27 +14,38 @@ public class GauntletLevelPickerController {
     private List<Button> levelButtons;
 
     void initialize(final Controller mainController) {
-        System.out.println("initialized");
-        int i = 0;
+        int i;
         for (i = 0; i < levelButtons.size(); i++) {
             final Button button = levelButtons.get(i);
-            final int j = i;
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    handleLevelButtonClicks(button, j, mainController);
-                }
-            });
+            final int j = i + 1;
+            button.setOnAction(makeEventHandlerForLevel(j, mainController));
         }
     }
 
-    private void handleLevelButtonClicks(Button button, final int buttonIndex, final Controller mainController) {
-        switch (buttonIndex) {
-            case 0:
-                mainController.startTicTacToe();
-
-            case 1:
-                mainController.startMemoryCard();
+    private EventHandler<ActionEvent> makeEventHandlerForLevel(int buttonIndex, final Controller mainController) {
+        EventHandler eventHandler = null;
+        if (buttonIndex == 1) {
+            eventHandler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    mainController.startTicTacToe();
+                }
+            };
+        } else if (buttonIndex == 2) {
+            eventHandler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    mainController.startSimon();
+                }
+            };
+        } else if (buttonIndex == 3) {
+            eventHandler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    mainController.startMemoryCard();
+                }
+            };
         }
+        return eventHandler;
     }
 }
