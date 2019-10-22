@@ -72,14 +72,20 @@ public class Controller extends MainMenu {
     }
 
     private void startGauntletMode(){
-        if(gauntletProgress.size() == 0){
-            System.out.println("Size = 0");
-            startTicTacToe();
+            if(gauntletProgress.size() == 0){
+                System.out.println("Tic Tac Toe not completed");
+                startTicTacToe();
+            }
+            if(gauntletProgress.size() > 0){
+                if(gauntletProgress.get(0).getGameCompleted()){
+                    System.out.println("Only Tic Tac Toe completed");
+                    startSimon();
+                }
+                else{
+                    startMemoryCard();
+                }
+            }
         }
-        else{
-            startMemoryCard();
-        }
-    }
 
     private void startGauntletModeFromBeginning(){
         startTicTacToe();
@@ -115,4 +121,18 @@ public class Controller extends MainMenu {
         gameName.setText("Memory Match");
     }
 
+    private void startSimon(){
+        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/Simon.fxml"));
+        AnchorPane simonPane = new AnchorPane();
+
+        try{
+            simonPane = loader.load();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        gamePane.getChildren().removeAll();
+        gamePane.getChildren().add(simonPane);
+        gameName.setText("Simon");
+    }
 }
