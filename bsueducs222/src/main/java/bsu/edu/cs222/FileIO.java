@@ -29,7 +29,6 @@ class FileIO {
         return filePath;
     }
 
-
     ArrayList<Game> readXML(String filePath) {
 
         ArrayList<Game> gameProgress = new ArrayList<>();
@@ -75,7 +74,6 @@ class FileIO {
 
             Element rootEle = dom.createElement("gameProgress");
             dom.appendChild(rootEle);
-
 
             for(Game game: gameProgress){
                 // create data elements and place them under root

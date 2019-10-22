@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Controller extends MainMenu{
+public class Controller extends MainMenu {
 
     @FXML
     Pane gamePane;
@@ -26,10 +26,14 @@ public class Controller extends MainMenu{
     @FXML
     Label gameName;
 
+    @FXML
+    GauntletLevelPickerController levelPickerController;
+
     private ArrayList<Game> gauntletProgress = new ArrayList<>();
 
 
     public void initialize(){
+        levelPickerController.initialize(this);
         setGauntletModeButtonAction();
         setRestartGauntletModeButtonAction();
         updateGauntletProgress();
@@ -81,7 +85,7 @@ public class Controller extends MainMenu{
         startTicTacToe();
     }
 
-    private void startTicTacToe(){
+    void startTicTacToe() {
         FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/TicTacToe.fxml"));
 
         AnchorPane ticTacToePane = new AnchorPane();
@@ -96,7 +100,7 @@ public class Controller extends MainMenu{
         gameName.setText("Tic Tac Toe");
     }
 
-    private void startMemoryCard(){
+    void startMemoryCard() {
         FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MemoryMatch.fxml"));
         AnchorPane memoryCardPane = new AnchorPane();
 
