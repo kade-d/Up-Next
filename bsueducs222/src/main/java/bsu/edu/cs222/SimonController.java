@@ -182,15 +182,10 @@ public class SimonController {
         }
     }
 
-
-
-    public void nextGameLoad(javafx.event.ActionEvent event){
-    }
-
     public void nextLevel(javafx.event.ActionEvent event){
         answer = "";
         enableOptions();
-        level = level++;
+        level = level + 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
         labelOutput.setText("Question: " + question);
