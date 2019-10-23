@@ -30,7 +30,6 @@ class FileIO {
     }
 
     ArrayList<Game> readXML(String filePath) {
-
         ArrayList<Game> gameProgress = new ArrayList<>();
         Document dom;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

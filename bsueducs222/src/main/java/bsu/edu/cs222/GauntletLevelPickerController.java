@@ -1,7 +1,6 @@
 package bsu.edu.cs222;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,25 +28,25 @@ public class GauntletLevelPickerController {
     }
 
     private EventHandler<ActionEvent> makeEventHandlerForLevel(int buttonIndex, final Controller mainController) {
-        EventHandler eventHandler = null;
+        EventHandler<ActionEvent> eventHandler = null;
         if (buttonIndex == 1) {
-            eventHandler = new EventHandler() {
+            eventHandler = new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(Event event) {
+                public void handle(ActionEvent event) {
                     mainController.startTicTacToe();
                 }
             };
         } else if (buttonIndex == 2) {
-            eventHandler = new EventHandler() {
+            eventHandler = new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(Event event) {
+                public void handle(ActionEvent event) {
                     mainController.startSimon();
                 }
             };
         } else if (buttonIndex == 3) {
-            eventHandler = new EventHandler() {
+            eventHandler = new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(Event event) {
+                public void handle(ActionEvent event) {
                     mainController.startMemoryCard();
                 }
             };
@@ -56,28 +55,25 @@ public class GauntletLevelPickerController {
     }
 
     private void disableLockedLevels() {
-        String unlockedLevelsString = getLevelNumbersForUnlockedLevels();
-        int lengthOfLevelString = unlockedLevelsString.length();
-        for (int j = 0; j < lengthOfLevelString + 1; j++) {
+        int unlockedLevels = getLevelNumbersForUnlockedLevels();
+        for (int j = 0; j < unlockedLevels + 1; j++) {
             levelButtons.get(j).setDisable(false);
         }
-        for (int i = lengthOfLevelString + 1; i < levelButtons.size(); i++) {
+        for (int i = unlockedLevels + 1; i < levelButtons.size(); i++) {
             levelButtons.get(i).setDisable(true);
         }
     }
 
-    private String getLevelNumbersForUnlockedLevels() {
-        String unlockedLevelsString = "";
+    private int getLevelNumbersForUnlockedLevels() {
+        int unlockedLevels = 0;
         ArrayList<Game> gameProgress = getGameProgress();
+        gameProgress.size();
         for (Game game : gameProgress) {
-            if (game.getGameName().equals("TicTacToe")) {
-                if (game.getGameCompleted()) {
-                    unlockedLevelsString = unlockedLevelsString.concat("1"); //Level 1 Completed
-                }
+            if (game.getGameCompleted()) {
+                unlockedLevels += 1;
             }
         }
-        System.out.println(unlockedLevelsString);
-        return unlockedLevelsString;
+        return unlockedLevels;
     }
 
     private ArrayList<Game> getGameProgress() {

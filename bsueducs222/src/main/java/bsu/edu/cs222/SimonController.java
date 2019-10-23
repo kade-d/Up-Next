@@ -4,16 +4,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class SimonController {
     //Author: Clay Grider
@@ -44,11 +40,6 @@ public class SimonController {
     @FXML
     Label labelOutput;
 
-    @FXML
-    AnchorPane board;
-
-    private Simon game;
-
     private int level = 0;
 
     private String answer = "";
@@ -65,10 +56,8 @@ public class SimonController {
             if(checkAnswers() == true){
                 if(checkCompletion() == false) {
                     nextLevel.setDisable(false);
-                }
-                else{//Winning Condition
-                    refreshScene();
-                    saveWinToXML();
+                } else {  //Winning Condition
+                    endSimon();
                 }
             }
             else{
@@ -87,8 +76,7 @@ public class SimonController {
                     nextLevel.setDisable(false);
                 }
                 else{//Winning Condition
-                    refreshScene();
-                    saveWinToXML();
+                    endSimon();
                 }
             }
             else{
@@ -107,8 +95,7 @@ public class SimonController {
                     nextLevel.setDisable(false);
                 }
                 else{
-                    refreshScene();
-                    saveWinToXML();
+                    endSimon();
                 }
             }
             else{
@@ -127,14 +114,18 @@ public class SimonController {
                     nextLevel.setDisable(false);
                 }
                 else{
-                    refreshScene();
-                    saveWinToXML();
+                    endSimon();
                 }
             }
             else{
                 labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
             }
         }
+    }
+
+    private void endSimon() {
+        saveWinToXML();
+        refreshScene();
     }
 
     private boolean checkAnswers(){
@@ -210,7 +201,6 @@ public class SimonController {
     public void startNewGame(javafx.event.ActionEvent event){
         answer = "";
         enableOptions();
-        game = new Simon();
         level = 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
@@ -221,7 +211,7 @@ public class SimonController {
     private void saveWinToXML(){
         FileIO fileIO = new FileIO();
         String filePath = fileIO.findXMLPath();
-        ArrayList<Game> gameProgress = new ArrayList<>();
+        ArrayList<Game> gameProgress = fileIO.readXML(filePath);
         Game game = new Game("Simon", true);
         gameProgress.add(game);
         fileIO.saveToXML(filePath, gameProgress);

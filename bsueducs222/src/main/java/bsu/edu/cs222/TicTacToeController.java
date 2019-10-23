@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -259,7 +258,7 @@ public class TicTacToeController {
     private void saveWinToXML(){
         FileIO fileIO = new FileIO();
         String filePath = fileIO.findXMLPath();
-        ArrayList<Game> gameProgress = new ArrayList<>();
+        ArrayList<Game> gameProgress = fileIO.readXML(filePath);
         Game game = new Game("TicTacToe", true);
         gameProgress.add(game);
         fileIO.saveToXML(filePath, gameProgress);
