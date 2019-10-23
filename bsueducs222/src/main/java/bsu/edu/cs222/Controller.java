@@ -72,14 +72,15 @@ public class Controller extends MainMenu {
     }
 
     private void startGauntletMode(){
+        int levelsCompleted = 0;
             if(gauntletProgress.size() == 0){
                 System.out.println("Tic Tac Toe not completed");
                 startTicTacToe();
             }
             if(gauntletProgress.size() > 0){
                 if(gauntletProgress.get(0).getGameCompleted()){
-                    System.out.println("Only Tic Tac Toe completed");
-                    startSimon();
+                    System.out.println("Tic Tac Toe completed");
+                    levelsCompleted += 1;
                 }
                 else{
                     startMemoryCard();

@@ -1,12 +1,17 @@
 package bsu.edu.cs222;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -39,6 +44,9 @@ public class SimonController {
     @FXML
     Label labelOutput;
 
+    @FXML
+    AnchorPane board;
+
     private Simon game;
 
     private int level = 0;
@@ -58,9 +66,11 @@ public class SimonController {
                 if(checkCompletion() == false) {
                     nextLevel.setDisable(false);
                 }
-                else{
-                    nextGame.setDisable(false);
-                }            }
+                else{//Winning Condition
+                    refreshScene();
+                    saveWinToXML();
+                }
+            }
             else{
                 labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
             }
@@ -76,9 +86,11 @@ public class SimonController {
                 if(checkCompletion() == false) {
                     nextLevel.setDisable(false);
                 }
-                else{
-                    nextGame.setDisable(false);
-                }            }
+                else{//Winning Condition
+                    refreshScene();
+                    saveWinToXML();
+                }
+            }
             else{
                 labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
             }
@@ -95,8 +107,10 @@ public class SimonController {
                     nextLevel.setDisable(false);
                 }
                 else{
-                    nextGame.setDisable(false);
-                }            }
+                    refreshScene();
+                    saveWinToXML();
+                }
+            }
             else{
                 labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
             }
@@ -113,7 +127,8 @@ public class SimonController {
                     nextLevel.setDisable(false);
                 }
                 else{
-                    nextGame.setDisable(false);
+                    refreshScene();
+                    saveWinToXML();
                 }
             }
             else{
@@ -192,9 +207,6 @@ public class SimonController {
         nextLevel.setDisable(true);
     }
 
-    public void saveWinToXML(){
-    }
-
     public void startNewGame(javafx.event.ActionEvent event){
         answer = "";
         enableOptions();
@@ -204,5 +216,27 @@ public class SimonController {
         generateOrder();
         labelOutput.setText("Question: " + question);
         nextLevel.setDisable(true);
+    }
+
+    private void saveWinToXML(){
+        FileIO fileIO = new FileIO();
+        String filePath = fileIO.findXMLPath();
+        ArrayList<Game> gameProgress = new ArrayList<>();
+        Game game = new Game("Simon", true);
+        gameProgress.add(game);
+        fileIO.saveToXML(filePath, gameProgress);
+    }
+
+    private void refreshScene(){
+        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
+        Stage stage = (Stage) nextLevel.getScene().getWindow();
+        AnchorPane page = new AnchorPane();
+        try {
+            page = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
     }
 }
