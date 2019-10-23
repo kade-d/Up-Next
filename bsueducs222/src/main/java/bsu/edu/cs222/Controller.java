@@ -27,7 +27,7 @@ public class Controller extends MainMenu {
     Label gameName;
 
     @FXML
-    GauntletLevelPickerController levelPickerController;
+    private GauntletLevelPickerController levelPickerController; //appends "Controller" to id of included fxml file
 
     private ArrayList<Game> gauntletProgress = new ArrayList<>();
 
