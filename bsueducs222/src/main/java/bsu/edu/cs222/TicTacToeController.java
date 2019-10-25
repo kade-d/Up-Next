@@ -223,9 +223,14 @@ public class TicTacToeController {
         if(game.gameState.checkBoard() != 0 || turnNumber == 9){
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             System.out.println(winner + " won!");
-            gameIsPlaying = false;
-            saveWinToXML();
-            refreshScene();
+            if(winner.equals("Player")){
+                gameIsPlaying = false;
+                saveWinToXML();
+                refreshScene();
+            }
+            else{
+                restartGame();
+            }
         }
     }
 
@@ -275,5 +280,15 @@ public class TicTacToeController {
         }
         Scene scene = new Scene(page);
         stage.setScene(scene);
+    }
+
+    public void restartGame(){
+        gameIsPlaying = false;
+        gameNotStarted = true;
+        game.gameState.reset();
+        for(Button cell : cellList){
+            cell.setText("");
+        }
+        turnNumber = 0;
     }
 }

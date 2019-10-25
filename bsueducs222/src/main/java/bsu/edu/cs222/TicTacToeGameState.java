@@ -31,6 +31,19 @@ public class TicTacToeGameState {
         lines.add(diag2);
     }
 
+    public void reset(){
+        cells = new int[9];
+        row1 = new int[3];
+        row2 = new int[3];
+        row3 = new int[3];
+        col1 = new int[3];
+        col2 = new int[3];
+        col3 = new int[3];
+        diag1 = new int[3];
+        diag2 = new int[3];
+        updateLines();
+    }
+
     public void addMove(int cell, int player){
         if(cells[cell] == 0){
             cells[cell] = player;
