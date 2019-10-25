@@ -179,7 +179,9 @@ public class TicTacToeController {
             turnNumber++;
             cell8.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -290,5 +292,6 @@ public class TicTacToeController {
             cell.setText("");
         }
         turnNumber = 0;
+        startGame();
     }
 }

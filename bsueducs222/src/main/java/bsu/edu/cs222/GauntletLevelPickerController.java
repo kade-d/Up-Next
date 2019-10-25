@@ -51,6 +51,14 @@ public class GauntletLevelPickerController {
                 }
             };
         }
+        else if (buttonIndex == 4) {
+            eventHandler = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    mainController.startMinesweeper();
+                }
+            };
+        }
         return eventHandler;
     }
 

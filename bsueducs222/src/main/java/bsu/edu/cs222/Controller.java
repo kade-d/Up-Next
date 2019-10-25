@@ -69,4 +69,19 @@ public class Controller extends MainMenu {
         gamePane.getChildren().add(simonPane);
         gameName.setText("Simon");
     }
+
+    void startMinesweeper() {
+        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/Minesweeper.fxml"));
+        AnchorPane minesweeperPane = new AnchorPane();
+
+        try{
+            minesweeperPane = loader.load();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        gamePane.getChildren().clear();
+        gamePane.getChildren().add(minesweeperPane);
+        gameName.setText("Minesweeper");
+    }
 }

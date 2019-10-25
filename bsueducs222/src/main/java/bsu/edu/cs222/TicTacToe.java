@@ -33,17 +33,17 @@ public class TicTacToe {
                 }
             }
         }
-        if(lineIndex == -1){
-            if(gameState.cells[4] == 0 && Math.floor(Math.random() * 2) == 0){
-                return 4;
-            }
-            return -1;
-        }
-        else if(priorityCellIndex != -1){
+        if(priorityCellIndex != -1) {
             int cell = findCellIndexFromLineIndex(priorityLineIndex, priorityCellIndex);
             gameState.addMove(cell, 2);
             checkVictory();
             return cell;
+        }
+        else if(lineIndex == -1){
+            if(gameState.cells[4] == 0 && Math.floor(Math.random() * 2) == 0){
+                return 4;
+            }
+            return -1;
         }
         else{
             int cell = findCellIndexFromLineIndex(lineIndex, cellIndex);
@@ -57,25 +57,19 @@ public class TicTacToe {
     public int findCellToBeMarked(int[] line){
         int totalXCells = 0;
         int totalOCells = 0;
-        int xCellsInARow = 0;
-        int oCellsInARow = 0;
         for(int i = 0; i < 3; i++){
             if(line[i] == 2){
-                oCellsInARow++;
                 totalOCells++;
-                xCellsInARow = 0;
             }
             if(line[i] == 1){
-                xCellsInARow++;
                 totalXCells++;
-                oCellsInARow = 0;
             }
-            if(oCellsInARow == 2 && totalXCells == 0){
+            if(totalOCells == 2 && totalXCells == 0){
                 if(findEmptyCell(line) != -1) {
                     return findEmptyCell(line) + 3;
                 }
             }
-            if(xCellsInARow == 2 && totalOCells == 0){
+            if(totalXCells == 2 && totalOCells == 0){
                 return findEmptyCell(line);
             }
         }
