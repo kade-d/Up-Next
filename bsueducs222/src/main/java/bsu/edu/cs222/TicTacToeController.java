@@ -224,7 +224,9 @@ public class TicTacToeController {
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             System.out.println(winner + " won!");
             gameIsPlaying = false;
-            saveWinToXML();
+            if (winner.equals("Player")) {
+                saveWinToXML();
+            }
             refreshScene();
         }
     }
