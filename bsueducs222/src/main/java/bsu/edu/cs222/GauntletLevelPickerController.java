@@ -73,15 +73,33 @@ public class GauntletLevelPickerController {
     }
 
     private int getLevelNumbersForUnlockedLevels() {
+        boolean[] gamesWonArray = new boolean[3];
+        String[] gamesArray = new String[]{"TicTacToe", "Simon", "Memory Match"};
         int unlockedLevels = 0;
+
         ArrayList<Game> gameProgress = getGameProgress();
-        gameProgress.size();
         for (Game game : gameProgress) {
-            if (game.getGameCompleted()) {
-                unlockedLevels += 1;
+            int indexOfGame = stringSearch(gamesArray, game.getGameName()); //returns index of game name in games array.
+            if (!gamesWonArray[indexOfGame]) {
+                if (game.getGameCompleted()) {
+                    unlockedLevels += 1;
+                    gamesWonArray[indexOfGame] = true;
+                }
             }
         }
         return unlockedLevels;
+    }
+
+    private int stringSearch(String[] array, String key) {
+        int start = 0;
+        int end = key.length();
+
+        for (int i = start; i < end; i++) {
+            if (array[i].compareTo(key) == 0) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     private ArrayList<Game> getGameProgress() {

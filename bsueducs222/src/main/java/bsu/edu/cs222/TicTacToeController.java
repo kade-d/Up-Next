@@ -179,9 +179,7 @@ public class TicTacToeController {
             turnNumber++;
             cell8.setText("X");
             updateGameState();
-            if(turnNumber % 2 == 1) {
-                computerMove();
-            }
+            computerMove();
         }
     }
 
@@ -225,14 +223,11 @@ public class TicTacToeController {
         if(game.gameState.checkBoard() != 0 || turnNumber == 9){
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             System.out.println(winner + " won!");
-            if(winner.equals("Player")){
-                gameIsPlaying = false;
+            gameIsPlaying = false;
+            if (winner.equals("Player")) {
                 saveWinToXML();
-                refreshScene();
             }
-            else{
-                restartGame();
-            }
+            refreshScene();
         }
     }
 
@@ -282,16 +277,5 @@ public class TicTacToeController {
         }
         Scene scene = new Scene(page);
         stage.setScene(scene);
-    }
-
-    public void restartGame(){
-        gameIsPlaying = false;
-        gameNotStarted = true;
-        game.gameState.reset();
-        for(Button cell : cellList){
-            cell.setText("");
-        }
-        turnNumber = 0;
-        startGame();
     }
 }
