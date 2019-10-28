@@ -1,6 +1,9 @@
 package bsu.edu.cs222;
 
-public class Simon {
+import java.util.ArrayList;
+import javafx.scene.control.Button;
 
-    //TODO Author: Clay
+public class Simon {
+    //Author: Clay Grider
+    public SimonController controller = new SimonController();
 }
