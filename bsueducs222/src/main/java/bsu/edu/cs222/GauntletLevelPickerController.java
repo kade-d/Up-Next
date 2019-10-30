@@ -47,18 +47,18 @@ public class GauntletLevelPickerController {
             eventHandler = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    mainController.startMinesweeper();
+                }
+            };
+        }else if (buttonIndex == 4) {
+            eventHandler = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
                     mainController.startMemoryCard();
                 }
             };
         }
-        else if (buttonIndex == 4) {
-            eventHandler = new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    mainController.startMinesweeper();
-                }
-            };
-        }
+
         return eventHandler;
     }
 

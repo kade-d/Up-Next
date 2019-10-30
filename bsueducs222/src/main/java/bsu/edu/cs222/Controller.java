@@ -19,7 +19,6 @@ public class Controller extends MainMenu {
     @FXML
     private GauntletLevelPickerController levelPickerController; //appends "Controller" to id of included fxml file
 
-
     public void initialize(){
         levelPickerController.initialize(this); //Class is GauntletLevelPickerController
     }
