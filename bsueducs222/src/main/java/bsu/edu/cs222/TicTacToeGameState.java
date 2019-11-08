@@ -31,6 +31,19 @@ public class TicTacToeGameState {
         lines.add(diag2);
     }
 
+    public void reset(){
+        cells = new int[9];
+        row1 = new int[3];
+        row2 = new int[3];
+        row3 = new int[3];
+        col1 = new int[3];
+        col2 = new int[3];
+        col3 = new int[3];
+        diag1 = new int[3];
+        diag2 = new int[3];
+        updateLines();
+    }
+
     public void addMove(int cell, int player){
         if(cells[cell] == 0){
             cells[cell] = player;
@@ -133,11 +146,11 @@ public class TicTacToeGameState {
     }
 
     private int checkDiagonals(){
-        if(checkThreeInARow(row1[0], row2[1], row3[2]) != 0){
+        if(checkThreeInARow(diag1[0], diag1[1], diag1[2]) != 0){
             return row1[0];
         }
 
-        if(checkThreeInARow(row1[2], row2[1], row3[0]) != 0){
+        if(checkThreeInARow(diag2[0], diag2[1], diag2[2]) != 0){
             return row1[2];
         }
 

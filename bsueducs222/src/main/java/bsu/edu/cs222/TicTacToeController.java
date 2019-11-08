@@ -75,7 +75,9 @@ public class TicTacToeController {
             turnNumber++;
             cell0.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -88,7 +90,9 @@ public class TicTacToeController {
             turnNumber++;
             cell1.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -101,7 +105,9 @@ public class TicTacToeController {
             turnNumber++;
             cell2.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -114,7 +120,9 @@ public class TicTacToeController {
             turnNumber++;
             cell3.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -127,7 +135,9 @@ public class TicTacToeController {
             turnNumber++;
             cell4.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -140,7 +150,9 @@ public class TicTacToeController {
             turnNumber++;
             cell5.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -153,7 +165,9 @@ public class TicTacToeController {
             turnNumber++;
             cell6.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -166,7 +180,9 @@ public class TicTacToeController {
             turnNumber++;
             cell7.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -179,7 +195,9 @@ public class TicTacToeController {
             turnNumber++;
             cell8.setText("X");
             updateGameState();
-            computerMove();
+            if(turnNumber % 2 == 1) {
+                computerMove();
+            }
         }
     }
 
@@ -226,8 +244,23 @@ public class TicTacToeController {
             gameIsPlaying = false;
             if (winner.equals("Player")) {
                 saveWinToXML();
+                refreshScene();
             }
-            refreshScene();
+            else{
+                restartGame();
+            }
+        }
+    }
+
+    private void restartGame(){
+        startGame();
+        game.gameState.reset();
+        resetBoard();
+    }
+
+    private void resetBoard(){
+        for(Button cell : cellList){
+            cell.setText("");
         }
     }
 
