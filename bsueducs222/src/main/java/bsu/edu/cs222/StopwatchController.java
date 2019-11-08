@@ -15,6 +15,10 @@ public class StopwatchController {
         stopwatch = makeTimer(stopwatchLabel);
     }
 
+    void resetStopwatch() {
+        stopwatch = makeTimer(stopwatchLabel);
+    }
+
     private AnimationTimer makeTimer(final Label label) {
 
         return new AnimationTimer() {

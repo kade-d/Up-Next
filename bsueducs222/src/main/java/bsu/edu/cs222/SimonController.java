@@ -17,9 +17,6 @@ public class SimonController {
     Button startGame;
 
     @FXML
-    Button nextGame;
-
-    @FXML
     Button nextLevel;
 
     @FXML
@@ -47,6 +44,12 @@ public class SimonController {
     private String question = "";
 
     private boolean correctLength = false;
+
+    private Controller mainController;
+
+    public void initialize(Controller controller) {
+        this.mainController = controller;
+    }
 
     public void clickA(javafx.event.ActionEvent event){
         answer += "A";
@@ -124,6 +127,7 @@ public class SimonController {
     }
 
     private void endSimon() {
+        mainController.getStopwatch().stop();
         saveWinToXML();
         refreshScene();
     }

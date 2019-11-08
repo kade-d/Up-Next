@@ -9,6 +9,8 @@
     <Pane fx:id="gamePane" layoutX="264.0" layoutY="146.0" prefHeight="500.0" prefWidth="500.0"
           style="-fx-background-color: lightgray;">
         <fx:include visible="false" fx:id="ticTacToe" source="TicTacToe.fxml"/>
+        <fx:include visible="false" fx:id="simon" source="Simon.fxml"/>
+        <fx:include visible="false" fx:id="minesweeper" source="Minesweeper.fxml"/>
     </Pane>
    <Label fx:id="gameName" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="25.0" prefHeight="42.0" prefWidth="202.0" textAlignment="RIGHT" textOverrun="CLIP">
       <font>

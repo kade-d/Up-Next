@@ -54,6 +54,12 @@ public class TicTacToeController {
 
     private TicTacToe game;
 
+    private Controller mainController;
+
+    public void initialize(Controller controller) {
+        this.mainController = controller;
+    }
+
     private void populateCellList(){
         cellList.add(cell0);
         cellList.add(cell1);
@@ -242,6 +248,7 @@ public class TicTacToeController {
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             System.out.println(winner + " won!");
             gameIsPlaying = false;
+            mainController.getStopwatch().stop();
             if (winner.equals("Player")) {
                 saveWinToXML();
                 refreshScene();
