@@ -55,6 +55,7 @@ public class TicTacToeController {
     private TicTacToe game;
 
     private void populateCellList(){
+        cellList.clear();
         cellList.add(cell0);
         cellList.add(cell1);
         cellList.add(cell2);
@@ -229,15 +230,9 @@ public class TicTacToeController {
     }
 
     private void updateGameState(){
-        game.gameState.addMove(0, convertTextToPlayerNumber(cell0.getText()));
-        game.gameState.addMove(1, convertTextToPlayerNumber(cell1.getText()));
-        game.gameState.addMove(2, convertTextToPlayerNumber(cell2.getText()));
-        game.gameState.addMove(3, convertTextToPlayerNumber(cell3.getText()));
-        game.gameState.addMove(4, convertTextToPlayerNumber(cell4.getText()));
-        game.gameState.addMove(5, convertTextToPlayerNumber(cell5.getText()));
-        game.gameState.addMove(6, convertTextToPlayerNumber(cell6.getText()));
-        game.gameState.addMove(7, convertTextToPlayerNumber(cell7.getText()));
-        game.gameState.addMove(8, convertTextToPlayerNumber(cell8.getText()));
+        for(int i = 0; i < 9; i ++){
+            game.gameState.addMove(i, convertTextToPlayerNumber(cellList.get(i).getText()));
+        }
         if(game.gameState.checkBoard() != 0 || turnNumber == 9){
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             System.out.println(winner + " won!");

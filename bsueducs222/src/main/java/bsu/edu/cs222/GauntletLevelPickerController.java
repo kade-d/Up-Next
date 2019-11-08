@@ -73,8 +73,8 @@ public class GauntletLevelPickerController {
     }
 
     private int getLevelNumbersForUnlockedLevels() {
-        boolean[] gamesWonArray = new boolean[3];
-        String[] gamesArray = new String[]{"TicTacToe", "Simon", "Memory Match"};
+        boolean[] gamesWonArray = new boolean[4];
+        String[] gamesArray = new String[]{"TicTacToe", "Simon", "Memory Match", "Minesweeper"}; //Add game name here.
         int unlockedLevels = 0;
 
         ArrayList<Game> gameProgress = getGameProgress();
