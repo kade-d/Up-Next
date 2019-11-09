@@ -41,13 +41,18 @@ public class StopwatchController {
             @Override
             public void handle(long now) {
                 long newTime = System.currentTimeMillis();
-                if (timestamp + 1000 <= newTime) {
-                    long deltaT = (newTime - timestamp) / 1000;
+                if (timestamp + 100 <= newTime) {
+                    long deltaT = (newTime - timestamp) / 100;
                     time += deltaT;
-                    timestamp += 1000 * deltaT;
-                    label.setText(Long.toString(time));
+                    timestamp += 100 * deltaT;
+                    label.setText(longToSeconds(time));
                 }
             }
         };
+    }
+
+    private String longToSeconds(long l) {
+        float seconds = (float) l / (float) 10;
+        return Float.toString(seconds);
     }
 }

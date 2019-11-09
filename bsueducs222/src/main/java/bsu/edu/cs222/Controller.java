@@ -47,8 +47,7 @@ public class Controller extends MainMenu {
 
     void startTicTacToe() {
         resetGamePane();
-        stopwatchController.resetStopwatch();
-        stopwatchController.stopwatch.start();
+        restartStopwatch();
         ticTacToe.setVisible(true);
         gameName.setText("Tic Tac Toe");
     }
@@ -60,16 +59,14 @@ public class Controller extends MainMenu {
 
     void startSimon() {
         resetGamePane();
-        stopwatchController.resetStopwatch();
-        stopwatchController.stopwatch.start();
+        restartStopwatch();
         simon.setVisible(true);
         gameName.setText("Simon");
     }
 
     void startMinesweeper() {
         resetGamePane();
-        stopwatchController.resetStopwatch();
-        stopwatchController.stopwatch.start();
+        restartStopwatch();
         minesweeper.setVisible(true);
         gameName.setText("Minesweeper");
     }
@@ -79,6 +76,12 @@ public class Controller extends MainMenu {
         for (Pane pane : gamePaneList) {
             pane.setVisible(false);
         }
+    }
+
+    private void restartStopwatch() {
+        stopwatchController.stopwatch.stop();
+        stopwatchController.resetStopwatch();
+        stopwatchController.stopwatch.start();
     }
 
     AnimationTimer getStopwatch() {
