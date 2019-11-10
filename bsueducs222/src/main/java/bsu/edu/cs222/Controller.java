@@ -1,7 +1,10 @@
 package bsu.edu.cs222;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -14,10 +17,22 @@ public class Controller extends MainMenu {
     Label gameName;
 
     @FXML
-    private GauntletLevelPickerController levelPickerController; //appends "Controller" to id of included fxml file
+    private Pane ticTacToe;
 
     @FXML
-    private StopwatchController stopwatchController;
+    private Pane simon;
+
+    @FXML
+    private Pane minesweeper;
+
+    @FXML
+    private Button startGauntletButton;
+
+    @FXML
+    private Button restartGauntletButton;
+
+    @FXML
+    private StopwatchController stopwatchController; //Assigned but IDE doesn't recognize.
 
     @FXML
     private TicTacToeController ticTacToeController;
@@ -28,24 +43,26 @@ public class Controller extends MainMenu {
     @FXML
     private MinesweeperController minesweeperController;
 
-    @FXML
-    private Pane ticTacToe;
-
-    @FXML
-    private Pane simon;
-
-    @FXML
-    private Pane minesweeper;
 
     public void initialize(){
-        levelPickerController.initialize(this); //Class is GauntletLevelPickerController
         stopwatchController.initialize();
-        ticTacToeController.initialize(this);
-        simonController.initialize(this);
-        minesweeperController.initialize(this);
+        startGauntletButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                startTicTacToe();
+            }
+        });
+        restartGauntletButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                resetGamePane();
+                startTicTacToe();
+            }
+        });
     }
 
     void startTicTacToe() {
+        ticTacToeController.initialize(this);
         resetGamePane();
         restartStopwatch();
         ticTacToe.setVisible(true);
@@ -58,6 +75,7 @@ public class Controller extends MainMenu {
     }
 
     void startSimon() {
+        simonController.initialize(this);
         resetGamePane();
         restartStopwatch();
         simon.setVisible(true);
@@ -65,6 +83,7 @@ public class Controller extends MainMenu {
     }
 
     void startMinesweeper() {
+        minesweeperController.initialize(this);
         resetGamePane();
         restartStopwatch();
         minesweeper.setVisible(true);

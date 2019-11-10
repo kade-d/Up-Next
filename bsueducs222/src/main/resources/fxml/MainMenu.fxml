@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -8,20 +9,19 @@
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
     <Pane fx:id="gamePane" layoutX="264.0" layoutY="146.0" prefHeight="500.0" prefWidth="500.0"
           style="-fx-background-color: lightgray;">
-        <fx:include visible="false" fx:id="ticTacToe" source="TicTacToe.fxml"/>
-        <fx:include visible="false" fx:id="simon" source="Simon.fxml"/>
-        <fx:include visible="false" fx:id="minesweeper" source="Minesweeper.fxml"/>
+        <fx:include fx:id="ticTacToe" source="TicTacToe.fxml" visible="false"/>
+        <fx:include fx:id="simon" source="Simon.fxml" visible="false"/>
+        <fx:include fx:id="minesweeper" source="Minesweeper.fxml" visible="false"/>
     </Pane>
    <Label fx:id="gameName" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="25.0" prefHeight="42.0" prefWidth="202.0" textAlignment="RIGHT" textOverrun="CLIP">
       <font>
          <Font size="24.0" />
       </font>
    </Label>
-    <Pane layoutX="66.0" layoutY="204.0">
-        <fx:include fx:id="levelPicker" source="GauntletLevelPicker.fxml"/>
-    </Pane>
     <Pane layoutX="264.0" layoutY="25.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: lightgray;">
         <fx:include fx:id="stopwatch" source="Stopwatch.fxml"/>
     </Pane>
+    <Button fx:id="startGauntletButton" layoutX="83.0" layoutY="152.0" mnemonicParsing="false" text="Start Gauntlet"/>
+    <Button fx:id="restartGauntletButton" layoutX="102.0" layoutY="215.0" mnemonicParsing="false" text="Restart"/>
 
 </AnchorPane>

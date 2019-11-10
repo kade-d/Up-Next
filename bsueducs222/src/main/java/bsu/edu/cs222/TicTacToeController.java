@@ -251,7 +251,7 @@ public class TicTacToeController {
             mainController.getStopwatch().stop();
             if (winner.equals("Player")) {
                 saveWinToXML();
-                refreshScene();
+                mainController.startSimon();
             }
             else{
                 restartGame();

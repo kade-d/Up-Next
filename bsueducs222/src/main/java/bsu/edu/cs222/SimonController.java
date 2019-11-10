@@ -1,14 +1,9 @@
 package bsu.edu.cs222;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SimonController {
@@ -126,12 +121,6 @@ public class SimonController {
         }
     }
 
-    private void endSimon() {
-        mainController.getStopwatch().stop();
-        saveWinToXML();
-        refreshScene();
-    }
-
     private boolean checkAnswers(){
         if(answer.equals(question)){
             return true;
@@ -192,7 +181,7 @@ public class SimonController {
         }
     }
 
-    public void nextLevel(javafx.event.ActionEvent event){
+    public void nextLevel() {
         answer = "";
         enableOptions();
         level = level + 1;
@@ -202,7 +191,7 @@ public class SimonController {
         nextLevel.setDisable(true);
     }
 
-    public void startNewGame(javafx.event.ActionEvent event){
+    public void startNewGame() {
         answer = "";
         enableOptions();
         level = 1;
@@ -212,6 +201,12 @@ public class SimonController {
         nextLevel.setDisable(true);
     }
 
+    private void endSimon() {
+        mainController.getStopwatch().stop();
+        saveWinToXML();
+        mainController.startMinesweeper();
+    }
+
     private void saveWinToXML(){
         FileIO fileIO = new FileIO();
         String filePath = fileIO.findXMLPath();
@@ -219,18 +214,5 @@ public class SimonController {
         Game game = new Game("Simon", true);
         gameProgress.add(game);
         fileIO.saveToXML(filePath, gameProgress);
-    }
-
-    private void refreshScene(){
-        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
-        Stage stage = (Stage) nextLevel.getScene().getWindow();
-        AnchorPane page = new AnchorPane();
-        try {
-            page = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scene scene = new Scene(page);
-        stage.setScene(scene);
     }
 }
