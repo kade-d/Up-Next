@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SimonController {
     //Author: Clay Grider
@@ -43,8 +44,11 @@ public class SimonController {
 
     private Controller mainController;
 
+    private HashMap<String, Button> buttonHashMap = new HashMap<>();
+
     void initialize(Controller controller) {
         this.mainController = controller;
+        populateHashMap();
     }
 
     public void clickA(){
@@ -110,6 +114,21 @@ public class SimonController {
         else {
             question = question.concat("D");
         }
+    }
+
+    private void playQuestion(){
+        for(char letter: question.toCharArray()){
+            Button tempButton = buttonHashMap.get(letter);
+            String buttonLetter = tempButton.getText();
+
+        }
+    }
+
+    private void populateHashMap(){
+        buttonHashMap.put("A", yellowButton);
+        buttonHashMap.put("B", blueButton);
+        buttonHashMap.put("C", redButton);
+        buttonHashMap.put("D", greenButton);
     }
 
     public void nextLevel(){
