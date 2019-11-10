@@ -32,6 +32,9 @@ public class SimonController {
     @FXML
     Label labelOutput;
 
+    @FXML
+    Label goalLabel;
+
     private int level = 0;
 
     private String answer = "";
@@ -94,21 +97,18 @@ public class SimonController {
     }
 
     private void generateOrder(){
-        question = "";
-        for(int i=0; i < level; i++){
-            int randomInt = (int )(Math.random() * 4 + 1);
-            if(randomInt == 1){
-                question = question.concat("A");
-            }
-            else if (randomInt == 2){
-                question = question.concat("B");
-            }
-            else if (randomInt == 3){
-                question = question.concat("C");
-            }
-            else {
-                question = question.concat("D");
-            }
+        int randomInt = (int )(Math.random() * 4 + 1);
+        if(randomInt == 1){
+            question = question.concat("A");
+        }
+        else if (randomInt == 2){
+            question = question.concat("B");
+        }
+        else if (randomInt == 3){
+            question = question.concat("C");
+        }
+        else {
+            question = question.concat("D");
         }
     }
 
@@ -125,6 +125,7 @@ public class SimonController {
     public void startNewGame(){
         mainController.restartStopwatch();
         answer = "";
+        question = "";
         enableOptions();
         level = 1;
         currentLevelLabel.setText("Current Level: " + level);
