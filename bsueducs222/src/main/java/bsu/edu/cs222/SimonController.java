@@ -1,5 +1,6 @@
 package bsu.edu.cs222;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,9 +32,6 @@ public class SimonController {
     Label currentLevelLabel;
 
     @FXML
-    Label labelOutput;
-
-    @FXML
     Label goalLabel;
 
     private int level = 0;
@@ -49,6 +47,13 @@ public class SimonController {
     void initialize(Controller controller) {
         this.mainController = controller;
         populateHashMap();
+    }
+
+    private void populateHashMap() {
+        buttonHashMap.put("A", yellowButton);
+        buttonHashMap.put("B", blueButton);
+        buttonHashMap.put("C", redButton);
+        buttonHashMap.put("D", greenButton);
     }
 
     public void clickA(){
@@ -93,13 +98,6 @@ public class SimonController {
         return level == 6;
     }
 
-    private void enableOptions(){
-        yellowButton.setDisable(false);
-        blueButton.setDisable(false);
-        redButton.setDisable(false);
-        greenButton.setDisable(false);
-    }
-
     private void generateOrder(){
         int randomInt = (int )(Math.random() * 4 + 1);
         if(randomInt == 1){
@@ -117,40 +115,89 @@ public class SimonController {
     }
 
     private void playQuestion(){
+        disableSimonButtons();
+        ArrayList<Button> questionButtons = new ArrayList<>();
         for(char letter: question.toCharArray()){
-            Button tempButton = buttonHashMap.get(letter);
-            String buttonLetter = tempButton.getText();
+            Button tempButton = buttonHashMap.get(Character.toString(letter));
+            questionButtons.add(tempButton);
+        }
+        AnimationTimer playQuestionTimer = makeShowButtonsTimer(questionButtons);
+        playQuestionTimer.start();
+    }
 
+    private void enableSimonButtons() {
+        for (String key : buttonHashMap.keySet()) {
+            buttonHashMap.get(key).setDisable(false);
         }
     }
 
-    private void populateHashMap(){
-        buttonHashMap.put("A", yellowButton);
-        buttonHashMap.put("B", blueButton);
-        buttonHashMap.put("C", redButton);
-        buttonHashMap.put("D", greenButton);
+    private void disableSimonButtons() {
+        for (String key : buttonHashMap.keySet()) {
+            buttonHashMap.get(key).setDisable(true);
+        }
+    }
+
+    private AnimationTimer makeShowButtonsTimer(final ArrayList<Button> questionButtons) {
+        return new AnimationTimer() {
+            private long timestamp;
+            private long fraction = 0;
+            private int count = 0;
+
+            @Override
+            public void start() {
+                timestamp = System.currentTimeMillis() - fraction;
+                super.start();
+            }
+
+            @Override
+            public void stop() {
+                super.stop();
+                fraction = System.currentTimeMillis() - timestamp;
+            }
+
+            @Override
+            public void handle(long now) {
+                long newTime = System.currentTimeMillis();
+                if (timestamp + 500 <= newTime) {
+                    count += 1;
+                    if (count % 2 == 1) {
+                        disableSimonButtons();
+                        long deltaT = (newTime - timestamp) / 500;
+                        timestamp += 500 * deltaT;
+                    } else {
+                        if (count / 2 <= questionButtons.size()) {
+                            questionButtons.get((count / 2) - 1).setDisable(false);
+                            long deltaT = (newTime - timestamp) / 500;
+                            timestamp += 500 * deltaT;
+                        } else {
+                            enableSimonButtons();
+                            super.stop();
+                        }
+                    }
+                }
+            }
+        };
     }
 
     public void nextLevel(){
         answer = "";
-        enableOptions();
         level = level + 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
-        labelOutput.setText("Question: " + question);
         nextLevel.setDisable(true);
+        playQuestion();
     }
 
     public void startNewGame(){
         mainController.restartStopwatch();
         answer = "";
         question = "";
-        enableOptions();
+        enableSimonButtons();
         level = 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
-        labelOutput.setText("Question: " + question);
         nextLevel.setDisable(true);
+        playQuestion();
     }
 
     private void restartSimon() {
