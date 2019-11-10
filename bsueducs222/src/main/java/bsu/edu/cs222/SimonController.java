@@ -38,8 +38,6 @@ public class SimonController {
 
     private String question = "";
 
-    private boolean correctLength = false;
-
     private Controller mainController;
 
     void initialize(Controller controller) {
@@ -48,96 +46,44 @@ public class SimonController {
 
     public void clickA(){
         answer += "A";
-        checkLength();
-        if (correctLength){
-            disableOptions();
-            if(checkAnswers()){
-                if(checkCompletion()) {
-                    nextLevel.setDisable(false);
-                } else {  //Winning Condition
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
-        }
+        checkTurn();
     }
 
     public void clickB(){
         answer += "B";
-        checkLength();
-        if (correctLength){
-            disableOptions();
-            if(checkAnswers()){
-                if(checkCompletion()) {
-                    nextLevel.setDisable(false);
-                }
-                else{//Winning Condition
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
-        }
+        checkTurn();
     }
 
     public void clickC(){
         answer += "C";
-        checkLength();
-        if (correctLength){
-            disableOptions();
-            if(checkAnswers()){
-                if(checkCompletion()) {
-                    nextLevel.setDisable(false);
-                }
-                else{
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
-        }
+        checkTurn();
     }
 
     public void clickD(){
         answer += "D";
-        checkLength();
-        if (correctLength){
-            disableOptions();
-            if(checkAnswers()){
-                if(checkCompletion()) {
-                    nextLevel.setDisable(false);
-                }
-                else{
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
+        checkTurn();
+    }
+
+    private void checkTurn() {
+        if (checkAnswers() && checkLevelsCompleted()) {
+            endSimon();
+        } else if (checkAnswers() && checkAnswerLength()) {
+            nextLevel.setDisable(false);
+        } else if (checkAnswerLength()) {
+            restartSimon();
         }
+    }
+
+    private boolean checkAnswerLength() {
+        return answer.length() == level;
     }
 
     private boolean checkAnswers(){
         return answer.equals(question);
     }
 
-    private boolean checkCompletion(){
-        return level < 6;
-    }
-
-    private void checkLength(){
-        correctLength = answer.length() == level;
-    }
-
-    private void disableOptions(){
-        yellowButton.setDisable(true);
-        blueButton.setDisable(true);
-        redButton.setDisable(true);
-        greenButton.setDisable(true);
+    private boolean checkLevelsCompleted() {
+        return level == 6;
     }
 
     private void enableOptions(){
@@ -177,6 +123,7 @@ public class SimonController {
     }
 
     public void startNewGame(){
+        mainController.restartStopwatch();
         answer = "";
         enableOptions();
         level = 1;
@@ -186,7 +133,16 @@ public class SimonController {
         nextLevel.setDisable(true);
     }
 
+    private void restartSimon() {
+        mainController.notifyLoss();
+        level = 0;
+        answer = "";
+        question = "";
+        currentLevelLabel.setText("");
+    }
+
     private void endSimon() {
+        mainController.notifyWin();
         mainController.getStopwatch().stop();
         saveWinToXML();
         mainController.startMinesweeper();

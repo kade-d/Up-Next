@@ -22,6 +22,7 @@ public class MinesweeperController {
         setCellButtonHandlers();
         resetBoard();
         game.startGame();
+        mainController.restartStopwatch();
     }
 
     private void setCellButtonHandlers() {
@@ -49,7 +50,6 @@ public class MinesweeperController {
     }
 
     private void sweepCell(int index){
-        System.out.println("Cell " + index + " swept!");
         int cell = game.gameState.cells[index];
         if(game.gameState.shownCells[index] || game.gameState.flaggedCells[index]){
             return;
@@ -294,7 +294,7 @@ public class MinesweeperController {
             }
         }
         if(flaggedBombs + shownCellCount == 81){
-            System.out.println("You win!");
+            mainController.notifyGauntletCompleted();
         }
     }
 }

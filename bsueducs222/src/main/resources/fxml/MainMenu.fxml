@@ -22,6 +22,7 @@
         <fx:include fx:id="stopwatch" source="Stopwatch.fxml"/>
     </Pane>
     <Button fx:id="startGauntletButton" layoutX="83.0" layoutY="152.0" mnemonicParsing="false" text="Start Gauntlet"/>
-    <Button fx:id="restartGauntletButton" layoutX="102.0" layoutY="215.0" mnemonicParsing="false" text="Restart"/>
+    <Label fx:id="gameNotificationLabel" layoutX="58.0" layoutY="396.0" prefHeight="56.0" prefWidth="140.0"
+           textAlignment="CENTER"/>
 
 </AnchorPane>

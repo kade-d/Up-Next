@@ -1,14 +1,9 @@
 package bsu.edu.cs222;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class TicTacToeController {
@@ -48,16 +43,15 @@ public class TicTacToeController {
 
     private int turnNumber = 0;
 
-    private boolean gameNotStarted = true;
-
     private boolean gameIsPlaying = false;
 
     private TicTacToe game;
 
     private Controller mainController;
 
-    public void initialize(Controller controller) {
+    void initialize(Controller controller) {
         this.mainController = controller;
+        startGame();
     }
 
     private void populateCellList(){
@@ -74,9 +68,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellZero() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell0.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell0.setText("X");
@@ -89,9 +80,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellOne() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell1.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell1.setText("X");
@@ -104,9 +92,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellTwo() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell2.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell2.setText("X");
@@ -119,9 +104,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellThree() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell3.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell3.setText("X");
@@ -134,9 +116,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellFour() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell4.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell4.setText("X");
@@ -149,9 +128,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellFive() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell5.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell5.setText("X");
@@ -164,9 +140,7 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellSix() {
-        if(gameNotStarted){
-            startGame();
-        }
+
         if(cell6.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell6.setText("X");
@@ -179,9 +153,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellSeven() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell7.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell7.setText("X");
@@ -194,9 +165,6 @@ public class TicTacToeController {
 
     @FXML
     private void handleCellEight() {
-        if(gameNotStarted){
-            startGame();
-        }
         if(cell8.getText().equals("") && gameIsPlaying) {
             turnNumber++;
             cell8.setText("X");
@@ -208,9 +176,7 @@ public class TicTacToeController {
     }
 
     private void startGame(){
-        gameNotStarted = false;
         gameIsPlaying = true;
-        System.out.println("Game started!");
         game = new TicTacToe();
         turnNumber = 0;
         populateCellList();
@@ -246,10 +212,10 @@ public class TicTacToeController {
         game.gameState.addMove(8, convertTextToPlayerNumber(cell8.getText()));
         if(game.gameState.checkBoard() != 0 || turnNumber == 9){
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
-            System.out.println(winner + " won!");
             gameIsPlaying = false;
             mainController.getStopwatch().stop();
             if (winner.equals("Player")) {
+                mainController.notifyWin();
                 saveWinToXML();
                 mainController.startSimon();
             }
@@ -260,9 +226,11 @@ public class TicTacToeController {
     }
 
     private void restartGame(){
-        startGame();
-        game.gameState.reset();
+        mainController.notifyLoss();
         resetBoard();
+        startGame();
+        mainController.restartStopwatch();
+        game.gameState.reset();
     }
 
     private void resetBoard(){
@@ -304,18 +272,5 @@ public class TicTacToeController {
         Game game = new Game("TicTacToe", true);
         gameProgress.add(game);
         fileIO.saveToXML(filePath, gameProgress);
-    }
-
-    private void refreshScene(){
-        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
-        Stage stage = (Stage) board.getScene().getWindow();
-        AnchorPane page = new AnchorPane();
-        try {
-            page = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scene scene = new Scene(page);
-        stage.setScene(scene);
     }
 }

@@ -29,7 +29,7 @@ public class Controller extends MainMenu {
     private Button startGauntletButton;
 
     @FXML
-    private Button restartGauntletButton;
+    private Label gameNotificationLabel;
 
     @FXML
     private StopwatchController stopwatchController; //Assigned but IDE doesn't recognize.
@@ -52,19 +52,12 @@ public class Controller extends MainMenu {
                 startTicTacToe();
             }
         });
-        restartGauntletButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                resetGamePane();
-                startTicTacToe();
-            }
-        });
     }
 
     void startTicTacToe() {
-        ticTacToeController.initialize(this);
         resetGamePane();
         restartStopwatch();
+        ticTacToeController.initialize(this);
         ticTacToe.setVisible(true);
         gameName.setText("Tic Tac Toe");
     }
@@ -97,10 +90,22 @@ public class Controller extends MainMenu {
         }
     }
 
-    private void restartStopwatch() {
+    void restartStopwatch() {
         stopwatchController.stopwatch.stop();
         stopwatchController.resetStopwatch();
         stopwatchController.stopwatch.start();
+    }
+
+    void notifyWin() {
+        gameNotificationLabel.setText("You won!");
+    }
+
+    void notifyLoss() {
+        gameNotificationLabel.setText("You lost!");
+    }
+
+    void notifyGauntletCompleted() {
+        gameNotificationLabel.setText("Gauntlet Completed!");
     }
 
     AnimationTimer getStopwatch() {
