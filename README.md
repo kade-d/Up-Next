@@ -1,7 +1,7 @@
 # FP-UpNext
 Desktop Java Application for minigames
 
-<h2>To run the build from Intellij Idea:</h2>
+<h2>To run the build from Intellij Idea (with JDK 12 or later):</h2>
 Build the project (Ctrl+F9).<br>
 
 Click on the Maven tool side toolbar.<br>
