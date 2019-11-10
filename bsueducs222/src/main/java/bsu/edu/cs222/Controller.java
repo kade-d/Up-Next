@@ -1,12 +1,9 @@
 package bsu.edu.cs222;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-
-import java.io.IOException;
 
 public class Controller extends MainMenu {
 
@@ -19,68 +16,75 @@ public class Controller extends MainMenu {
     @FXML
     private GauntletLevelPickerController levelPickerController; //appends "Controller" to id of included fxml file
 
+    @FXML
+    private StopwatchController stopwatchController;
+
+    @FXML
+    private TicTacToeController ticTacToeController;
+
+    @FXML
+    private SimonController simonController;
+
+    @FXML
+    private MinesweeperController minesweeperController;
+
+    @FXML
+    private Pane ticTacToe;
+
+    @FXML
+    private Pane simon;
+
+    @FXML
+    private Pane minesweeper;
+
     public void initialize(){
         levelPickerController.initialize(this); //Class is GauntletLevelPickerController
+        stopwatchController.initialize();
+        ticTacToeController.initialize(this);
+        simonController.initialize(this);
+        minesweeperController.initialize(this);
     }
 
     void startTicTacToe() {
-        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/TicTacToe.fxml"));
-
-        AnchorPane ticTacToePane = new AnchorPane();
-
-        try{
-            ticTacToePane = loader.load();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        gamePane.getChildren().clear();
-        gamePane.getChildren().add(ticTacToePane);
+        resetGamePane();
+        restartStopwatch();
+        ticTacToe.setVisible(true);
         gameName.setText("Tic Tac Toe");
     }
 
     void startMemoryCard() {
-        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MemoryMatch.fxml"));
-        AnchorPane memoryCardPane = new AnchorPane();
-
-        try{
-            memoryCardPane = loader.load();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        gamePane.getChildren().clear();
-        gamePane.getChildren().add(memoryCardPane);
+        resetGamePane();
         gameName.setText("Memory Match");
     }
 
     void startSimon() {
-        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/Simon.fxml"));
-        AnchorPane simonPane = new AnchorPane();
-
-        try{
-            simonPane = loader.load();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        gamePane.getChildren().clear();
-        gamePane.getChildren().add(simonPane);
+        resetGamePane();
+        restartStopwatch();
+        simon.setVisible(true);
         gameName.setText("Simon");
     }
 
     void startMinesweeper() {
-        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/Minesweeper.fxml"));
-        AnchorPane minesweeperPane = new AnchorPane();
-
-        try{
-            minesweeperPane = loader.load();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        gamePane.getChildren().clear();
-        gamePane.getChildren().add(minesweeperPane);
+        resetGamePane();
+        restartStopwatch();
+        minesweeper.setVisible(true);
         gameName.setText("Minesweeper");
+    }
+
+    private void resetGamePane() {
+        Pane[] gamePaneList = new Pane[]{ticTacToe, simon, minesweeper};
+        for (Pane pane : gamePaneList) {
+            pane.setVisible(false);
+        }
+    }
+
+    private void restartStopwatch() {
+        stopwatchController.stopwatch.stop();
+        stopwatchController.resetStopwatch();
+        stopwatchController.stopwatch.start();
+    }
+
+    AnimationTimer getStopwatch() {
+        return this.stopwatchController.stopwatch;
     }
 }
