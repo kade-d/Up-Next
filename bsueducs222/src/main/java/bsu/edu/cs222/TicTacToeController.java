@@ -54,18 +54,6 @@ public class TicTacToeController {
         startGame();
     }
 
-    private void populateCellList(){
-        cellList.add(cell0);
-        cellList.add(cell1);
-        cellList.add(cell2);
-        cellList.add(cell3);
-        cellList.add(cell4);
-        cellList.add(cell5);
-        cellList.add(cell6);
-        cellList.add(cell7);
-        cellList.add(cell8);
-    }
-
     @FXML
     private void handleCellZero() {
         if(cell0.getText().equals("") && gameIsPlaying) {
@@ -179,7 +167,21 @@ public class TicTacToeController {
         gameIsPlaying = true;
         game = new TicTacToe();
         turnNumber = 0;
+        cellList = new ArrayList<>();
         populateCellList();
+        resetBoard();
+    }
+
+    private void populateCellList() {
+        cellList.add(cell0);
+        cellList.add(cell1);
+        cellList.add(cell2);
+        cellList.add(cell3);
+        cellList.add(cell4);
+        cellList.add(cell5);
+        cellList.add(cell6);
+        cellList.add(cell7);
+        cellList.add(cell8);
     }
 
     private void computerMove() {

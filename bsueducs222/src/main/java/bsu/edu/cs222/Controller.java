@@ -49,6 +49,7 @@ public class Controller extends MainMenu {
         startGauntletButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                gameNotificationLabel.setText("");
                 startTicTacToe();
             }
         });
@@ -106,6 +107,7 @@ public class Controller extends MainMenu {
 
     void notifyGauntletCompleted() {
         gameNotificationLabel.setText("Gauntlet Completed!");
+        stopwatchController.stopwatch.stop();
     }
 
     AnimationTimer getStopwatch() {

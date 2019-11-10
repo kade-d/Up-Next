@@ -15,10 +15,11 @@ public class MinesweeperController {
 
     private Controller mainController;
 
-    Minesweeper game = new Minesweeper();
+    Minesweeper game;
 
     public void initialize(Controller controller) {
         this.mainController = controller;
+        game = new Minesweeper();
         setCellButtonHandlers();
         resetBoard();
         game.startGame();
@@ -71,7 +72,6 @@ public class MinesweeperController {
     }
 
     private void revealAllBombCells(){
-        System.out.println("You lose!");
         for(int i = 0; i < cellButtons.size(); i++){
             int cell = game.gameState.cells[i];
             if(cell == -1) {
@@ -83,6 +83,7 @@ public class MinesweeperController {
     }
 
     private void restartGame(){
+        mainController.notifyLoss();
         resetBoard();
         game.gameState.reset();
         game.startGame();
@@ -264,12 +265,10 @@ public class MinesweeperController {
             return;
         }
         if(cellIsFlagged){
-            System.out.println("Cell " + index + " unflagged!");
             game.gameState.unflagCell(index);
             cellButtons.get(index).setText("");
         }
         else{
-            System.out.println("Cell " + index + " flagged!");
             game.gameState.flagCell(index);
             cellButtons.get(index).setText("F");
             checkVictory();
