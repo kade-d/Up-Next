@@ -47,17 +47,17 @@ public class SimonController {
 
     private Controller mainController;
 
-    public void initialize(Controller controller) {
+    void initialize(Controller controller) {
         this.mainController = controller;
     }
 
-    public void clickA(javafx.event.ActionEvent event){
+    public void clickA(){
         answer += "A";
         checkLength();
-        if (correctLength == true){
+        if (correctLength){
             disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
+            if(checkAnswers()){
+                if(checkCompletion()) {
                     nextLevel.setDisable(false);
                 } else {  //Winning Condition
                     endSimon();
@@ -69,13 +69,13 @@ public class SimonController {
         }
     }
 
-    public void clickB(javafx.event.ActionEvent event){
+    public void clickB(){
         answer += "B";
         checkLength();
-        if (correctLength == true){
+        if (correctLength){
             disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
+            if(checkAnswers()){
+                if(checkCompletion()) {
                     nextLevel.setDisable(false);
                 }
                 else{//Winning Condition
@@ -88,13 +88,13 @@ public class SimonController {
         }
     }
 
-    public void clickC(javafx.event.ActionEvent event){
+    public void clickC(){
         answer += "C";
         checkLength();
-        if (correctLength == true){
+        if (correctLength){
             disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
+            if(checkAnswers()){
+                if(checkCompletion()) {
                     nextLevel.setDisable(false);
                 }
                 else{
@@ -107,13 +107,13 @@ public class SimonController {
         }
     }
 
-    public void clickD(javafx.event.ActionEvent event){
+    public void clickD(){
         answer += "D";
         checkLength();
-        if (correctLength == true){
+        if (correctLength){
             disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
+            if(checkAnswers()){
+                if(checkCompletion()) {
                     nextLevel.setDisable(false);
                 }
                 else{
@@ -133,30 +133,15 @@ public class SimonController {
     }
 
     private boolean checkAnswers(){
-        if(answer.equals(question)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return answer.equals(question);
     }
 
-    public boolean checkCompletion(){
-        if (level < 8){
-            return false;
-        }
-        else{
-            return true;
-        }
+    private boolean checkCompletion(){
+        return level < 6;
     }
 
     private void checkLength(){
-        if(answer.length() == level){
-            correctLength = true;
-        }
-        else{
-            correctLength = false;
-        }
+        correctLength = answer.length() == level;
     }
 
     private void disableOptions(){
@@ -178,21 +163,21 @@ public class SimonController {
         for(int i=0; i < level; i++){
             int randomInt = (int )(Math.random() * 4 + 1);
             if(randomInt == 1){
-                question += "A";
+                question = question.concat("A");
             }
             else if (randomInt == 2){
-                question += "B";
+                question = question.concat("B");
             }
             else if (randomInt == 3){
-                question += "C";
+                question = question.concat("C");
             }
             else {
-                question += "D";
+                question = question.concat("D");
             }
         }
     }
 
-    public void nextLevel(javafx.event.ActionEvent event){
+    public void nextLevel(){
         answer = "";
         enableOptions();
         level = level + 1;
@@ -202,7 +187,7 @@ public class SimonController {
         nextLevel.setDisable(true);
     }
 
-    public void startNewGame(javafx.event.ActionEvent event){
+    public void startNewGame(){
         answer = "";
         enableOptions();
         level = 1;
