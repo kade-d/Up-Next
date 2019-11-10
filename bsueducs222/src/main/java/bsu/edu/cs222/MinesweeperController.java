@@ -2,16 +2,26 @@ package bsu.edu.cs222;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MinesweeperController {
 
     @FXML
     private List<Button> cellButtons;
+
+    @FXML
+    GridPane board;
 
     private Controller mainController;
 
@@ -295,6 +305,34 @@ public class MinesweeperController {
         }
         if(flaggedBombs + shownCellCount == 81){
             System.out.println("You win!");
+            declareVictory();
         }
+    }
+
+    private void declareVictory(){
+        saveWinToXML();
+        refreshScene();
+    }
+
+    private void saveWinToXML(){
+        FileIO fileIO = new FileIO();
+        String filePath = fileIO.findXMLPath();
+        ArrayList<Game> gameProgress = fileIO.readXML(filePath);
+        Game game = new Game("Minesweeper", true);
+        gameProgress.add(game);
+        fileIO.saveToXML(filePath, gameProgress);
+    }
+
+    private void refreshScene(){
+        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
+        Stage stage = (Stage) board.getScene().getWindow();
+        AnchorPane page = new AnchorPane();
+        try {
+            page = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
     }
 }

@@ -9,5 +9,4 @@ class Minesweeper {
     void startGame(){
         gameState.makeNewBoard();
     }
-
 }
