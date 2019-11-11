@@ -1,19 +1,12 @@
-package bsu.edu.cs222;
+import bsu.edu.cs222.TicTacToe;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import bsu.edu.cs222.TicTacToe;
-import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
+public class AppTest {
+
     @Test
     public void shouldAnswerWithTrue() {
         assertTrue( true );

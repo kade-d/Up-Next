@@ -1,15 +1,12 @@
 package bsu.edu.cs222;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SimonController {
     //Author: Clay Grider
@@ -35,7 +32,7 @@ public class SimonController {
     Label currentLevelLabel;
 
     @FXML
-    Label labelOutput;
+    Label goalLabel;
 
     private int level = 0;
 
@@ -43,173 +40,179 @@ public class SimonController {
 
     private String question = "";
 
-    private boolean correctLength = false;
-
     private Controller mainController;
 
-    public void initialize(Controller controller) {
+    private HashMap<String, Button> buttonHashMap = new HashMap<>();
+
+    void initialize(Controller controller) {
         this.mainController = controller;
+        populateHashMap();
     }
 
-    public void clickA(javafx.event.ActionEvent event){
+    private void populateHashMap() {
+        buttonHashMap.put("A", yellowButton);
+        buttonHashMap.put("B", blueButton);
+        buttonHashMap.put("C", redButton);
+        buttonHashMap.put("D", greenButton);
+    }
+
+    public void clickA(){
         answer += "A";
-        checkLength();
-        if (correctLength == true){
-            disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
-                    nextLevel.setDisable(false);
-                } else {  //Winning Condition
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
-        }
+        checkTurn();
     }
 
-    public void clickB(javafx.event.ActionEvent event){
+    public void clickB(){
         answer += "B";
-        checkLength();
-        if (correctLength == true){
-            disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
-                    nextLevel.setDisable(false);
-                }
-                else{//Winning Condition
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
-        }
+        checkTurn();
     }
 
-    public void clickC(javafx.event.ActionEvent event){
+    public void clickC(){
         answer += "C";
-        checkLength();
-        if (correctLength == true){
-            disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
-                    nextLevel.setDisable(false);
-                }
-                else{
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
-        }
+        checkTurn();
     }
 
-    public void clickD(javafx.event.ActionEvent event){
+    public void clickD(){
         answer += "D";
-        checkLength();
-        if (correctLength == true){
-            disableOptions();
-            if(checkAnswers() == true){
-                if(checkCompletion() == false) {
-                    nextLevel.setDisable(false);
-                }
-                else{
-                    endSimon();
-                }
-            }
-            else{
-                labelOutput.setText("Incorrect\nQuestion was : " + question + "\nAnswer given was: " + answer + "\nPlease start a new game.");
-            }
+        checkTurn();
+    }
+
+    private void checkTurn() {
+        if (checkAnswers() && checkLevelsCompleted()) {
+            endSimon();
+        } else if (checkAnswers() && checkAnswerLength()) {
+            nextLevel.setDisable(false);
+        } else if (checkAnswerLength()) {
+            restartSimon();
         }
     }
 
-    private void endSimon() {
-        mainController.getStopwatch().stop();
-        saveWinToXML();
-        refreshScene();
+    private boolean checkAnswerLength() {
+        return answer.length() == level;
     }
 
     private boolean checkAnswers(){
-        if(answer.equals(question)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return answer.equals(question);
     }
 
-    public boolean checkCompletion(){
-        if (level < 8){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-
-    private void checkLength(){
-        if(answer.length() == level){
-            correctLength = true;
-        }
-        else{
-            correctLength = false;
-        }
-    }
-
-    private void disableOptions(){
-        yellowButton.setDisable(true);
-        blueButton.setDisable(true);
-        redButton.setDisable(true);
-        greenButton.setDisable(true);
-    }
-
-    private void enableOptions(){
-        yellowButton.setDisable(false);
-        blueButton.setDisable(false);
-        redButton.setDisable(false);
-        greenButton.setDisable(false);
+    private boolean checkLevelsCompleted() {
+        return level == 6;
     }
 
     private void generateOrder(){
-        question = "";
-        for(int i=0; i < level; i++){
-            int randomInt = (int )(Math.random() * 4 + 1);
-            if(randomInt == 1){
-                question += "A";
-            }
-            else if (randomInt == 2){
-                question += "B";
-            }
-            else if (randomInt == 3){
-                question += "C";
-            }
-            else {
-                question += "D";
-            }
+        int randomInt = (int )(Math.random() * 4 + 1);
+        if(randomInt == 1){
+            question = question.concat("A");
+        }
+        else if (randomInt == 2){
+            question = question.concat("B");
+        }
+        else if (randomInt == 3){
+            question = question.concat("C");
+        }
+        else {
+            question = question.concat("D");
         }
     }
 
-    public void nextLevel(javafx.event.ActionEvent event){
+    private void playQuestion(){
+        disableSimonButtons();
+        ArrayList<Button> questionButtons = new ArrayList<>();
+        for(char letter: question.toCharArray()){
+            Button tempButton = buttonHashMap.get(Character.toString(letter));
+            questionButtons.add(tempButton);
+        }
+        AnimationTimer playQuestionTimer = makeShowButtonsTimer(questionButtons);
+        playQuestionTimer.start();
+    }
+
+    private void enableSimonButtons() {
+        for (String key : buttonHashMap.keySet()) {
+            buttonHashMap.get(key).setDisable(false);
+        }
+    }
+
+    private void disableSimonButtons() {
+        for (String key : buttonHashMap.keySet()) {
+            buttonHashMap.get(key).setDisable(true);
+        }
+    }
+
+    private AnimationTimer makeShowButtonsTimer(final ArrayList<Button> questionButtons) {
+        return new AnimationTimer() {
+            private long timestamp;
+            private long fraction = 0;
+            private int count = 0;
+
+            @Override
+            public void start() {
+                timestamp = System.currentTimeMillis() - fraction;
+                super.start();
+            }
+
+            @Override
+            public void stop() {
+                super.stop();
+                fraction = System.currentTimeMillis() - timestamp;
+            }
+
+            @Override
+            public void handle(long now) {
+                long newTime = System.currentTimeMillis();
+                if (timestamp + 500 <= newTime) {
+                    count += 1;
+                    if (count % 2 == 1) {
+                        disableSimonButtons();
+                        long deltaT = (newTime - timestamp) / 500;
+                        timestamp += 500 * deltaT;
+                    } else {
+                        if (count / 2 <= questionButtons.size()) {
+                            questionButtons.get((count / 2) - 1).setDisable(false);
+                            long deltaT = (newTime - timestamp) / 500;
+                            timestamp += 500 * deltaT;
+                        } else {
+                            enableSimonButtons();
+                            super.stop();
+                        }
+                    }
+                }
+            }
+        };
+    }
+
+    public void nextLevel(){
         answer = "";
-        enableOptions();
         level = level + 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
-        labelOutput.setText("Question: " + question);
         nextLevel.setDisable(true);
+        playQuestion();
     }
 
-    public void startNewGame(javafx.event.ActionEvent event){
+    public void startNewGame(){
+        mainController.restartStopwatch();
         answer = "";
-        enableOptions();
+        question = "";
+        enableSimonButtons();
         level = 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
-        labelOutput.setText("Question: " + question);
         nextLevel.setDisable(true);
+        playQuestion();
+    }
+
+    private void restartSimon() {
+        mainController.notifyLoss();
+        level = 0;
+        answer = "";
+        question = "";
+        currentLevelLabel.setText("");
+    }
+
+    private void endSimon() {
+        mainController.notifyWin();
+        mainController.getStopwatch().stop();
+        saveWinToXML();
+        mainController.startMinesweeper();
     }
 
     private void saveWinToXML(){
@@ -219,18 +222,5 @@ public class SimonController {
         Game game = new Game("Simon", true);
         gameProgress.add(game);
         fileIO.saveToXML(filePath, gameProgress);
-    }
-
-    private void refreshScene(){
-        FXMLLoader loader = new FXMLLoader(MainMenu.class.getResource("/fxml/MainMenu.fxml"));
-        Stage stage = (Stage) nextLevel.getScene().getWindow();
-        AnchorPane page = new AnchorPane();
-        try {
-            page = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scene scene = new Scene(page);
-        stage.setScene(scene);
     }
 }

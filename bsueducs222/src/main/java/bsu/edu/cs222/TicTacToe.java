@@ -25,7 +25,6 @@ public class TicTacToe {
                 if(findCellToBeMarked(lines.get(i)) > 2){
                     priorityLineIndex = i;
                     priorityCellIndex = findCellToBeMarked(lines.get(i)) - 3;
-                    System.out.println("Line: " + priorityLineIndex + " Cell: " + priorityCellIndex);
                 }
                 else {
                     lineIndex = i;
@@ -227,11 +226,9 @@ public class TicTacToe {
 
     private void declareVictory(int victor){
         if(victor == 1) {
-            System.out.println("Player wins!");
             this.victor = "Player";
         }
         else if(victor == 2) {
-            System.out.println("Computer wins!");
             this.victor = "Computer";
         }
     }
