@@ -15,9 +15,9 @@ public class MinesweeperController {
 
     private Controller mainController;
 
-    Minesweeper game;
+    private Minesweeper game;
 
-    public void initialize(Controller controller) {
+    void initialize(Controller controller) {
         this.mainController = controller;
         game = new Minesweeper();
         setCellButtonHandlers();

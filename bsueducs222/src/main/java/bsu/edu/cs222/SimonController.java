@@ -50,6 +50,7 @@ public class SimonController {
         this.mainController = controller;
         populateHashMap();
         setButtonActions();
+        startNewGame();
     }
 
     private void populateHashMap() {
@@ -209,7 +210,7 @@ public class SimonController {
         };
     }
 
-    public void nextLevel(){
+    private void nextLevel() {
         answer = "";
         level = level + 1;
         currentLevelLabel.setText("Current Level: " + level);
@@ -217,10 +218,9 @@ public class SimonController {
         playQuestion();
     }
 
-    public void startNewGame(){
+    private void startNewGame() {
         answer = "";
         question = "";
-        enableSimonButtons();
         level = 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
@@ -229,10 +229,12 @@ public class SimonController {
 
     private void restartSimon() {
         mainController.notifyLoss();
-        level = 0;
+        level = 1;
         answer = "";
         question = "";
         currentLevelLabel.setText("");
+        generateOrder();
+        playQuestion();
     }
 
     private void endSimon() {
