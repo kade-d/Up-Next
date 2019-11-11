@@ -6,7 +6,7 @@ public class TicTacToe {
 
     //Author: Adam
 
-    public TicTacToeGameState gameState = new TicTacToeGameState();
+    public final TicTacToeGameState gameState = new TicTacToeGameState();
     public String victor = null;
 
     public void playerMove(int cell){

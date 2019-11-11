@@ -17,6 +17,7 @@
       </font>
    </Label>
     <Pane layoutX="614.0" layoutY="74.0" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: lightgray;">
+        <!--suppress JavaFxUnresolvedFxIdReference -->
         <fx:include fx:id="stopwatch" source="Stopwatch.fxml"/>
     </Pane>
     <Button fx:id="startGauntletButton" layoutX="18.0" layoutY="146.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="219.0" text="Start Gauntlet" textAlignment="CENTER" wrapText="true">

@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
-public class TicTacToeController {
+class TicTacToeController {
 
     @FXML
     GridPane board;

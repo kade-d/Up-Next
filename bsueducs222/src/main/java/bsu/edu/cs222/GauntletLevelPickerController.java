@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GauntletLevelPickerController { //Implementation of this class will be used in the final iteration.
+class GauntletLevelPickerController { //Implementation of this class will be used in the final iteration.
 
     @FXML
     private List<Button> levelButtons;

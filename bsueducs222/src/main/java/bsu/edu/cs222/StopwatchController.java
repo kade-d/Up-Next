@@ -4,7 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class StopwatchController {
+class StopwatchController {
 
     @FXML
     private Label stopwatchLabel;

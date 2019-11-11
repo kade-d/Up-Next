@@ -13,7 +13,7 @@ public class TicTacToeGameState {
     private int[] col3 = new int[3];
     public int[] diag1 = new int[3];
     private int[] diag2 = new int[3];
-    ArrayList<int[]> lines = new ArrayList<>();
+    final ArrayList<int[]> lines = new ArrayList<>();
 
     TicTacToeGameState() {
         updateLines();
