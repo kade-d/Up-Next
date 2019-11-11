@@ -42,7 +42,6 @@ public class Controller extends MainMenu {
     @FXML
     private MinesweeperController minesweeperController;
 
-
     public void initialize(){
         stopwatchController.initialize();
         startGauntletButton.setOnAction(new EventHandler<ActionEvent>() {

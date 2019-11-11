@@ -5,19 +5,19 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MinesweeperGameState {
 
-    public int[] cells = new int[81];
-    public boolean[] bombCells = new boolean[81];
-    public boolean[] shownCells = new boolean[81];
+    int[] cells = new int[81];
+    boolean[] bombCells = new boolean[81];
+    boolean[] shownCells = new boolean[81];
     public boolean[] flaggedCells = new boolean[81];
 
-    public void reset(){
+    void reset() {
         cells = new int[81];
         bombCells = new boolean[81];
         shownCells = new boolean[81];
         flaggedCells = new boolean[81];
     }
 
-    public void revealCell(int index){
+    void revealCell(int index) {
         shownCells[index] = true;
     }
 
@@ -25,15 +25,15 @@ public class MinesweeperGameState {
         flaggedCells[index] = true;
     }
 
-    public void unflagCell(int index){
+    void unflagCell(int index) {
         flaggedCells[index] = false;
     }
 
-    public void makeNewBoard(){
+    void makeNewBoard() {
         addBombs();
     }
 
-    public void addBombs(){
+    private void addBombs() {
         for(int i = 0; i < 9; i++){
             cells[i] = -1;
         }
@@ -42,7 +42,7 @@ public class MinesweeperGameState {
         findBombs();
     }
 
-    public void randomizeBoard(){
+    private void randomizeBoard() {
         Random random = ThreadLocalRandom.current();
         for (int i = cells.length - 1; i > 0; i--){
             int randomIndex = random.nextInt(i + 1);
@@ -52,7 +52,7 @@ public class MinesweeperGameState {
         }
     }
 
-    public void placeNumbers(){
+    private void placeNumbers() {
         for(int i = 0; i < cells.length; i++){
             int cell = cells[i];
             int bombCount = 0;
