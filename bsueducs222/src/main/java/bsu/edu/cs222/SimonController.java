@@ -57,6 +57,7 @@ public class SimonController {
     }
 
     public void clickA(){
+
         answer += "A";
         checkTurn();
     }
@@ -189,7 +190,6 @@ public class SimonController {
     }
 
     public void startNewGame(){
-        mainController.restartStopwatch();
         answer = "";
         question = "";
         enableSimonButtons();
