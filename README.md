@@ -1,6 +1,8 @@
 # FP-UpNext
 Desktop Java Application for minigames
 
+Developers: Kade Dentel, Adam Gackenheimer, Clay Grider
+
 <h2>To run the build from Intellij Idea (with JDK 12 or later):</h2>
 Build the project (Ctrl+F9).<br>
 
