@@ -215,7 +215,6 @@ public class TicTacToeController {
         if(game.gameState.checkBoard() != 0 || turnNumber == 9){
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             gameIsPlaying = false;
-            mainController.getStopwatch().stop();
             if (winner.equals("Player")) {
                 declareWin();
             }
@@ -235,7 +234,6 @@ public class TicTacToeController {
         mainController.notifyLoss();
         resetBoard();
         startGame();
-        mainController.restartStopwatch();
         game.gameState.reset();
     }
 

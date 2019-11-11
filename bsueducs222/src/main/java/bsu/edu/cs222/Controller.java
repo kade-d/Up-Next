@@ -63,15 +63,9 @@ public class Controller extends MainMenu {
         gameName.setText("Tic Tac Toe");
     }
 
-    void startMemoryCard() {
-        resetGamePane();
-        gameName.setText("Memory Match");
-    }
-
     void startSimon() {
         simonController.initialize(this);
         resetGamePane();
-        restartStopwatch();
         simon.setVisible(true);
         gameName.setText("Simon");
     }
@@ -79,7 +73,6 @@ public class Controller extends MainMenu {
     void startMinesweeper() {
         minesweeperController.initialize(this);
         resetGamePane();
-        restartStopwatch();
         minesweeper.setVisible(true);
         gameName.setText("Minesweeper");
     }

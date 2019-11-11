@@ -8,7 +8,8 @@ import javafx.scene.control.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GauntletLevelPickerController {
+
+public class GauntletLevelPickerController { //Implementation of this class will be used in the final iteration.
 
     @FXML
     private List<Button> levelButtons;
@@ -50,13 +51,6 @@ public class GauntletLevelPickerController {
                     mainController.startMinesweeper();
                 }
             };
-        }else if (buttonIndex == 4) {
-            eventHandler = new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    mainController.startMemoryCard();
-                }
-            };
         }
 
         return eventHandler;
@@ -73,8 +67,8 @@ public class GauntletLevelPickerController {
     }
 
     private int getLevelNumbersForUnlockedLevels() {
-        boolean[] gamesWonArray = new boolean[4];
-        String[] gamesArray = new String[]{"TicTacToe", "Simon", "Memory Match", "Minesweeper"}; //Add game name here.
+        boolean[] gamesWonArray = new boolean[3];
+        String[] gamesArray = new String[]{"TicTacToe", "Simon", "Minesweeper"};
         int unlockedLevels = 0;
 
         ArrayList<Game> gameProgress = getGameProgress();
