@@ -14,7 +14,7 @@ public class TicTacToe {
         checkVictory();
     }
 
-    public int computerMove(){
+    int computerMove(){
         ArrayList<int[]> lines = gameState.lines;
         int lineIndex = -1;
         int cellIndex = -1;
@@ -53,7 +53,7 @@ public class TicTacToe {
     }
 
 
-    public int findCellToBeMarked(int[] line){
+    private int findCellToBeMarked(int[] line){
         int totalXCells = 0;
         int totalOCells = 0;
         for(int i = 0; i < 3; i++){
@@ -75,7 +75,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int findEmptyCell(int[] line){
+    private int findEmptyCell(int[] line){
         for(int i = 0; i < line.length; i++){
             int cellValue = line[i];
             if(cellValue == 0){
@@ -85,7 +85,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int findCellIndexFromLineIndex(int lineIndex, int cellIndex){
+    private int findCellIndexFromLineIndex(int lineIndex, int cellIndex){
         switch (lineIndex){
             case 0: //row1
                 return extractRow1(cellIndex);
@@ -114,7 +114,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractRow1(int cellIndex){
+    private int extractRow1(int cellIndex){
         if(cellIndex == 0){
             return 0;
         }
@@ -127,7 +127,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractRow2(int cellIndex){
+    private int extractRow2(int cellIndex){
         if(cellIndex == 0){
             return 3;
         }
@@ -140,7 +140,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractRow3(int cellIndex){
+    private int extractRow3(int cellIndex){
         if(cellIndex == 0){
             return 6;
         }
@@ -153,7 +153,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractCol1(int cellIndex){
+    private int extractCol1(int cellIndex){
         if(cellIndex == 0){
             return 0;
         }
@@ -166,7 +166,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractCol2(int cellIndex){
+    private int extractCol2(int cellIndex){
         if(cellIndex == 0){
             return 1;
         }
@@ -179,7 +179,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractCol3(int cellIndex){
+    private int extractCol3(int cellIndex){
         if(cellIndex == 0){
             return 2;
         }
@@ -192,7 +192,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractDiag1(int cellIndex){
+    private int extractDiag1(int cellIndex){
         if(cellIndex == 0){
             return 0;
         }
@@ -205,7 +205,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public int extractDiag2(int cellIndex){
+    private int extractDiag2(int cellIndex){
         if(cellIndex == 0){
             return 2;
         }
@@ -218,7 +218,7 @@ public class TicTacToe {
         return -1;
     }
 
-    public void checkVictory(){
+    private void checkVictory(){
         if(gameState.checkBoard() != 0){
             declareVictory(gameState.checkBoard());
         }

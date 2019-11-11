@@ -5,21 +5,21 @@ import java.util.ArrayList;
 public class TicTacToeGameState {
 
     public int[] cells = new int[9];
-    public int[] row1 = new int[3];
+    private int[] row1 = new int[3];
     public int[] row2 = new int[3];
-    public int[] row3 = new int[3];
-    public int[] col1 = new int[3];
+    private int[] row3 = new int[3];
+    private int[] col1 = new int[3];
     public int[] col2 = new int[3];
-    public int[] col3 = new int[3];
+    private int[] col3 = new int[3];
     public int[] diag1 = new int[3];
-    public int[] diag2 = new int[3];
-    public ArrayList<int[]> lines = new ArrayList<>();
+    private int[] diag2 = new int[3];
+    ArrayList<int[]> lines = new ArrayList<>();
 
-    public TicTacToeGameState() {
+    TicTacToeGameState() {
         updateLines();
     }
 
-    public void updateLines(){
+    private void updateLines(){
         lines.clear();
         lines.add(row1);
         lines.add(row2);
@@ -31,7 +31,7 @@ public class TicTacToeGameState {
         lines.add(diag2);
     }
 
-    public void reset(){
+    void reset(){
         cells = new int[9];
         row1 = new int[3];
         row2 = new int[3];
@@ -44,7 +44,7 @@ public class TicTacToeGameState {
         updateLines();
     }
 
-    public void addMove(int cell, int player){
+    void addMove(int cell, int player){
         if(cells[cell] == 0){
             cells[cell] = player;
             addMoveToRow(cell, player);
@@ -97,7 +97,7 @@ public class TicTacToeGameState {
         }
     }
 
-    public int checkBoard(){
+    int checkBoard(){
         if(checkHorizontals() != 0){
             return checkHorizontals();
         }
@@ -171,7 +171,7 @@ public class TicTacToeGameState {
         return (num == 0);
     }
 
-    public ArrayList<Integer> findOpenCells(){
+    ArrayList<Integer> findOpenCells(){
         ArrayList<Integer> openCells = new ArrayList<>();
 
         for(int i = 0; i < 9; i++){

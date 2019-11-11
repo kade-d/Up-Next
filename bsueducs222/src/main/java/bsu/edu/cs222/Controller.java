@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class Controller extends MainMenu {
 
@@ -43,6 +44,11 @@ public class Controller extends MainMenu {
     @FXML
     private MinesweeperController minesweeperController;
 
+    @FXML
+    private Rectangle winBlink;
+
+    @FXML
+    private Rectangle loseBlink;
 
     public void initialize(){
         stopwatchController.initialize();
@@ -92,6 +98,8 @@ public class Controller extends MainMenu {
 
     void notifyWin() {
         gameNotificationLabel.setText("You won!");
+        winBlink.setVisible(true);
+
     }
 
     void notifyLoss() {

@@ -1,6 +1,6 @@
 package bsu.edu.cs222;
 
-class Minesweeper {
+public class Minesweeper {
 
     //TODO Author: Adam
 
