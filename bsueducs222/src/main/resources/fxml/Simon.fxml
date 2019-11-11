@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.SimonController">
    <Button fx:id="startGame" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#startNewGame"
            text="Start Game" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0"/>
    <Button fx:id="yellowButton" disable="true" layoutX="150.0" layoutY="150.0" mnemonicParsing="false"
-           onAction="#clickA" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #ffff00;" text="A"/>
-   <Button fx:id="blueButton" disable="true" layoutX="250.0" layoutY="150.0" mnemonicParsing="false" onAction="#clickB"
+           prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #ffff00;" text="A"/>
+   <Button fx:id="blueButton" disable="true" layoutX="250.0" layoutY="150.0" mnemonicParsing="false"
            prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0000ff;" text="B"/>
-   <Button fx:id="redButton" disable="true" layoutX="150.0" layoutY="250.0" mnemonicParsing="false" onAction="#clickC"
+   <Button fx:id="redButton" disable="true" layoutX="150.0" layoutY="250.0" mnemonicParsing="false"
            prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #ff0000;" text="C"/>
-   <Button fx:id="greenButton" disable="true" layoutX="250.0" layoutY="250.0" mnemonicParsing="false" onAction="#clickD"
+   <Button fx:id="greenButton" disable="true" layoutX="250.0" layoutY="250.0" mnemonicParsing="false"
            prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #008000;" text="D"/>
-   <Button fx:id="nextLevel" disable="true" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#nextLevel"
-           text="Next Level" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0"/>
    <Label fx:id="labelOutput" layoutX="14.0" layoutY="110.0" prefHeight="280.0" prefWidth="132.0"/>
    <Label fx:id="currentLevelLabel" alignment="CENTER_RIGHT" layoutX="354.0" layoutY="19.0" prefHeight="21.0"
           prefWidth="132.0" text="Current Level:" textAlignment="RIGHT" AnchorPane.topAnchor="19.0"/>
