@@ -217,14 +217,18 @@ public class TicTacToeController {
             gameIsPlaying = false;
             mainController.getStopwatch().stop();
             if (winner.equals("Player")) {
-                mainController.notifyWin();
-                saveWinToXML();
-                mainController.startSimon();
+                declareWin();
             }
             else{
                 restartGame();
             }
         }
+    }
+
+    private void declareWin(){
+        mainController.notifyWin();
+        saveWinToXML();
+        mainController.startSimon();
     }
 
     private void restartGame(){
