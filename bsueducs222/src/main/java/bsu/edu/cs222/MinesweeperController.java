@@ -23,7 +23,6 @@ public class MinesweeperController {
         setCellButtonHandlers();
         resetBoard();
         game.startGame();
-        mainController.restartStopwatch();
     }
 
     private void setCellButtonHandlers() {

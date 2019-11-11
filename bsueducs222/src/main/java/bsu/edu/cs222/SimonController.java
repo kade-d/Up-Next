@@ -1,6 +1,8 @@
 package bsu.edu.cs222;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,6 +49,7 @@ public class SimonController {
     void initialize(Controller controller) {
         this.mainController = controller;
         populateHashMap();
+        setButtonActions();
     }
 
     private void populateHashMap() {
@@ -56,32 +59,58 @@ public class SimonController {
         buttonHashMap.put("D", greenButton);
     }
 
-    public void clickA(){
-
-        answer += "A";
-        checkTurn();
+    private void setButtonActions() {
+        setYellowButtonAction();
+        setBlueButtonAction();
+        setRedButtonAction();
+        setGreenButtonAction();
     }
 
-    public void clickB(){
-        answer += "B";
-        checkTurn();
+    private void setYellowButtonAction() {
+        yellowButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                answer += "A";
+                checkTurn();
+            }
+        });
     }
 
-    public void clickC(){
-        answer += "C";
-        checkTurn();
+    private void setBlueButtonAction() {
+        blueButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                answer += "B";
+                checkTurn();
+            }
+        });
     }
 
-    public void clickD(){
-        answer += "D";
-        checkTurn();
+    private void setRedButtonAction() {
+        redButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                answer += "C";
+                checkTurn();
+            }
+        });
+    }
+
+    private void setGreenButtonAction() {
+        greenButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                answer += "D";
+                checkTurn();
+            }
+        });
     }
 
     private void checkTurn() {
         if (checkAnswers() && checkLevelsCompleted()) {
             endSimon();
         } else if (checkAnswers() && checkAnswerLength()) {
-            nextLevel.setDisable(false);
+            nextLevel();
         } else if (checkAnswerLength()) {
             restartSimon();
         }
@@ -185,7 +214,6 @@ public class SimonController {
         level = level + 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
-        nextLevel.setDisable(true);
         playQuestion();
     }
 
@@ -196,7 +224,6 @@ public class SimonController {
         level = 1;
         currentLevelLabel.setText("Current Level: " + level);
         generateOrder();
-        nextLevel.setDisable(true);
         playQuestion();
     }
 
@@ -210,7 +237,6 @@ public class SimonController {
 
     private void endSimon() {
         mainController.notifyWin();
-        mainController.getStopwatch().stop();
         saveWinToXML();
         mainController.startMinesweeper();
     }
