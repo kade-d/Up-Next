@@ -12,8 +12,8 @@
         <fx:include fx:id="ticTacToe" source="TicTacToe.fxml" visible="false" />
         <fx:include fx:id="simon" source="Simon.fxml" visible="false" />
         <fx:include fx:id="minesweeper" source="Minesweeper.fxml" visible="false" />
-      <Rectangle fx:id="winBlink" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="500.0" stroke="BLACK" strokeType="INSIDE" width="500.0" visible="false" />
-      <Rectangle fx:id="loseBlink" arcHeight="5.0" arcWidth="5.0" fill="RED" height="500.0" stroke="BLACK" strokeType="INSIDE" width="500.0" visible="false" />
+      <Rectangle fx:id="winBlink" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
+      <Rectangle fx:id="loseBlink" arcHeight="5.0" arcWidth="5.0" fill="RED" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
     </Pane>
    <Label fx:id="gameName" alignment="BOTTOM_LEFT" layoutX="264.0" layoutY="74.0" prefHeight="60.0" prefWidth="227.0" textAlignment="RIGHT" textOverrun="CLIP">
       <font>
@@ -27,6 +27,9 @@
       <font>
          <Font name="Arial" size="40.0" />
       </font></Button>
-    <Label fx:id="gameNotificationLabel" layoutX="514.0" layoutY="72.0" prefHeight="60.0" prefWidth="112.0" textAlignment="CENTER" />
+    <Label fx:id="gameNotificationLabel" layoutX="502.0" layoutY="74.0" prefHeight="60.0" prefWidth="112.0" textAlignment="CENTER" wrapText="true">
+      <font>
+         <Font size="18.0" />
+      </font></Label>
 
 </AnchorPane>

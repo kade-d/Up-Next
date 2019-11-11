@@ -1,13 +1,11 @@
 package bsu.edu.cs222;
 
-import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 
 public class Controller extends MainMenu {
 
@@ -33,7 +31,7 @@ public class Controller extends MainMenu {
     private Label gameNotificationLabel;
 
     @FXML
-    private StopwatchController stopwatchController; //Assigned but IDE doesn't recognize.
+    private StopwatchController stopwatchController;
 
     @FXML
     private TicTacToeController ticTacToeController;
@@ -43,12 +41,6 @@ public class Controller extends MainMenu {
 
     @FXML
     private MinesweeperController minesweeperController;
-
-    @FXML
-    private Rectangle winBlink;
-
-    @FXML
-    private Rectangle loseBlink;
 
     public void initialize(){
         stopwatchController.initialize();
@@ -105,11 +97,8 @@ public class Controller extends MainMenu {
     }
 
     void notifyGauntletCompleted() {
-        gameNotificationLabel.setText("Gauntlet Completed!");
+        gameNotificationLabel.setText("Gauntlet completed!");
+        resetGamePane();
         stopwatchController.stopwatch.stop();
-    }
-
-    AnimationTimer getStopwatch() {
-        return this.stopwatchController.stopwatch;
     }
 }

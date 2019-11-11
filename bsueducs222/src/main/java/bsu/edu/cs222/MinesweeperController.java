@@ -292,7 +292,6 @@ public class MinesweeperController {
             }
         }
         if(flaggedBombs + shownCellCount == 81){
-
             mainController.notifyGauntletCompleted();
         }
     }
