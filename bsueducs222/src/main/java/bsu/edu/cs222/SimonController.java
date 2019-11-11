@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class SimonController {
+public class SimonController {
 
     @FXML
     Button yellowButton;

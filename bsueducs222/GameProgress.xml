@@ -524,4 +524,12 @@
         <gameName>Simon</gameName>
         <gameCompleted>true</gameCompleted>
     </game>
+    <game>
+        <gameName>TicTacToe</gameName>
+        <gameCompleted>true</gameCompleted>
+    </game>
+    <game>
+        <gameName>Simon</gameName>
+        <gameCompleted>true</gameCompleted>
+    </game>
 </gameProgress>
