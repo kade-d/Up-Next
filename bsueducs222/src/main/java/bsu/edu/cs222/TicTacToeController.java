@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
-public class TicTacToeController {
+class TicTacToeController {
 
     @FXML
     GridPane board;
@@ -215,7 +215,7 @@ public class TicTacToeController {
         if(game.gameState.checkBoard() != 0 || turnNumber == 9){
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             gameIsPlaying = false;
-            if(winner != null) {
+            if (winner != null) {
                 if (winner.equals("Player")) {
                     declareWin();
                 } else {
@@ -225,7 +225,7 @@ public class TicTacToeController {
         }
     }
 
-    private void declareWin(){
+    private void declareWin() {
         mainController.notifyWin();
         saveWinToXML();
         mainController.startSimon();
@@ -245,7 +245,7 @@ public class TicTacToeController {
     }
 
     private int convertTextToPlayerNumber(String text){
-        switch (text){
+        switch (text) {
             case "":
                 return 0;
 

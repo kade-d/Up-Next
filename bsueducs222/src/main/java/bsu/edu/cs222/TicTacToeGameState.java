@@ -13,13 +13,13 @@ public class TicTacToeGameState {
     private int[] col3 = new int[3];
     public int[] diag1 = new int[3];
     private int[] diag2 = new int[3];
-    ArrayList<int[]> lines = new ArrayList<>();
+    final ArrayList<int[]> lines = new ArrayList<>();
 
     TicTacToeGameState() {
         updateLines();
     }
 
-    private void updateLines(){
+    private void updateLines() {
         lines.clear();
         lines.add(row1);
         lines.add(row2);
@@ -31,7 +31,7 @@ public class TicTacToeGameState {
         lines.add(diag2);
     }
 
-    void reset(){
+    void reset() {
         cells = new int[9];
         row1 = new int[3];
         row2 = new int[3];
@@ -44,7 +44,7 @@ public class TicTacToeGameState {
         updateLines();
     }
 
-    void addMove(int cell, int player){
+    void addMove(int cell, int player) {
         if(cells[cell] == 0){
             cells[cell] = player;
             addMoveToRow(cell, player);
@@ -97,7 +97,7 @@ public class TicTacToeGameState {
         }
     }
 
-    int checkBoard(){
+    int checkBoard() {
         if(checkHorizontals() != 0){
             return checkHorizontals();
         }
@@ -171,7 +171,7 @@ public class TicTacToeGameState {
         return (num == 0);
     }
 
-    ArrayList<Integer> findOpenCells(){
+    ArrayList<Integer> findOpenCells() {
         ArrayList<Integer> openCells = new ArrayList<>();
 
         for(int i = 0; i < 9; i++){

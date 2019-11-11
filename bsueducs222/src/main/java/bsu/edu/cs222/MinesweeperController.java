@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 
-public class MinesweeperController {
+class MinesweeperController {
 
     @FXML
     private List<Button> cellButtons;

@@ -10,8 +10,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SimonController {
-    //Author: Clay Grider
+class SimonController {
 
     @FXML
     Button yellowButton;
@@ -39,7 +38,7 @@ public class SimonController {
 
     private Controller mainController;
 
-    private HashMap<String, Button> buttonHashMap = new HashMap<>();
+    private final HashMap<String, Button> buttonHashMap = new HashMap<>();
 
     void initialize(Controller controller) {
         this.mainController = controller;

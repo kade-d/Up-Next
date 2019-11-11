@@ -1,8 +1,8 @@
 package bsu.edu.cs222;
 
 class Game {
-    private String gameName;
-    private Boolean gameCompleted;
+    private final String gameName;
+    private final Boolean gameCompleted;
 
 
     Game(String gameName, Boolean gameCompleted) {
