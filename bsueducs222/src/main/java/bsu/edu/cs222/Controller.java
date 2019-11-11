@@ -1,6 +1,5 @@
 package bsu.edu.cs222;
 
-import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -84,7 +83,7 @@ public class Controller extends MainMenu {
         }
     }
 
-    void restartStopwatch() {
+    private void restartStopwatch() {
         stopwatchController.stopwatch.stop();
         stopwatchController.resetStopwatch();
         stopwatchController.stopwatch.start();
@@ -101,9 +100,5 @@ public class Controller extends MainMenu {
     void notifyGauntletCompleted() {
         gameNotificationLabel.setText("Gauntlet Completed!");
         stopwatchController.stopwatch.stop();
-    }
-
-    AnimationTimer getStopwatch() {
-        return this.stopwatchController.stopwatch;
     }
 }

@@ -4,7 +4,7 @@ class Minesweeper {
 
     //TODO Author: Adam
 
-    public MinesweeperGameState gameState = new MinesweeperGameState();
+    MinesweeperGameState gameState = new MinesweeperGameState();
 
     void startGame(){
         gameState.makeNewBoard();
