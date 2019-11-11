@@ -215,11 +215,12 @@ public class TicTacToeController {
         if(game.gameState.checkBoard() != 0 || turnNumber == 9){
             String winner = convertPlayerNumberToString(game.gameState.checkBoard());
             gameIsPlaying = false;
-            if (winner.equals("Player")) {
-                declareWin();
-            }
-            else{
-                restartGame();
+            if(winner != null) {
+                if (winner.equals("Player")) {
+                    declareWin();
+                } else {
+                    restartGame();
+                }
             }
         }
     }
@@ -244,14 +245,15 @@ public class TicTacToeController {
     }
 
     private int convertTextToPlayerNumber(String text){
-        if(text.equals("")){
-            return 0;
-        }
-        else if(text.equals("X")){
-            return 1;
-        }
-        else if(text.equals("O")){
-            return 2;
+        switch (text){
+            case "":
+                return 0;
+
+            case "X":
+                return 1;
+
+            case "O":
+                return 2;
         }
         return 0;
     }

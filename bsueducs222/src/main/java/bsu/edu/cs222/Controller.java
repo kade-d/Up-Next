@@ -90,7 +90,7 @@ public class Controller extends MainMenu {
         }
     }
 
-    void restartStopwatch() {
+    private void restartStopwatch() {
         stopwatchController.stopwatch.stop();
         stopwatchController.resetStopwatch();
         stopwatchController.stopwatch.start();
@@ -98,8 +98,6 @@ public class Controller extends MainMenu {
 
     void notifyWin() {
         gameNotificationLabel.setText("You won!");
-        winBlink.setVisible(true);
-
     }
 
     void notifyLoss() {

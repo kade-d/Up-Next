@@ -12,11 +12,6 @@ import java.util.HashMap;
 
 public class SimonController {
     //Author: Clay Grider
-    @FXML
-    Button startGame;
-
-    @FXML
-    Button nextLevel;
 
     @FXML
     Button yellowButton;
