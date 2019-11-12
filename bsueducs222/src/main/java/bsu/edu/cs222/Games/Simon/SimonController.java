@@ -30,9 +30,6 @@ public class SimonController {
     @FXML
     Label currentLevelLabel;
 
-    @FXML
-    Label goalLabel;
-
     private int level = 0;
 
     private String answer = "";
@@ -210,7 +207,7 @@ public class SimonController {
     private void nextLevel() {
         answer = "";
         level = level + 1;
-        currentLevelLabel.setText("Current Level: " + level);
+        currentLevelLabel.setText("Current Level: " + level + "/6");
         generateOrder();
         playQuestion();
     }
@@ -219,7 +216,7 @@ public class SimonController {
         answer = "";
         question = "";
         level = 1;
-        currentLevelLabel.setText("Current Level: " + level);
+        currentLevelLabel.setText("Current Level: " + level + "/6");
         generateOrder();
         playQuestion();
     }
@@ -229,7 +226,7 @@ public class SimonController {
         level = 1;
         answer = "";
         question = "";
-        currentLevelLabel.setText("");
+        currentLevelLabel.setText("Current Level: 0/6");
         generateOrder();
         playQuestion();
     }

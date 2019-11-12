@@ -138,11 +138,13 @@ public class Controller extends MainMenu {
         return new AnimationTimer() {
             private long timestamp;
             private int count = 0;
+            private double opacity = 1;
 
             @Override
             public void start() {
                 timestamp = System.currentTimeMillis();
                 rectangle.setVisible(true);
+                rectangle.setOpacity(opacity);
                 super.start();
             }
 
@@ -154,10 +156,15 @@ public class Controller extends MainMenu {
             @Override
             public void handle(long now) {
                 long newTime = System.currentTimeMillis();
+                if(timestamp + 100 <= newTime){
+                    opacity = opacity * 0.85;
+                    rectangle.setOpacity(opacity);
+                }
                 if (timestamp + 500 <= newTime) {
                     if (count == 0) {
                         count += 1;
                         rectangle.setVisible(false);
+                        rectangle.setOpacity(1);
                     } else {
                         super.stop();
                     }
