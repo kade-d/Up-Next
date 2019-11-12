@@ -38,7 +38,7 @@ public class LevelPickerController { //Implementation of this class will be used
                 eventHandler = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        mainController.startTicTacToe();
+                        mainController.startTicTacToe(1);
                     }
                 };
                 break;
@@ -47,7 +47,7 @@ public class LevelPickerController { //Implementation of this class will be used
                 eventHandler = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        mainController.startSimon();
+                        mainController.startSimon(1);
                     }
                 };
                 break;
@@ -56,7 +56,7 @@ public class LevelPickerController { //Implementation of this class will be used
                 eventHandler = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        mainController.startMinesweeper();
+                        mainController.startMinesweeper(1);
                     }
                 };
                 break;
@@ -65,7 +65,7 @@ public class LevelPickerController { //Implementation of this class will be used
                 eventHandler = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        mainController.startMaze();
+                        mainController.startMaze(1);
                     }
                 };
                 break;

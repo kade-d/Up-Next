@@ -27,6 +27,8 @@ public class MazeController {
 
     private Controller mainController;
 
+    private int mode;
+
     private final double circleSpeed = 150;
     private final double minX = -230;
     private final double maxX = 230;
@@ -36,10 +38,10 @@ public class MazeController {
     private DoubleProperty circleYVelocity = new SimpleDoubleProperty();
     private LongProperty lastUpdateTime = new SimpleLongProperty();
 
-    public void initialize(Controller controller) {
+    public void initialize(Controller controller, int mode) {
         this.mainController = controller;
+        this.mode = mode;
         startMaze();
-
     }
 
     private void startMaze(){
@@ -158,7 +160,13 @@ public class MazeController {
 
     private void winMaze(){
         coin.setVisible(false);
-        mainController.notifyGauntletCompleted();
+        if(mode == 0) {
+            mainController.notifyGauntletCompleted();
+        }
+        else if(mode == 1){
+            resetSprites();
+            mainController.restartStopwatch();
+        }
     }
 
 }

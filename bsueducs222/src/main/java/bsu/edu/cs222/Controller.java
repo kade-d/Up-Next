@@ -42,7 +42,7 @@ public class Controller extends MainMenu {
     private Label gameNotificationLabel;
 
     @FXML
-    private StopwatchController stopwatchController;
+    public StopwatchController stopwatchController;
 
     @FXML
     private LevelPickerController levelPickerController;
@@ -72,35 +72,44 @@ public class Controller extends MainMenu {
             @Override
             public void handle(ActionEvent event) {
                 gameNotificationLabel.setText("");
-                startTicTacToe();
+                startTicTacToe(0);
             }
         });
     }
 
-    public void startTicTacToe() {
-        resetGamePane();
+    public void startTicTacToe(int mode) {
         restartStopwatch();
-        ticTacToeController.initialize(this);
+        resetGamePane();
+        ticTacToeController.initialize(this, mode);
         ticTacToe.setVisible(true);
         gameName.setText("Tic Tac Toe");
     }
 
-    public void startSimon() {
-        simonController.initialize(this);
+    public void startSimon(int mode) {
+        if(mode == 1){
+            restartStopwatch();
+        }
+        simonController.initialize(this, mode);
         resetGamePane();
         simon.setVisible(true);
         gameName.setText("Simon");
     }
 
-    public void startMinesweeper() {
-        minesweeperController.initialize(this);
+    public void startMinesweeper(int mode) {
+        if(mode == 1){
+            restartStopwatch();
+        }
+        minesweeperController.initialize(this, mode);
         resetGamePane();
         minesweeper.setVisible(true);
         gameName.setText("Minesweeper");
     }
 
-    public void startMaze() {
-        mazeController.initialize(this);
+    public void startMaze(int mode) {
+        if(mode == 1){
+            restartStopwatch();
+        }
+        mazeController.initialize(this, mode);
         resetGamePane();
         maze.setVisible(true);
         gameName.setText("Maze");
@@ -113,7 +122,7 @@ public class Controller extends MainMenu {
         }
     }
 
-    private void restartStopwatch() {
+    public void restartStopwatch() {
         stopwatchController.stopwatch.stop();
         stopwatchController.resetStopwatch();
         stopwatchController.stopwatch.start();

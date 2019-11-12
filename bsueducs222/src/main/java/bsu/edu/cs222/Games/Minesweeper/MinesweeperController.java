@@ -19,10 +19,13 @@ public class MinesweeperController {
 
     private Controller mainController;
 
+    private int mode;
+
     private Minesweeper game;
 
-    public void initialize(Controller controller) {
+    public void initialize(Controller controller, int mode) {
         this.mainController = controller;
+        this.mode = mode;
         game = new Minesweeper();
         setCellButtonHandlers();
         resetBoard();
@@ -82,11 +85,14 @@ public class MinesweeperController {
                 cellButtons.get(i).setStyle("-fx-background-color: #ff0000");
             }
         }
+        mainController.notifyLoss();
         restartGame();
+        if(mode == 1){
+            mainController.restartStopwatch();
+        }
     }
 
     private void restartGame(){
-        mainController.notifyLoss();
         resetBoard();
         game.gameState.reset();
         game.startGame();
@@ -296,10 +302,21 @@ public class MinesweeperController {
             }
         }
         if(flaggedBombs + shownCellCount == 81){
-            mainController.notifyWin();
-            saveWinToXML();
-            mainController.startMaze();
+            if(mode == 0) {
+                endMinesweeper();
+            }
+            else if(mode == 1){
+                mainController.notifyWin();
+                restartGame();
+                mainController.restartStopwatch();
+            }
         }
+    }
+
+    private void endMinesweeper(){
+        mainController.notifyWin();
+        saveWinToXML();
+        mainController.startMaze(0);
     }
 
     private void saveWinToXML() {

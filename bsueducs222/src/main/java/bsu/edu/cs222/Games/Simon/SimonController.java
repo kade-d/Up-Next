@@ -38,10 +38,13 @@ public class SimonController {
 
     private Controller mainController;
 
+    private int mode;
+
     private final HashMap<String, Button> buttonHashMap = new HashMap<>();
 
-    public void initialize(Controller controller) {
+    public void initialize(Controller controller, int mode) {
         this.mainController = controller;
+        this.mode = mode;
         populateHashMap();
         setButtonActions();
         startNewGame();
@@ -103,11 +106,22 @@ public class SimonController {
 
     private void checkTurn() {
         if (checkAnswers() && checkLevelsCompleted()) {
-            endSimon();
+            if(mode == 0){
+                endSimon();
+            }
+            else if(mode == 1){
+                mainController.notifyWin();
+                restartSimon();
+                mainController.restartStopwatch();
+            }
         } else if (checkAnswers() && checkAnswerLength()) {
             nextLevel();
         } else if (checkAnswerLength()) {
+            mainController.notifyLoss();
             restartSimon();
+            if(mode == 1){
+                mainController.restartStopwatch();
+            }
         }
     }
 
@@ -222,7 +236,6 @@ public class SimonController {
     }
 
     private void restartSimon() {
-        mainController.notifyLoss();
         level = 1;
         answer = "";
         question = "";
@@ -234,7 +247,7 @@ public class SimonController {
     private void endSimon() {
         mainController.notifyWin();
         saveWinToXML();
-        mainController.startMinesweeper();
+        mainController.startMinesweeper(0);
     }
 
     private void saveWinToXML(){
