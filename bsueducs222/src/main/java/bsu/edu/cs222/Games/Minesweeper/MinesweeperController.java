@@ -296,7 +296,7 @@ public class MinesweeperController {
             }
         }
         if(flaggedBombs + shownCellCount == 81){
-            mainController.notifyGauntletCompleted();
+            mainController.notifyWin();
             saveWinToXML();
             mainController.startMaze();
         }

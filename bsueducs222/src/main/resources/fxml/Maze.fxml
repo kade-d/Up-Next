@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
-<AnchorPane fx:id="mazePane" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Games.Maze.MazeController">
+
+<AnchorPane fx:id="mazePane" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Games.Maze.MazeController">
     <children>
-        <Circle fx:id="ball" fill="DODGERBLUE" layoutX="250.0" layoutY="250.0" radius="20.0" stroke="BLACK"
-                strokeType="INSIDE"/>
+        <Circle fx:id="ball" fill="DODGERBLUE" layoutX="250.0" layoutY="250.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="coin" fill="#fff31f" layoutX="250.0" layoutY="250.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
     </children>
 </AnchorPane>
