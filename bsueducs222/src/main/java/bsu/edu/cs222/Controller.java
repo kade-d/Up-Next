@@ -1,8 +1,10 @@
 package bsu.edu.cs222;
 
+import bsu.edu.cs222.Games.Maze.MazeController;
 import bsu.edu.cs222.Games.Minesweeper.MinesweeperController;
 import bsu.edu.cs222.Games.Simon.SimonController;
 import bsu.edu.cs222.Games.TicTacToe.TicTacToeController;
+import bsu.edu.cs222.UIComponents.LevelPickerController;
 import bsu.edu.cs222.UIComponents.StopwatchController;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -31,6 +33,9 @@ public class Controller extends MainMenu {
     private Pane minesweeper;
 
     @FXML
+    private Pane maze;
+
+    @FXML
     private Button startGauntletButton;
 
     @FXML
@@ -38,6 +43,9 @@ public class Controller extends MainMenu {
 
     @FXML
     private StopwatchController stopwatchController;
+
+    @FXML
+    private LevelPickerController levelPickerController;
 
     @FXML
     private TicTacToeController ticTacToeController;
@@ -49,6 +57,9 @@ public class Controller extends MainMenu {
     private MinesweeperController minesweeperController;
 
     @FXML
+    private MazeController mazeController;
+
+    @FXML
     private Rectangle winBlink;
 
     @FXML
@@ -56,6 +67,7 @@ public class Controller extends MainMenu {
 
     public void initialize(){
         stopwatchController.initialize();
+        levelPickerController.initialize(this);
         startGauntletButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -87,8 +99,15 @@ public class Controller extends MainMenu {
         gameName.setText("Minesweeper");
     }
 
+    public void startMaze() {
+        mazeController.initialize(this);
+        resetGamePane();
+        maze.setVisible(true);
+        gameName.setText("Maze");
+    }
+
     private void resetGamePane() {
-        Pane[] gamePaneList = new Pane[]{ticTacToe, simon, minesweeper};
+        Pane[] gamePaneList = new Pane[]{ticTacToe, simon, minesweeper, maze};
         for (Pane pane : gamePaneList) {
             pane.setVisible(false);
         }

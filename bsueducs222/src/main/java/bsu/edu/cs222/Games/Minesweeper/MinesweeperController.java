@@ -1,12 +1,15 @@
 package bsu.edu.cs222.Games.Minesweeper;
 
 import bsu.edu.cs222.Controller;
+import bsu.edu.cs222.FileIO.FileIO;
+import bsu.edu.cs222.FileIO.Game;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MinesweeperController {
@@ -294,6 +297,17 @@ public class MinesweeperController {
         }
         if(flaggedBombs + shownCellCount == 81){
             mainController.notifyGauntletCompleted();
+            saveWinToXML();
+            mainController.startMaze();
         }
+    }
+
+    private void saveWinToXML() {
+        FileIO fileIO = new FileIO();
+        String filePath = fileIO.findXMLPath();
+        ArrayList<Game> gameProgress = fileIO.readXML(filePath);
+        Game game = new Game("Minesweeper", true);
+        gameProgress.add(game);
+        fileIO.saveToXML(filePath, gameProgress);
     }
 }

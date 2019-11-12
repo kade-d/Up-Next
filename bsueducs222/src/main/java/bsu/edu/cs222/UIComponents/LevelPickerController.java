@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class GauntletLevelPickerController { //Implementation of this class will be used in the final iteration.
+public class LevelPickerController { //Implementation of this class will be used in the final iteration.
 
     @FXML
     private List<Button> levelButtons;
@@ -33,29 +33,43 @@ class GauntletLevelPickerController { //Implementation of this class will be use
 
     private EventHandler<ActionEvent> makeEventHandlerForLevel(int buttonIndex, final Controller mainController) {
         EventHandler<ActionEvent> eventHandler = null;
-        if (buttonIndex == 1) {
-            eventHandler = new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    mainController.startTicTacToe();
-                }
-            };
-        } else if (buttonIndex == 2) {
-            eventHandler = new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    mainController.startSimon();
-                }
-            };
-        } else if (buttonIndex == 3) {
-            eventHandler = new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    mainController.startMinesweeper();
-                }
-            };
-        }
+        switch (buttonIndex) {
+            case 1:
+                eventHandler = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        mainController.startTicTacToe();
+                    }
+                };
+                break;
 
+            case 2:
+                eventHandler = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        mainController.startSimon();
+                    }
+                };
+                break;
+
+            case 3:
+                eventHandler = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        mainController.startMinesweeper();
+                    }
+                };
+                break;
+
+            case 4:
+                eventHandler = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        mainController.startMaze();
+                    }
+                };
+                break;
+        }
         return eventHandler;
     }
 

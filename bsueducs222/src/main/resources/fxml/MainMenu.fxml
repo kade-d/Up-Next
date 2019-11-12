@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane prefHeight="666.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
     <Pane fx:id="gamePane" layoutX="264.0" layoutY="146.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
         <fx:include fx:id="ticTacToe" source="TicTacToe.fxml" visible="false" />
         <fx:include fx:id="simon" source="Simon.fxml" visible="false" />
         <fx:include fx:id="minesweeper" source="Minesweeper.fxml" visible="false" />
+        <fx:include fx:id="maze" source="Maze.fxml" visible="false"/>
       <Rectangle fx:id="winBlink" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
       <Rectangle fx:id="loseBlink" arcHeight="5.0" arcWidth="5.0" fill="RED" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
     </Pane>
@@ -31,5 +31,8 @@
       <font>
          <Font size="18.0" />
       </font></Label>
+    <Pane layoutX="28.0" layoutY="296.0" prefHeight="200.0" prefWidth="200.0">
+        <fx:include fx:id="levelPicker" source="LevelPicker.fxml"/>
+    </Pane>
 
 </AnchorPane>
