@@ -1,4 +1,4 @@
-import bsu.edu.cs222.Minesweeper;
+import bsu.edu.cs222.Games.Minesweeper.Minesweeper;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

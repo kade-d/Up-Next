@@ -1,4 +1,4 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.FileIO;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,16 +20,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class FileIO {
+public class FileIO {
 
-    String findXMLPath() {
+    public String findXMLPath() {
         String filePath = new File("").getAbsolutePath();
         filePath = filePath.concat("\\GameProgress.xml");
 
         return filePath;
     }
 
-    ArrayList<Game> readXML(String filePath) {
+    public ArrayList<Game> readXML(String filePath) {
         ArrayList<Game> gameProgress = new ArrayList<>();
         Document dom;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -61,7 +61,7 @@ class FileIO {
         return gameProgress;
     }
 
-    void saveToXML(String filePath, ArrayList<Game> gameProgress) {
+    public void saveToXML(String filePath, ArrayList<Game> gameProgress) {
         Document dom;
         Element e;
 

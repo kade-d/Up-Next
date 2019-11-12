@@ -1,20 +1,20 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.FileIO;
 
-class Game {
+public class Game {
     private final String gameName;
     private final Boolean gameCompleted;
 
 
-    Game(String gameName, Boolean gameCompleted) {
+    public Game(String gameName, Boolean gameCompleted) {
         this.gameName = gameName;
         this.gameCompleted = gameCompleted;
     }
 
-    String getGameName() {
+    public String getGameName() {
         return gameName;
     }
 
-    Boolean getGameCompleted() {
+    public Boolean getGameCompleted() {
         return gameCompleted;
     }
 }

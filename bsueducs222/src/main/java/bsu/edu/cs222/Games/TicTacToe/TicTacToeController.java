@@ -1,5 +1,8 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.Games.TicTacToe;
 
+import bsu.edu.cs222.Controller;
+import bsu.edu.cs222.FileIO.FileIO;
+import bsu.edu.cs222.FileIO.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -49,7 +52,7 @@ public class TicTacToeController {
 
     private Controller mainController;
 
-    void initialize(Controller controller) {
+    public void initialize(Controller controller) {
         this.mainController = controller;
         startGame();
     }

@@ -1,5 +1,6 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.Games.Minesweeper;
 
+import bsu.edu.cs222.Controller;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class MinesweeperController {
 
     private Minesweeper game;
 
-    void initialize(Controller controller) {
+    public void initialize(Controller controller) {
         this.mainController = controller;
         game = new Minesweeper();
         setCellButtonHandlers();

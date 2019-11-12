@@ -1,4 +1,4 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.UIComponents;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -9,13 +9,13 @@ public class StopwatchController {
     @FXML
     private Label stopwatchLabel;
 
-    AnimationTimer stopwatch;
+    public AnimationTimer stopwatch;
 
-    void initialize() {
+    public void initialize() {
         stopwatch = makeTimer(stopwatchLabel);
     }
 
-    void resetStopwatch() {
+    public void resetStopwatch() {
         stopwatch = makeTimer(stopwatchLabel);
     }
 

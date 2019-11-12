@@ -1,4 +1,4 @@
-import bsu.edu.cs222.TicTacToe;
+import bsu.edu.cs222.Games.TicTacToe.TicTacToe;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

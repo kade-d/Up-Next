@@ -1,5 +1,8 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.UIComponents;
 
+import bsu.edu.cs222.Controller;
+import bsu.edu.cs222.FileIO.FileIO;
+import bsu.edu.cs222.FileIO.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,7 +17,7 @@ class GauntletLevelPickerController { //Implementation of this class will be use
     @FXML
     private List<Button> levelButtons;
 
-    void initialize(Controller mainController) {
+    public void initialize(Controller mainController) {
         setLevelButtonHandlers(mainController);
         disableLockedLevels();
     }

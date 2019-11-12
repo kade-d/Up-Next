@@ -1,4 +1,4 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.Games.Minesweeper;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;

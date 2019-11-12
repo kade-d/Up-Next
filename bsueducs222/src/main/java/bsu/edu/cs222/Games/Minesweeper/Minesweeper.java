@@ -1,4 +1,4 @@
-package bsu.edu.cs222;
+package bsu.edu.cs222.Games.Minesweeper;
 
 public class Minesweeper {
 
