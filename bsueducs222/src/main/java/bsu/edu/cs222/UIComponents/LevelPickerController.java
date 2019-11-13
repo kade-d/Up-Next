@@ -34,7 +34,7 @@ public class LevelPickerController { //Implementation of this class will be used
                 eventHandler = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        mainController.startTicTacToe();
+                        mainController.startTicTacToe(1);
                     }
                 };
                 break;

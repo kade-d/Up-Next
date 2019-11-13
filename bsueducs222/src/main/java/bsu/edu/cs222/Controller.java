@@ -86,7 +86,7 @@ public class Controller extends MainMenu {
             @Override
             public void handle(ActionEvent event) {
                 gameNotificationLabel.setText("");
-                startTicTacToe();
+                startTicTacToe(0);
             }
         });
         scoreboardButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -100,10 +100,10 @@ public class Controller extends MainMenu {
         });
     }
 
-    public void startTicTacToe() {
+    public void startTicTacToe(int mode) {
         resetGamePane();
         restartStopwatch();
-        ticTacToeController.initialize(this, 0);
+        ticTacToeController.initialize(this, mode);
         ticTacToe.setVisible(true);
         gameName.setText("Tic Tac Toe");
     }
@@ -183,6 +183,7 @@ public class Controller extends MainMenu {
         return new AnimationTimer() {
             private long timestamp;
             private int count = 0;
+            private double opacity = 1;
 
             @Override
             public void start() {
@@ -199,6 +200,10 @@ public class Controller extends MainMenu {
             @Override
             public void handle(long now) {
                 long newTime = System.currentTimeMillis();
+                if(timestamp + 100 <= newTime){
+                    opacity = opacity * 0.85;
+                    rectangle.setOpacity(opacity);
+                }
                 if (timestamp + 500 <= newTime) {
                     if (count == 0) {
                         count += 1;

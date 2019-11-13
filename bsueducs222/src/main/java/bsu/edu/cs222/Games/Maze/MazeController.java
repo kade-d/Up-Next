@@ -44,6 +44,7 @@ public class MazeController {
 
     public void initialize(Controller controller, int mode) {
         this.mainController = controller;
+        this.mode = mode;
         startMaze();
     }
 
@@ -227,7 +228,15 @@ public class MazeController {
     private void winMaze(){
         coin.setVisible(false);
         mainController.saveWinToXML(new Game("Maze", true, "0"));
-        mainController.notifyGauntletCompleted();
+        if(mode == 0) {
+            mainController.notifyWin();
+            mainController.notifyGauntletCompleted();
+        }
+        else if(mode == 1){
+            mainController.restartStopwatch();
+            mainController.notifyWin();
+            resetSprites();
+        }
     }
 
 }
