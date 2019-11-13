@@ -45,14 +45,17 @@ public class TicTacToeController {
 
     private int turnNumber = 0;
 
+    private int mode;
+
     private boolean gameIsPlaying = false;
 
     private TicTacToe game;
 
     private Controller mainController;
 
-    public void initialize(Controller controller) {
+    public void initialize(Controller controller, int mode) {
         this.mainController = controller;
+        this.mode = mode;
         startGame();
     }
 
@@ -221,7 +224,7 @@ public class TicTacToeController {
                 if (winner.equals("Player")) {
                     declareWin();
                 } else {
-                    restartGame();
+                    declareLoss();
                 }
             }
         }
@@ -230,11 +233,22 @@ public class TicTacToeController {
     private void declareWin() {
         mainController.notifyWin();
         mainController.saveWinToXML(new Game("TicTacToe", true, "0"));
-        mainController.startSimon();
+        if (mode == 0) {
+            mainController.startSimon(0);
+        } else if (mode == 1) {
+            restartGame();
+        }
+    }
+
+    private void declareLoss() {
+        mainController.notifyLoss();
+        restartGame();
+        if (mode == 1) {
+            mainController.restartStopwatch();
+        }
     }
 
     private void restartGame(){
-        mainController.notifyLoss();
         resetBoard();
         startGame();
         game.gameState.reset();

@@ -30,6 +30,8 @@ public class MazeController {
 
     private Controller mainController;
 
+    private int mode;
+
     private final double circleSpeed = 150;
     private double minX = -230;
     private double maxX = 230;
@@ -40,7 +42,7 @@ public class MazeController {
     private DoubleProperty circleYVelocity = new SimpleDoubleProperty();
     private LongProperty lastUpdateTime = new SimpleLongProperty();
 
-    public void initialize(Controller controller) {
+    public void initialize(Controller controller, int mode) {
         this.mainController = controller;
         startMaze();
     }

@@ -8,89 +8,26 @@
     <game>
         <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
     </game>
     <game>
         <gameName>Simon</gameName>
         <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
     </game>
     <game>
         <gameName>Minesweeper</gameName>
         <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Minesweeper</gameName>
+        <gameName>Maze</gameName>
         <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>Simon</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>Minesweeper</gameName>
-        <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
     </game>
     <game>
         <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>Simon</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>Minesweeper</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
-    </game>
-    <game>
-        <gameName>TicTacToe</gameName>
-        <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
     </game>
 </gameProgress>
