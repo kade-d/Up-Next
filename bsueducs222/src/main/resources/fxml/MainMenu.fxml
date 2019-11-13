@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="666.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
     <Pane fx:id="gamePane" layoutX="264.0" layoutY="146.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
+        <fx:include fx:id="scoreboard" source="Scoreboard.fxml" visible="false"/>
         <fx:include fx:id="ticTacToe" source="TicTacToe.fxml" visible="false" />
         <fx:include fx:id="simon" source="Simon.fxml" visible="false" />
         <fx:include fx:id="minesweeper" source="Minesweeper.fxml" visible="false" />
@@ -23,16 +24,22 @@
     <Pane layoutX="614.0" layoutY="74.0" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: lightgray;">
         <fx:include fx:id="stopwatch" source="Stopwatch.fxml" />
     </Pane>
-    <Button fx:id="startGauntletButton" layoutX="18.0" layoutY="146.0" mnemonicParsing="false" prefHeight="140.0" prefWidth="219.0" text="Start Gauntlet" textAlignment="CENTER" wrapText="true">
+    <Button fx:id="startGauntletButton" layoutX="18.0" layoutY="183.0" mnemonicParsing="false" prefHeight="103.0"
+            prefWidth="219.0" text="Start Gauntlet" textAlignment="CENTER" wrapText="true">
       <font>
-         <Font name="Arial" size="40.0" />
+          <Font name="Arial" size="30.0"/>
       </font></Button>
     <Label fx:id="gameNotificationLabel" layoutX="502.0" layoutY="74.0" prefHeight="60.0" prefWidth="112.0" textAlignment="CENTER" wrapText="true">
       <font>
          <Font size="18.0" />
       </font></Label>
-    <Pane layoutX="28.0" layoutY="296.0" prefHeight="200.0" prefWidth="200.0">
+    <Pane layoutX="62.0" layoutY="433.0" prefHeight="103.0" prefWidth="131.0">
         <fx:include fx:id="levelPicker" source="LevelPicker.fxml"/>
     </Pane>
-
+    <Button fx:id="scoreboardButton" layoutX="18.0" layoutY="297.0" mnemonicParsing="false" prefHeight="103.0"
+            prefWidth="219.0" text="High Scores">
+        <font>
+            <Font size="30.0"/>
+        </font>
+    </Button>
 </AnchorPane>

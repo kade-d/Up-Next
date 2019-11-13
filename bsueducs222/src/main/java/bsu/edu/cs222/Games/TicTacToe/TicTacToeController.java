@@ -1,7 +1,6 @@
 package bsu.edu.cs222.Games.TicTacToe;
 
 import bsu.edu.cs222.Controller;
-import bsu.edu.cs222.FileIO.FileIO;
 import bsu.edu.cs222.FileIO.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -230,7 +229,7 @@ public class TicTacToeController {
 
     private void declareWin() {
         mainController.notifyWin();
-        saveWinToXML();
+        mainController.saveWinToXML(new Game("TicTacToe", true, "0"));
         mainController.startSimon();
     }
 
@@ -272,14 +271,5 @@ public class TicTacToeController {
             return "Computer";
         }
         return null;
-    }
-
-    private void saveWinToXML(){
-        FileIO fileIO = new FileIO();
-        String filePath = fileIO.findXMLPath();
-        ArrayList<Game> gameProgress = fileIO.readXML(filePath);
-        Game game = new Game("TicTacToe", true);
-        gameProgress.add(game);
-        fileIO.saveToXML(filePath, gameProgress);
     }
 }

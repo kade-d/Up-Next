@@ -1,7 +1,6 @@
 package bsu.edu.cs222.Games.Simon;
 
 import bsu.edu.cs222.Controller;
-import bsu.edu.cs222.FileIO.FileIO;
 import bsu.edu.cs222.FileIO.Game;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -236,16 +235,7 @@ public class SimonController {
 
     private void endSimon() {
         mainController.notifyWin();
-        saveWinToXML();
+        mainController.saveWinToXML(new Game("Simon", true, "0"));
         mainController.startMinesweeper();
-    }
-
-    private void saveWinToXML(){
-        FileIO fileIO = new FileIO();
-        String filePath = fileIO.findXMLPath();
-        ArrayList<Game> gameProgress = fileIO.readXML(filePath);
-        Game game = new Game("Simon", true);
-        gameProgress.add(game);
-        fileIO.saveToXML(filePath, gameProgress);
     }
 }

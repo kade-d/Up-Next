@@ -1,10 +1,13 @@
 package bsu.edu.cs222;
 
+import bsu.edu.cs222.FileIO.FileIO;
+import bsu.edu.cs222.FileIO.Game;
 import bsu.edu.cs222.Games.Maze.MazeController;
 import bsu.edu.cs222.Games.Minesweeper.MinesweeperController;
 import bsu.edu.cs222.Games.Simon.SimonController;
 import bsu.edu.cs222.Games.TicTacToe.TicTacToeController;
 import bsu.edu.cs222.UIComponents.LevelPickerController;
+import bsu.edu.cs222.UIComponents.ScoreboardController;
 import bsu.edu.cs222.UIComponents.StopwatchController;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -15,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
+
 public class Controller extends MainMenu {
 
     @FXML
@@ -22,6 +27,9 @@ public class Controller extends MainMenu {
 
     @FXML
     Label gameName;
+
+    @FXML
+    private Pane scoreboard;
 
     @FXML
     private Pane ticTacToe;
@@ -36,10 +44,16 @@ public class Controller extends MainMenu {
     private Pane maze;
 
     @FXML
+    private Button scoreboardButton;
+
+    @FXML
     private Button startGauntletButton;
 
     @FXML
     private Label gameNotificationLabel;
+
+    @FXML
+    private ScoreboardController scoreboardController;
 
     @FXML
     private StopwatchController stopwatchController;
@@ -75,6 +89,15 @@ public class Controller extends MainMenu {
                 startTicTacToe();
             }
         });
+        scoreboardButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                resetStopwatch();
+                resetGamePane();
+                scoreboard.setVisible(true);
+                scoreboardController.initialize();
+            }
+        });
     }
 
     public void startTicTacToe() {
@@ -107,7 +130,7 @@ public class Controller extends MainMenu {
     }
 
     private void resetGamePane() {
-        Pane[] gamePaneList = new Pane[]{ticTacToe, simon, minesweeper, maze};
+        Pane[] gamePaneList = new Pane[]{ticTacToe, simon, minesweeper, maze, scoreboard};
         for (Pane pane : gamePaneList) {
             pane.setVisible(false);
         }
@@ -119,8 +142,21 @@ public class Controller extends MainMenu {
         stopwatchController.stopwatch.start();
     }
 
+    private void resetStopwatch() {
+        stopwatchController.stopwatch.stop();
+        stopwatchController.resetStopwatch();
+    }
+
     public void notifyWin() {
         makeBlinkTimer(winBlink).start();
+    }
+
+    public void saveWinToXML(Game game) {
+        FileIO fileIO = new FileIO();
+        String filePath = fileIO.findXMLPath();
+        ArrayList<Game> gameProgress = fileIO.readXML(filePath);
+        gameProgress.add(game);
+        fileIO.saveToXML(filePath, gameProgress);
     }
 
     public void notifyLoss() {

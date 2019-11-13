@@ -41,6 +41,7 @@ public class FileIO {
 
             String gameName = "";
             String gameCompleted = "";
+            String score = "";
 
             for (int i = 0; i < nList.getLength(); i++) {
                 Node node = nList.item(i);
@@ -48,9 +49,10 @@ public class FileIO {
                     Element element = (Element) node;
                     gameName = element.getElementsByTagName("gameName").item(0).getTextContent();
                     gameCompleted = element.getElementsByTagName("gameCompleted").item(0).getTextContent();
+                    score = element.getElementsByTagName("gameScore").item(0).getTextContent();
                 }
                 Boolean bGameCompleted = Boolean.parseBoolean(gameCompleted);
-                Game newGame = new Game(gameName, bGameCompleted);
+                Game newGame = new Game(gameName, bGameCompleted, score);
                 gameProgress.add(newGame);
             }
 
@@ -86,6 +88,10 @@ public class FileIO {
                 Boolean gameCompleted = game.getGameCompleted();
                 e.appendChild(dom.createTextNode(gameCompleted.toString()));
                 rootEle2.appendChild(e);
+                e = dom.createElement("gameScore");
+                String gameScore = game.getScore();
+                e.appendChild(dom.createTextNode(gameScore));
+                rootEle2.appendChild(e);
             }
 
             try {
@@ -103,7 +109,7 @@ public class FileIO {
                 System.out.println(te.getMessage());
             }
         } catch (ParserConfigurationException pce) {
-            System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
+            System.out.println("GameProgressXML: Error trying to instantiate DocumentBuilder " + pce);
         }
     }
 
