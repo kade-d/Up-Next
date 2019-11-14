@@ -237,6 +237,7 @@ public class TicTacToeController {
             mainController.startSimon(0);
         } else if (mode == 1) {
             restartGame();
+            mainController.restartStopwatch();
         }
     }
 
