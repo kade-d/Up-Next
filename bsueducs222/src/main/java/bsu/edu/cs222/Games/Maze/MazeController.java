@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 
+import java.util.BitSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MazeController {
@@ -38,9 +39,27 @@ public class MazeController {
     private double minY = -230;
     private double maxY = 230;
     private int coinsEaten = 0;
+    private BitSet keyboardBitSet = new BitSet(); //TODO use bitset to track which keys are pressed.
     private DoubleProperty circleXVelocity = new SimpleDoubleProperty();
     private DoubleProperty circleYVelocity = new SimpleDoubleProperty();
     private LongProperty lastUpdateTime = new SimpleLongProperty();
+
+    private enum KEY {
+        RIGHT(0),
+        LEFT(1),
+        UP(2),
+        DOWN(3);
+
+        private final int value;
+
+        KEY(final int newValue) {
+            value = newValue;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 
     public void initialize(Controller controller, int mode) {
         this.mainController = controller;
@@ -140,32 +159,79 @@ public class MazeController {
             @Override
             public void handle(KeyEvent event) {
                 if (checkRightKeyCode(event)) {
-                    circleXVelocity.set(circleSpeed);
+                    keyboardBitSet.set(KEY.RIGHT.getValue());
+
                 } else if (checkLeftKeyCode(event)) {
-                    circleXVelocity.set(-circleSpeed);
+                    keyboardBitSet.set(KEY.LEFT.getValue());
+
                 } else if (checkDownKeyCode(event)) {
-                    circleYVelocity.set(circleSpeed);
+                    keyboardBitSet.set(KEY.DOWN.getValue());
+
                 } else if (checkUpKeyCode(event)) {
-                    circleYVelocity.set(-circleSpeed);
+                    keyboardBitSet.set(KEY.UP.getValue());
+
                 }
+                setBallVelocityFromBitSet();
                 event.consume();
             }
         });
         mazePane.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                //Must check velocity because left key could be pressed as well. Without this, velocity would be set to 0 when it shouldn't.
-                if (checkRightReleasedAndPositiveVelocity(event)) {
-                    circleXVelocity.set(0);
-                } else if (checkLeftReleasedAndNegativeVelocity(event)) {
-                    circleXVelocity.set(0);
-                } else if (checkDownReleasedAndPositiveVelocity(event)) {
-                    circleYVelocity.set(0);
-                } else if (checkUpReleasedAndNegativeVelocity(event)) {
-                    circleYVelocity.set(0);
+                //Must use BitSet because left key could be pressed as well. Without this,
+                // velocity would be set to 0 when it shouldn't.
+                final boolean noKeysInBitSet = checkNoKeysPressedInBitSet();
+                removeKeyFromBitSet(event);
+                if (checkRightKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.RIGHT.getValue(), true);
+                } else if (checkLeftKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.LEFT.getValue(), true);
+                } else if (checkDownKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.DOWN.getValue(), true);
+                } else if (checkUpKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.UP.getValue(), true);
                 }
+                setBallVelocityFromBitSet();
             }
         });
+    }
+
+    private void setBallVelocityFromBitSet() {
+        boolean rightPressed = keyboardBitSet.get(KEY.RIGHT.getValue());
+        boolean leftPressed = keyboardBitSet.get(KEY.LEFT.getValue());
+        boolean upPressed = keyboardBitSet.get(KEY.UP.getValue());
+        boolean downPressed = keyboardBitSet.get(KEY.DOWN.getValue());
+
+        if (rightPressed && !leftPressed) {
+            circleXVelocity.set(circleSpeed);
+        }
+        if (leftPressed && !rightPressed) {
+            circleXVelocity.set(-circleSpeed);
+        }
+        if (downPressed && !upPressed) {
+            circleYVelocity.set(circleSpeed);
+        }
+        if (upPressed && !downPressed) {
+            circleYVelocity.set(-circleSpeed);
+        }
+        if (!rightPressed && !leftPressed || rightPressed && leftPressed) {
+            circleXVelocity.set(0);
+        }
+        if (!downPressed && !upPressed || downPressed && upPressed) {
+            circleYVelocity.set(0);
+        }
+    }
+
+    private void removeKeyFromBitSet(KeyEvent event) {
+        if (checkRightKeyCode(event)) {
+            keyboardBitSet.set(KEY.RIGHT.getValue(), false);
+        } else if (checkLeftKeyCode(event)) {
+            keyboardBitSet.set(KEY.LEFT.getValue(), false);
+        } else if (checkDownKeyCode(event)) {
+            keyboardBitSet.set(KEY.DOWN.getValue(), false);
+        } else if (checkUpKeyCode(event)) {
+            keyboardBitSet.set(KEY.UP.getValue(), false);
+        }
     }
 
     private void growBall(final Circle ball) {
@@ -175,6 +241,15 @@ public class MazeController {
         minY = minY + radius / 4;
         maxX = maxX - radius / 4;
         maxY = maxY - radius / 4;
+    }
+
+    private boolean checkNoKeysPressedInBitSet() {
+        for (int i = 0; i < 4; i++) {
+            if (keyboardBitSet.get(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private double findDistanceBetweenPoints(double firstX, double firstY, double secondX, double secondY) {
@@ -197,22 +272,6 @@ public class MazeController {
 
     private boolean checkDownKeyCode(KeyEvent event) {
         return event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S;
-    }
-
-    private boolean checkRightReleasedAndPositiveVelocity(KeyEvent event) {
-        return (checkRightKeyCode(event) && circleXVelocity.get() > 0);
-    }
-
-    private boolean checkLeftReleasedAndNegativeVelocity(KeyEvent event) {
-        return (checkLeftKeyCode(event) && circleXVelocity.get() < 0);
-    }
-
-    private boolean checkDownReleasedAndPositiveVelocity(KeyEvent event) {
-        return (checkDownKeyCode(event) && circleYVelocity.get() > 0);
-    }
-
-    private boolean checkUpReleasedAndNegativeVelocity(KeyEvent event) {
-        return (checkUpKeyCode(event) && circleYVelocity.get() < 0);
     }
 
     private void getFocusForGame() {
