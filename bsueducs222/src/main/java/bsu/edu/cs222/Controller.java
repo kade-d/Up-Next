@@ -5,6 +5,7 @@ import bsu.edu.cs222.FileIO.Game;
 import bsu.edu.cs222.Games.Maze.MazeController;
 import bsu.edu.cs222.Games.Minesweeper.MinesweeperController;
 import bsu.edu.cs222.Games.Simon.SimonController;
+import bsu.edu.cs222.Games.Snake.SnakeController;
 import bsu.edu.cs222.Games.TicTacToe.TicTacToeController;
 import bsu.edu.cs222.UIComponents.LevelPickerController;
 import bsu.edu.cs222.UIComponents.ScoreboardController;
@@ -26,7 +27,7 @@ public class Controller extends MainMenu {
     Pane gamePane;
 
     @FXML
-    Label gameName;
+    public Label gameName;
 
     @FXML
     private Pane scoreboard;
@@ -42,6 +43,9 @@ public class Controller extends MainMenu {
 
     @FXML
     private Pane maze;
+
+    @FXML
+    private Pane snake;
 
     @FXML
     private Button scoreboardButton;
@@ -72,6 +76,9 @@ public class Controller extends MainMenu {
 
     @FXML
     private MazeController mazeController;
+
+    @FXML
+    private SnakeController snakeController;
 
     @FXML
     private Rectangle winBlink;
@@ -136,6 +143,16 @@ public class Controller extends MainMenu {
         resetGamePane();
         maze.setVisible(true);
         gameName.setText("Maze");
+    }
+
+    public void startSnake(int mode) {
+        if (mode == 1) {
+            restartStopwatch();
+        }
+        snakeController.initialize(this, mode);
+        resetGamePane();
+        snake.setVisible(true);
+        gameName.setText("Snake");
     }
 
     private void resetGamePane() {

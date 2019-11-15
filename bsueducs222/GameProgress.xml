@@ -22791,7 +22791,12 @@
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
+    </game>
+    <game>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
@@ -22826,7 +22831,17 @@
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
+    </game>
+    <game>
+        <gameName>Simon</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
+    </game>
+    <game>
+        <gameName>Minesweeper</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
@@ -22836,182 +22851,62 @@
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
     <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
+        <gameName>TicTacToe</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
