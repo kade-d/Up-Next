@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,7 +25,6 @@ public class MainMenu extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         stage.setTitle("Project 1: Up Next");
         stage.setScene(scene);
         stage.show();

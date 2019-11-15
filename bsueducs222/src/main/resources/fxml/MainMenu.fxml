@@ -6,7 +6,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="666.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
+<AnchorPane prefHeight="666.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="bsu.edu.cs222.Controller"
+            style="-fx-background-color: gray;">
     <Pane fx:id="gamePane" layoutX="264.0" layoutY="146.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
         <fx:include fx:id="scoreboard" source="Scoreboard.fxml" visible="false"/>
         <fx:include fx:id="ticTacToe" source="TicTacToe.fxml" visible="false" />

@@ -33,7 +33,7 @@ public class MazeController {
     private int mode;
 
     private final double ballSpeed = 150;
-    private final double enemySpeed = 400;
+    private final double enemySpeed = 300;
     private final double firstEnemyStartingX = 0;
     private final int distanceBetweenEnemies = 85;
     private final int enemyBallCount = 5;
@@ -195,14 +195,20 @@ public class MazeController {
         double deltaY = elapsedSeconds * enemyBallVelocity.get();
         double oldY = firstEnemyBall.getTranslateY();
         double radius = firstEnemyBall.getRadius();
-        double newY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
-        if (newY == maxY - radius | newY == minY + radius) {
+        double newFirstY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
+        if (newFirstY == maxY - radius | newFirstY == minY + radius) {
             enemyBallVelocity.set(enemyBallVelocity.get() * -1);
             deltaY = elapsedSeconds * enemyBallVelocity.get();
-            newY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
+            newFirstY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
         }
+        int count = 0;
         for (EnemyBall enemyBall : enemyBalls) {
-            enemyBall.setTranslateY(newY);
+            if (count % 2 == 0) {
+                enemyBall.setTranslateY(newFirstY);
+            } else {
+                enemyBall.setTranslateY(maxY - newFirstY);
+            }
+            count += 1;
         }
     }
 
