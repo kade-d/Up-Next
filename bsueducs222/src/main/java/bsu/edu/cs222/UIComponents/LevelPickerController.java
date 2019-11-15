@@ -65,6 +65,15 @@ public class LevelPickerController { //Implementation of this class will be used
                     }
                 };
                 break;
+
+            case 5:
+                eventHandler = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        mainController.startSnake(1);
+                    }
+                };
+                break;
         }
         return eventHandler;
     }
