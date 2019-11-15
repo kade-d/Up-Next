@@ -13,34 +13,56 @@ import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
+import java.util.BitSet;
 
 public class MazeController {
 
     @FXML
-    private Circle ball;
-
-    @FXML
-    private Circle coin;
-
-    @FXML
     private AnchorPane mazePane;
+
+    private Ball ball;
+
+    private Coin coin;
+
+    private ArrayList<EnemyBall> enemyBalls;
 
     private Controller mainController;
 
     private int mode;
 
-    private final double circleSpeed = 150;
-    private double minX = -230;
-    private double maxX = 230;
-    private double minY = -230;
-    private double maxY = 230;
-    private int coinsEaten = 0;
+    private final double ballSpeed = 150;
+    private final double enemySpeed = 400;
+    private final double firstEnemyStartingX = 0;
+    private final int distanceBetweenEnemies = 85;
+    private final int enemyBallCount = 5;
+    private double minX = 0;
+    private double maxX = 500;
+    private double minY = 0;
+    private double maxY = 500;
+    private BitSet keyboardBitSet = new BitSet();
+    private DoubleProperty enemyBallVelocity = new SimpleDoubleProperty();
     private DoubleProperty circleXVelocity = new SimpleDoubleProperty();
     private DoubleProperty circleYVelocity = new SimpleDoubleProperty();
     private LongProperty lastUpdateTime = new SimpleLongProperty();
+
+    private enum KEY {
+        RIGHT(0),
+        LEFT(1),
+        UP(2),
+        DOWN(3);
+
+        private final int value;
+
+        KEY(final int newValue) {
+            value = newValue;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 
     public void initialize(Controller controller, int mode) {
         this.mainController = controller;
@@ -49,31 +71,62 @@ public class MazeController {
     }
 
     private void startMaze(){
+        ball = new Ball();
+        coin = new Coin();
+        makeEnemyBalls(); //ArrayList of EnemyBalls based on count.
         mazePane.setFocusTraversable(true);
-        makeBallAnimationLoop(ball, circleXVelocity, circleYVelocity, lastUpdateTime).start();
+        makeAnimationLoop(lastUpdateTime).start();
         moveBallOnArrowPress();
         resetSprites();
-        makeCoinCollisionLoop(ball, coin).start();
+        makeCollisionLoop().start();
         getFocusForGame();
     }
 
-    private void resetSprites(){
-        minX = -230;
-        maxX = 230;
-        minY = -230;
-        maxY = 230;
-        coinsEaten = 0;
-        coin.setVisible(true);
-        coin.setTranslateX(-100);
-        coin.setTranslateY(100);
-        circleXVelocity.set(0);
-        circleYVelocity.set(0);
-        ball.setTranslateX(0);
-        ball.setRadius(20);
-        ball.setTranslateY(0);
+    private void makeEnemyBalls() {
+        enemyBalls = new ArrayList<>();
+        for (int i = 0; i < enemyBallCount; i++) {
+            enemyBalls.add(new EnemyBall());
+        }
     }
 
-    private AnimationTimer makeBallAnimationLoop(final Circle circle, final DoubleProperty circleXVelocity, final DoubleProperty circleYVelocity, final LongProperty lastUpdateTime) {
+    private void resetSprites(){
+        mazePane.getChildren().clear();
+        circleXVelocity.set(0);
+        circleYVelocity.set(0);
+        enemyBallVelocity.set(enemySpeed);
+        setCoinPosition(coin);
+        setBallStartingPosition(ball);
+        setEnemyBallsStartingPosition(enemyBalls);
+    }
+
+    private void setEnemyBallsStartingPosition(ArrayList<EnemyBall> circles) {
+        int count = 0;
+        int deltaX;
+        for (EnemyBall circle : circles) {
+            count += 1;
+            deltaX = count * distanceBetweenEnemies;
+            circle.setTranslateX(firstEnemyStartingX + deltaX);
+            circle.setTranslateY(250);
+            circle.setParent(mazePane);
+            circle.setVisible(true);
+        }
+    }
+
+    private void setBallStartingPosition(Ball circle) {
+        circle.setTranslateX(minX + 40);
+        circle.setTranslateY(250);
+        circle.setParent(mazePane);
+        circle.setVisible(true);
+    }
+
+    private void setCoinPosition(Coin circle) {
+        circle.setParent(mazePane);
+        circle.setVisible(true);
+        circle.setTranslateX(480);
+        circle.setTranslateY(250);
+    }
+
+    private AnimationTimer makeAnimationLoop(final LongProperty lastUpdateTime) {
         return new AnimationTimer() {
 
             @Override
@@ -87,53 +140,91 @@ public class MazeController {
             }
 
             @Override
-            public void handle(long now) {
+            public void handle(long now) { //called every frame
                 if (lastUpdateTime.get() > 0) {
-                    final double elapsedSeconds = (now - lastUpdateTime.get()) / 1000000000.0;
-                    final double deltaX = elapsedSeconds * circleXVelocity.get();
-                    final double deltaY = elapsedSeconds * circleYVelocity.get();
-                    final double oldX = circle.getTranslateX();
-                    final double oldY = circle.getTranslateY();
-                    final double newX = Math.max(minX, Math.min(maxX, oldX + deltaX));
-                    final double newY = Math.max(minY, Math.min(maxY, oldY + deltaY));
-                    circle.setTranslateX(newX);
-                    circle.setTranslateY(newY);
+                    moveBallFromElapsedTime(now);
+                    moveEnemyBallFromElapsedTime(now);
                 }
                 lastUpdateTime.set(now);
             }
         };
     }
 
-    private AnimationTimer makeCoinCollisionLoop(final Circle ball, final Circle coin) {
+    private AnimationTimer makeCollisionLoop() {
         return new AnimationTimer() {
             @Override
             public void handle(long l) {
-                final double ballRadius = ball.getRadius();
-                final double coinRadius = coin.getRadius();
-                final double ballCenterX = minX - ballRadius + ball.getTranslateX();
-                final double ballCenterY = minY - ballRadius + ball.getTranslateY();
-                final double coinCenterX = minX - coinRadius + coin.getTranslateX();
-                final double coinCenterY = minY - coinRadius + coin.getTranslateY();
-                double distance = findDistanceBetweenPoints(ballCenterX + ballRadius, ballCenterY + ballRadius, coinCenterX + coinRadius, coinCenterY + coinRadius);
-                if(distance < ballRadius + coinRadius){
-                    notifyCoinWasEaten();
-                }
+                checkDistanceToCoin();
+                checkDistanceToEnemy();
             }
         };
     }
 
-    private void notifyCoinWasEaten() {
-        coinsEaten += 1;
-        growBall(ball);
-        coin.setVisible(false);
-        double newX = ThreadLocalRandom.current().nextDouble(minX, maxX);
-        double newY = ThreadLocalRandom.current().nextDouble(minY, maxY);
-        coin.setTranslateX(newX);
-        coin.setTranslateY(newY);
-        coin.setVisible(true);
-        if (coinsEaten >= 5) {
-            winMaze();
+    private void checkDistanceToCoin() {
+        final double ballRadius = ball.getRadius();
+        final double coinRadius = coin.getRadius();
+        final double ballCenterX = minX - ballRadius + ball.getTranslateX();
+        final double ballCenterY = minY - ballRadius + ball.getTranslateY();
+        final double coinCenterX = minX - coinRadius + coin.getTranslateX();
+        final double coinCenterY = minY - coinRadius + coin.getTranslateY();
+        double distanceToCoin = findDistanceBetweenPoints(ballCenterX + ballRadius, ballCenterY + ballRadius, coinCenterX + coinRadius, coinCenterY + coinRadius);
+        if (distanceToCoin < ballRadius + coinRadius) {
+            notifyCoinWasEaten();
         }
+    }
+
+    private void checkDistanceToEnemy() {
+        final double ballRadius = ball.getRadius();
+        for (EnemyBall enemyBall : enemyBalls) {
+            final double enemyRadius = enemyBall.getRadius();
+            final double ballCenterX = minX - ballRadius + ball.getTranslateX();
+            final double ballCenterY = minY - ballRadius + ball.getTranslateY();
+            final double enemyCenterX = minX - enemyRadius + enemyBall.getTranslateX();
+            final double enemyCenterY = minY - enemyRadius + enemyBall.getTranslateY();
+            double distanceToEnemy = findDistanceBetweenPoints(ballCenterX + ballRadius, ballCenterY + ballRadius, enemyCenterX + enemyRadius, enemyCenterY + enemyRadius);
+            if (distanceToEnemy < ballRadius + enemyRadius) {
+                notifyEnemyWasHit();
+            }
+        }
+
+    }
+
+    private void moveEnemyBallFromElapsedTime(long now) {
+        EnemyBall firstEnemyBall = enemyBalls.get(0);
+        double elapsedSeconds = (now - lastUpdateTime.get()) / 1000000000.0;
+        double deltaY = elapsedSeconds * enemyBallVelocity.get();
+        double oldY = firstEnemyBall.getTranslateY();
+        double radius = firstEnemyBall.getRadius();
+        double newY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
+        if (newY == maxY - radius | newY == minY + radius) {
+            enemyBallVelocity.set(enemyBallVelocity.get() * -1);
+            deltaY = elapsedSeconds * enemyBallVelocity.get();
+            newY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
+        }
+        for (EnemyBall enemyBall : enemyBalls) {
+            enemyBall.setTranslateY(newY);
+        }
+    }
+
+    private void moveBallFromElapsedTime(long now) {
+        final double elapsedSeconds = (now - lastUpdateTime.get()) / 1000000000.0;
+        final double deltaX = elapsedSeconds * circleXVelocity.get();
+        final double deltaY = elapsedSeconds * circleYVelocity.get();
+        final double oldX = ball.getTranslateX();
+        final double oldY = ball.getTranslateY();
+        final double radius = ball.getRadius();
+        final double newX = Math.max(minX + radius, Math.min(maxX - radius, oldX + deltaX));
+        final double newY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
+        ball.setTranslateX(newX);
+        ball.setTranslateY(newY);
+    }
+
+    private void notifyCoinWasEaten() {
+        winMaze();
+    }
+
+    private void notifyEnemyWasHit() {
+        loseMaze();
     }
 
     private void moveBallOnArrowPress() {
@@ -141,41 +232,88 @@ public class MazeController {
             @Override
             public void handle(KeyEvent event) {
                 if (checkRightKeyCode(event)) {
-                    circleXVelocity.set(circleSpeed);
+                    keyboardBitSet.set(KEY.RIGHT.getValue());
+
                 } else if (checkLeftKeyCode(event)) {
-                    circleXVelocity.set(-circleSpeed);
+                    keyboardBitSet.set(KEY.LEFT.getValue());
+
                 } else if (checkDownKeyCode(event)) {
-                    circleYVelocity.set(circleSpeed);
+                    keyboardBitSet.set(KEY.DOWN.getValue());
+
                 } else if (checkUpKeyCode(event)) {
-                    circleYVelocity.set(-circleSpeed);
+                    keyboardBitSet.set(KEY.UP.getValue());
+
                 }
+                setBallVelocityFromBitSet();
                 event.consume();
             }
         });
         mazePane.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                //Must check velocity because left key could be pressed as well. Without this, velocity would be set to 0 when it shouldn't.
-                if (checkRightReleasedAndPositiveVelocity(event)) {
-                    circleXVelocity.set(0);
-                } else if (checkLeftReleasedAndNegativeVelocity(event)) {
-                    circleXVelocity.set(0);
-                } else if (checkDownReleasedAndPositiveVelocity(event)) {
-                    circleYVelocity.set(0);
-                } else if (checkUpReleasedAndNegativeVelocity(event)) {
-                    circleYVelocity.set(0);
+                //Must use BitSet because left key could be pressed as well. Without this,
+                // velocity would be set to 0 when it shouldn't.
+                final boolean noKeysInBitSet = checkNoKeysPressedInBitSet();
+                removeKeyFromBitSet(event);
+                if (checkRightKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.RIGHT.getValue(), true);
+                } else if (checkLeftKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.LEFT.getValue(), true);
+                } else if (checkDownKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.DOWN.getValue(), true);
+                } else if (checkUpKeyCode(event) && noKeysInBitSet) {
+                    keyboardBitSet.set(KEY.UP.getValue(), true);
                 }
+                setBallVelocityFromBitSet();
             }
         });
     }
 
-    private void growBall(final Circle ball) {
-        double radius = ball.getRadius() * 1.25;
-        ball.setRadius(radius);
-        minX = minX + radius / 4;
-        minY = minY + radius / 4;
-        maxX = maxX - radius / 4;
-        maxY = maxY - radius / 4;
+    private void setBallVelocityFromBitSet() {
+        boolean rightPressed = keyboardBitSet.get(KEY.RIGHT.getValue());
+        boolean leftPressed = keyboardBitSet.get(KEY.LEFT.getValue());
+        boolean upPressed = keyboardBitSet.get(KEY.UP.getValue());
+        boolean downPressed = keyboardBitSet.get(KEY.DOWN.getValue());
+
+        if (rightPressed && !leftPressed) {
+            circleXVelocity.set(ballSpeed);
+        }
+        if (leftPressed && !rightPressed) {
+            circleXVelocity.set(-ballSpeed);
+        }
+        if (downPressed && !upPressed) {
+            circleYVelocity.set(ballSpeed);
+        }
+        if (upPressed && !downPressed) {
+            circleYVelocity.set(-ballSpeed);
+        }
+        if (!rightPressed && !leftPressed || rightPressed && leftPressed) {
+            circleXVelocity.set(0);
+        }
+        if (!downPressed && !upPressed || downPressed && upPressed) {
+            circleYVelocity.set(0);
+        }
+    }
+
+    private void removeKeyFromBitSet(KeyEvent event) {
+        if (checkRightKeyCode(event)) {
+            keyboardBitSet.set(KEY.RIGHT.getValue(), false);
+        } else if (checkLeftKeyCode(event)) {
+            keyboardBitSet.set(KEY.LEFT.getValue(), false);
+        } else if (checkDownKeyCode(event)) {
+            keyboardBitSet.set(KEY.DOWN.getValue(), false);
+        } else if (checkUpKeyCode(event)) {
+            keyboardBitSet.set(KEY.UP.getValue(), false);
+        }
+    }
+
+    private boolean checkNoKeysPressedInBitSet() {
+        for (int i = 0; i < 4; i++) {
+            if (keyboardBitSet.get(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private double findDistanceBetweenPoints(double firstX, double firstY, double secondX, double secondY) {
@@ -200,22 +338,6 @@ public class MazeController {
         return event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S;
     }
 
-    private boolean checkRightReleasedAndPositiveVelocity(KeyEvent event) {
-        return (checkRightKeyCode(event) && circleXVelocity.get() > 0);
-    }
-
-    private boolean checkLeftReleasedAndNegativeVelocity(KeyEvent event) {
-        return (checkLeftKeyCode(event) && circleXVelocity.get() < 0);
-    }
-
-    private boolean checkDownReleasedAndPositiveVelocity(KeyEvent event) {
-        return (checkDownKeyCode(event) && circleYVelocity.get() > 0);
-    }
-
-    private boolean checkUpReleasedAndNegativeVelocity(KeyEvent event) {
-        return (checkUpKeyCode(event) && circleYVelocity.get() < 0);
-    }
-
     private void getFocusForGame() {
         Platform.runLater(new Runnable() {
             @Override
@@ -226,7 +348,6 @@ public class MazeController {
     }
 
     private void winMaze(){
-        coin.setVisible(false);
         mainController.saveWinToXML(new Game("Maze", true, "0"));
         if(mode == 0) {
             mainController.notifyWin();
@@ -237,6 +358,11 @@ public class MazeController {
             mainController.notifyWin();
             resetSprites();
         }
+    }
+
+    private void loseMaze() {
+        mainController.notifyLoss();
+        resetSprites();
     }
 
 }
