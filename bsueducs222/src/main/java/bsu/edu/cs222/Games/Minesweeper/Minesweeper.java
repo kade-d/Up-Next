@@ -2,11 +2,17 @@ package bsu.edu.cs222.Games.Minesweeper;
 
 public class Minesweeper {
 
-    //TODO Author: Adam
+    //Author: Adam
 
-    final MinesweeperGameState gameState = new MinesweeperGameState();
+    private int bombNumber;
+
+    Minesweeper(int bombCount){
+        this.bombNumber = bombCount;
+    }
+
+    public final MinesweeperGameState gameState = new MinesweeperGameState();
 
     void startGame(){
-        gameState.makeNewBoard();
+        gameState.makeNewBoard(bombNumber);
     }
 }

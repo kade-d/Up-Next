@@ -54,7 +54,7 @@ public class Controller extends MainMenu {
     private Button startGauntletButton;
 
     @FXML
-    private Label gameNotificationLabel;
+    public Label gameNotificationLabel;
 
     @FXML
     private ScoreboardController scoreboardController;
@@ -156,7 +156,7 @@ public class Controller extends MainMenu {
     }
 
     private void resetGamePane() {
-        Pane[] gamePaneList = new Pane[]{ticTacToe, simon, minesweeper, maze, scoreboard};
+        Pane[] gamePaneList = new Pane[]{ticTacToe, simon, minesweeper, maze, snake, scoreboard};
         for (Pane pane : gamePaneList) {
             pane.setVisible(false);
         }
@@ -191,7 +191,7 @@ public class Controller extends MainMenu {
 
     public void notifyGauntletCompleted() {
         gameNotificationLabel.setText("Gauntlet completed!");
-        makeBlinkTimer(winBlink).start();
+        notifyWin();
         resetGamePane();
         stopwatchController.stopwatch.stop();
     }

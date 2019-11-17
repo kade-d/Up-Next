@@ -6,21 +6,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="666.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="bsu.edu.cs222.Controller"
-            style="-fx-background-color: gray;">
+
+<AnchorPane prefHeight="666.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
     <Pane fx:id="gamePane" layoutX="264.0" layoutY="146.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
-        <fx:include fx:id="scoreboard" source="Scoreboard.fxml" visible="false"/>
+        <fx:include fx:id="scoreboard" source="Scoreboard.fxml" visible="false" />
         <fx:include fx:id="ticTacToe" source="TicTacToe.fxml" visible="false" />
         <fx:include fx:id="simon" source="Simon.fxml" visible="false" />
         <fx:include fx:id="minesweeper" source="Minesweeper.fxml" visible="false" />
-        <fx:include fx:id="maze" source="Maze.fxml" visible="false"/>
-        <fx:include fx:id="snake" source="Snake.fxml" visible="false"/>
+        <fx:include fx:id="maze" source="Maze.fxml" visible="false" />
+        <fx:include fx:id="snake" source="Snake.fxml" visible="false" />
       <Rectangle fx:id="winBlink" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
       <Rectangle fx:id="loseBlink" arcHeight="5.0" arcWidth="5.0" fill="RED" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
     </Pane>
-   <Label fx:id="gameName" alignment="BOTTOM_LEFT" layoutX="264.0" layoutY="74.0" prefHeight="60.0" prefWidth="227.0" textAlignment="RIGHT" textOverrun="CLIP">
+   <Label fx:id="gameName" layoutX="264.0" layoutY="74.0" prefHeight="60.0" prefWidth="204.0" textAlignment="RIGHT" textOverrun="CLIP">
       <font>
          <Font size="32.0" />
       </font>
@@ -28,22 +26,20 @@
     <Pane layoutX="614.0" layoutY="74.0" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: lightgray;">
         <fx:include fx:id="stopwatch" source="Stopwatch.fxml" />
     </Pane>
-    <Button fx:id="startGauntletButton" layoutX="18.0" layoutY="183.0" mnemonicParsing="false" prefHeight="103.0"
-            prefWidth="219.0" text="Start Gauntlet" textAlignment="CENTER" wrapText="true">
+    <Button fx:id="startGauntletButton" layoutX="18.0" layoutY="183.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="219.0" text="Start Gauntlet" textAlignment="CENTER" wrapText="true">
       <font>
-          <Font name="Arial" size="30.0"/>
+          <Font name="Arial" size="30.0" />
       </font></Button>
-    <Label fx:id="gameNotificationLabel" layoutX="502.0" layoutY="74.0" prefHeight="60.0" prefWidth="112.0" textAlignment="CENTER" wrapText="true">
+    <Label fx:id="gameNotificationLabel" alignment="CENTER" layoutX="475.0" layoutY="54.0" prefHeight="80.0" prefWidth="122.0" textAlignment="CENTER" wrapText="true">
       <font>
-         <Font size="18.0" />
+         <Font size="28.0" />
       </font></Label>
     <Pane layoutX="62.0" layoutY="433.0" prefHeight="103.0" prefWidth="131.0">
-        <fx:include fx:id="levelPicker" source="LevelPicker.fxml"/>
+        <fx:include fx:id="levelPicker" source="LevelPicker.fxml" />
     </Pane>
-    <Button fx:id="scoreboardButton" layoutX="18.0" layoutY="297.0" mnemonicParsing="false" prefHeight="103.0"
-            prefWidth="219.0" text="High Scores">
+    <Button fx:id="scoreboardButton" layoutX="18.0" layoutY="297.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="219.0" text="High Scores">
         <font>
-            <Font size="30.0"/>
+            <Font size="30.0" />
         </font>
     </Button>
 </AnchorPane>

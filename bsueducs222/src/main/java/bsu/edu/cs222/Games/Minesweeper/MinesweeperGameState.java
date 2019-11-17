@@ -29,12 +29,12 @@ public class MinesweeperGameState {
         flaggedCells[index] = false;
     }
 
-    void makeNewBoard() {
-        addBombs();
+    void makeNewBoard(int bombNumber) {
+        addBombs(bombNumber);
     }
 
-    private void addBombs() {
-        for(int i = 0; i < 9; i++){
+    private void addBombs(int bombNumber) {
+        for(int i = 0; i < bombNumber; i++){
             cells[i] = -1;
         }
         randomizeBoard();

@@ -19,12 +19,14 @@ public class MinesweeperController {
 
     private Minesweeper game;
 
+    private int bombCount = 9;
+
     private int mode;
 
     public void initialize(Controller controller, int mode) {
         this.mainController = controller;
         this.mode = mode;
-        game = new Minesweeper();
+        game = new Minesweeper(bombCount);
         setCellButtonHandlers();
         resetBoard();
         game.startGame();
@@ -288,7 +290,11 @@ public class MinesweeperController {
         boolean[] flaggedCells = game.gameState.flaggedCells;
         int shownCellCount = 0;
         int flaggedBombs = 0;
+        int flagCount = 0;
         for(int i = 0; i < 81; i++){
+            if(flaggedCells[i]){
+                flagCount++;
+            }
             if(bombCells[i] && !flaggedCells[i]){
                 return;
             }
@@ -308,6 +314,7 @@ public class MinesweeperController {
                 mainController.restartStopwatch();
             }
         }
+        mainController.gameNotificationLabel.setText("Goal: (" + flagCount + "/" + bombCount + ")");
     }
 
     private void endMinesweeper() {
