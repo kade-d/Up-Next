@@ -3,11 +3,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="60.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.UIComponents.StopwatchController">
-        <Label fx:id="stopwatchLabel" alignment="BOTTOM_RIGHT" contentDisplay="TOP" layoutX="3.0" layoutY="7.0" prefHeight="45.0" prefWidth="142.0" text="0" textAlignment="RIGHT">
+
+<AnchorPane prefHeight="60.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.UIComponents.StopwatchController">
+        <Label fx:id="stopwatchLabel" alignment="CENTER" contentDisplay="TOP" layoutX="2.0" layoutY="2.0" prefHeight="60.0" prefWidth="150.0" text="0" textAlignment="RIGHT">
             <font>
-                <Font name="Arial" size="38.0" />
+                <Font name="Arial" size="45.0" />
             </font>
         </Label>
 </AnchorPane>
