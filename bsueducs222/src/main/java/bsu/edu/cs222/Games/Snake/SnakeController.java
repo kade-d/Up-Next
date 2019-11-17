@@ -35,7 +35,7 @@ public class SnakeController {
 
     private int gameSpeed = 50;
 
-    private int goalLength = 400;
+    private int goalLength = 25;
 
     private int mode;
 
