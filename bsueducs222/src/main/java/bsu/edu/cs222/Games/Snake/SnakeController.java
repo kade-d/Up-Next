@@ -33,9 +33,13 @@ public class SnakeController {
 
     private SnakeGameState gameState;
 
+    private int boardWidth = 25;
+
+    private int boardHeight = 25;
+
     private int gameSpeed = 50;
 
-    private int goalLength = 25;
+    private int goalLength = 30;
 
     private int mode;
 
@@ -78,7 +82,7 @@ public class SnakeController {
     }
 
     public void startSnake(){
-        gameState = new SnakeGameState(mainController);
+        gameState = new SnakeGameState(mainController, boardWidth, boardHeight);
         resetPane();
         addCellsToGridPane();
         pane.setFocusTraversable(false);
@@ -91,11 +95,17 @@ public class SnakeController {
     }
 
     private void addCellsToGridPane() {
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < boardHeight; i++) {
+            if(i < boardHeight - 1) {
+                pane.addRow(0);
+            }
+            for (int j = 0; j < boardWidth; j++) {
+                if(j < boardWidth - 1) {
+                    pane.addColumn(0);
+                }
                 Rectangle cell = new Rectangle();
-                cell.setWidth(25);
-                cell.setHeight(25);
+                cell.setWidth(Math.round(500.0 / boardWidth));
+                cell.setHeight(Math.round(500.0 / boardHeight));
                 pane.add(cell, j, i);
             }
         }

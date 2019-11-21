@@ -13,11 +13,15 @@ public class SnakeGameState {
     public int food;
     public int direction;
     public int lastDirection;
+    private int boardWidth;
+    private int boardHeight;
+    private int cellCount;
 
-
-
-    SnakeGameState(Controller mainController){
+    SnakeGameState(Controller mainController, int boardWidth, int boardHeight){
         this.mainController = mainController;
+        this.boardWidth = boardWidth;
+        this.boardHeight = boardHeight;
+        this.cellCount = boardWidth * boardHeight;
         snake.add(0);
         snake.add(1);
         snake.add(2);
@@ -34,7 +38,7 @@ public class SnakeGameState {
     }
 
     public void placeFood(){
-        int randomInt = (int)(Math.random() * 400);
+        int randomInt = (int)(Math.random() * cellCount);
         System.out.println(randomInt);
         if(snake.contains(randomInt)){
             placeFood();
@@ -47,27 +51,27 @@ public class SnakeGameState {
         int snakeHead = snake.get(snake.size() - 1);
         int move = snakeHead;
         if(direction == 0) {
-            move = snakeHead - 20;
+            move = snakeHead - boardWidth;
             if(move < 0){
-                move = move + 400;
+                move = move + cellCount;
             }
         }
         if(direction == 1) {
             move = snakeHead + 1;
-            if(move % 20 == 0){
-                move = move - 20;
+            if(move % boardWidth == 0){
+                move = move - boardWidth;
             }
         }
         if(direction == 2) {
-            move = snakeHead + 20;
-            if(move > 399){
-                move = move - 400;
+            move = snakeHead + boardWidth;
+            if(move > cellCount - 1){
+                move = move - cellCount;
             }
         }
         if(direction == 3) {
             move = snakeHead - 1;
-            if(move % 20 == 19 || move == -1){
-                move = move + 20;
+            if(move % boardWidth == boardWidth - 1 || move == -1){
+                move = move + boardWidth;
             }
         }
         lastDirection = direction;
