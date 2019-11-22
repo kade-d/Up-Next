@@ -22,6 +22,7 @@ public class LevelPickerController { //Implementation of this class will be used
         int i;
         for (i = 0; i < levelButtons.size(); i++) {
             final Button button = levelButtons.get(i);
+            button.setText(mainController.gameList.get(i));
             final int j = i + 1;
             button.setOnAction(makeEventHandlerForLevel(j, mainController));
         }

@@ -210,10 +210,28 @@ public class SnakeController {
     }
 
     public void setDirection(){
-        boolean rightPressed = keyboardBitSet.get(KEY.RIGHT.getValue());
-        boolean leftPressed = keyboardBitSet.get(KEY.LEFT.getValue());
         boolean upPressed = keyboardBitSet.get(KEY.UP.getValue());
+        boolean rightPressed = keyboardBitSet.get(KEY.RIGHT.getValue());
         boolean downPressed = keyboardBitSet.get(KEY.DOWN.getValue());
+        boolean leftPressed = keyboardBitSet.get(KEY.LEFT.getValue());
+
+        int pressedKeys = 0;
+
+        if(upPressed){
+            pressedKeys++;
+        }
+        if(rightPressed){
+            pressedKeys++;
+        }
+        if(downPressed){
+            pressedKeys++;
+        }
+        if(leftPressed){
+            pressedKeys++;
+        }
+        if(pressedKeys > 1){
+            return;
+        }
 
         if (upPressed && gameState.lastDirection != 2) {
             gameState.direction = 0;

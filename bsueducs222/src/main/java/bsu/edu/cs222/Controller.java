@@ -86,7 +86,10 @@ public class Controller extends MainMenu {
     @FXML
     private Rectangle loseBlink;
 
+    public ArrayList<String> gameList = new ArrayList<>();
+
     public void initialize(){
+        addGamesToGameList();
         stopwatchController.initialize();
         levelPickerController.initialize(this);
         startGauntletButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -105,6 +108,14 @@ public class Controller extends MainMenu {
                 scoreboardController.initialize();
             }
         });
+    }
+
+    private void addGamesToGameList(){
+        gameList.add("Tic Tac Toe");
+        gameList.add("Simon");
+        gameList.add("Minesweeper");
+        gameList.add("Maze");
+        gameList.add("Snake");
     }
 
     public void startTicTacToe(int mode) {
