@@ -305,6 +305,7 @@ public class MinesweeperController {
                 shownCellCount++;
             }
         }
+        mainController.gameNotificationLabel.setText("Goal: (" + flagCount + "/" + bombCount + ")");
         if(flaggedBombs + shownCellCount == 81){
             if (mode == 0) {
                 endMinesweeper();
@@ -314,7 +315,6 @@ public class MinesweeperController {
                 mainController.restartStopwatch();
             }
         }
-        mainController.gameNotificationLabel.setText("Goal: (" + flagCount + "/" + bombCount + ")");
     }
 
     private void endMinesweeper() {

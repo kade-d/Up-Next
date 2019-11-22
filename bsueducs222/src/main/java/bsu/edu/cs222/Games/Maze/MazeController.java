@@ -41,6 +41,7 @@ public class MazeController {
     private double maxX = 500;
     private double minY = 0;
     private double maxY = 500;
+    private boolean coinIsEaten = false;
     private BitSet keyboardBitSet = new BitSet();
     private DoubleProperty enemyBallVelocity = new SimpleDoubleProperty();
     private DoubleProperty circleXVelocity = new SimpleDoubleProperty();
@@ -169,7 +170,9 @@ public class MazeController {
         final double coinCenterY = minY - coinRadius + coin.getTranslateY();
         double distanceToCoin = findDistanceBetweenPoints(ballCenterX + ballRadius, ballCenterY + ballRadius, coinCenterX + coinRadius, coinCenterY + coinRadius);
         if (distanceToCoin < ballRadius + coinRadius) {
-            notifyCoinWasEaten();
+            if(!coinIsEaten) {
+                notifyCoinWasEaten();
+            }
         }
     }
 
@@ -226,6 +229,7 @@ public class MazeController {
     }
 
     private void notifyCoinWasEaten() {
+        coinIsEaten = true;
         winMaze();
     }
 
@@ -356,8 +360,9 @@ public class MazeController {
     private void winMaze(){
         mainController.saveWinToXML(new Game("Maze", true, "0"));
         if(mode == 0) {
+            resetSprites();
             mainController.notifyWin();
-            mainController.notifyGauntletCompleted();
+            mainController.startSnake(0);
         }
         else if(mode == 1){
             mainController.restartStopwatch();
