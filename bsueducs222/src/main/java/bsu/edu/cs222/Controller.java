@@ -2,7 +2,6 @@ package bsu.edu.cs222;
 
 import bsu.edu.cs222.FileIO.FileIO;
 import bsu.edu.cs222.FileIO.Game;
-import bsu.edu.cs222.Games.Hangman.HangmanController;
 import bsu.edu.cs222.Games.Maze.MazeController;
 import bsu.edu.cs222.Games.Minesweeper.MinesweeperController;
 import bsu.edu.cs222.Games.Simon.SimonController;
@@ -85,9 +84,6 @@ public class Controller extends MainMenu {
     private SnakeController snakeController;
 
     @FXML
-    private HangmanController hangmanController;
-
-    @FXML
     private Rectangle winBlink;
 
     @FXML
@@ -151,15 +147,6 @@ public class Controller extends MainMenu {
         resetGamePane();
         minesweeper.setVisible(true);
         gameName.setText("Minesweeper");
-    }
-    public void startHangman(int mode) {
-        if(mode==1){
-            restartStopwatch();
-        }
-        hangmanController.initialize(this);
-        resetGamePane();
-        hangman.setVisible(true);
-        gameName.setText("bsu/edu/cs222/Games/Hangman");
     }
 
     public void startMaze(int mode) {
