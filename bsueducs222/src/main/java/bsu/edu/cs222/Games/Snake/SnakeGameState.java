@@ -3,16 +3,14 @@ package bsu.edu.cs222.Games.Snake;
 import bsu.edu.cs222.Controller;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class SnakeGameState {
+class SnakeGameState {
 
-    private int[] cells = new int[400];
     ArrayList<Integer> snake = new ArrayList<>();
     private Controller mainController;
-    public int food;
-    public int direction;
-    public int lastDirection;
+    private int food;
+    private int direction;
+    int lastDirection;
     private int boardWidth;
     private int boardHeight;
     private int cellCount;

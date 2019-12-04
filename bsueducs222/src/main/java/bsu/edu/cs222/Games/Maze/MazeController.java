@@ -365,6 +365,7 @@ public class MazeController {
             mainController.startSnake(0);
         }
         else if(mode == 1){
+            coinIsEaten = false;
             mainController.restartStopwatch();
             mainController.notifyWin();
             resetSprites();

@@ -21,6 +21,8 @@ public class MinesweeperController {
 
     private int bombCount = 9;
 
+    private int flagCount = 0;
+
     private int mode;
 
     public void initialize(Controller controller, int mode) {
@@ -30,6 +32,11 @@ public class MinesweeperController {
         setCellButtonHandlers();
         resetBoard();
         game.startGame();
+        updateGoalLabel();
+    }
+
+    private void updateGoalLabel(){
+        mainController.gameNotificationLabel.setText("Goal: (" + flagCount + "/" + bombCount + ")");
     }
 
     private void setCellButtonHandlers() {
@@ -93,6 +100,8 @@ public class MinesweeperController {
     }
 
     private void restartGame(){
+        flagCount = 0;
+        updateGoalLabel();
         resetBoard();
         game.gameState.reset();
         game.startGame();
@@ -276,10 +285,14 @@ public class MinesweeperController {
         if(cellIsFlagged){
             game.gameState.unflagCell(index);
             cellButtons.get(index).setText("");
+            flagCount--;
+            updateGoalLabel();
         }
         else{
             game.gameState.flagCell(index);
             cellButtons.get(index).setText("F");
+            flagCount++;
+            updateGoalLabel();
             checkVictory();
         }
     }
@@ -290,11 +303,7 @@ public class MinesweeperController {
         boolean[] flaggedCells = game.gameState.flaggedCells;
         int shownCellCount = 0;
         int flaggedBombs = 0;
-        int flagCount = 0;
         for(int i = 0; i < 81; i++){
-            if(flaggedCells[i]){
-                flagCount++;
-            }
             if(bombCells[i] && !flaggedCells[i]){
                 return;
             }
@@ -305,7 +314,6 @@ public class MinesweeperController {
                 shownCellCount++;
             }
         }
-        mainController.gameNotificationLabel.setText("Goal: (" + flagCount + "/" + bombCount + ")");
         if(flaggedBombs + shownCellCount == 81){
             if (mode == 0) {
                 endMinesweeper();

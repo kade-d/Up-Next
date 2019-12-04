@@ -85,7 +85,7 @@ public class SnakeController {
         gameState = new SnakeGameState(mainController, boardWidth, boardHeight);
         resetPane();
         addCellsToGridPane();
-        pane.setFocusTraversable(false);
+        pane.setFocusTraversable(true);
         getFocusForGame();
         getArrowInput();
     }
@@ -166,8 +166,12 @@ public class SnakeController {
 
     private void updateSnake(){
         gameState.moveSnake();
-        mainController.gameNotificationLabel.setText("Goal: (" + gameState.snake.size() + "/" + goalLength + ")");
+        updateGoalLabel();
         render();
+    }
+
+    private void updateGoalLabel(){
+        mainController.gameNotificationLabel.setText("Goal: (" + gameState.snake.size() + "/" + goalLength + ")");
     }
 
     private void getArrowInput() {
