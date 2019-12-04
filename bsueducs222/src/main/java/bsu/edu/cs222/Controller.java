@@ -48,6 +48,9 @@ public class Controller extends MainMenu {
     private Pane snake;
 
     @FXML
+    private Pane hangman;
+
+    @FXML
     private Button scoreboardButton;
 
     @FXML
