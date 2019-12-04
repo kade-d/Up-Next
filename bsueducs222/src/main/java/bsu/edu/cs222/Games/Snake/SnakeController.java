@@ -27,10 +27,6 @@ public class SnakeController {
 
     private ChangeListener<Boolean> listener = null;
 
-    private int direction = 1;
-
-    private Snake game;
-
     private SnakeGameState gameState;
 
     private int boardWidth = 25;
@@ -81,7 +77,7 @@ public class SnakeController {
         pane.focusedProperty().addListener(listener);
     }
 
-    public void startSnake(){
+    private void startSnake(){
         gameState = new SnakeGameState(mainController, boardWidth, boardHeight);
         resetPane();
         addCellsToGridPane();
@@ -111,7 +107,7 @@ public class SnakeController {
         }
     }
 
-    public void run() {
+    private void run() {
         AnimationTimer snakeTimer = makeSnakeTimer();
         snakeTimer.start();
         if(gameState.snake.size() >= goalLength){
@@ -120,9 +116,15 @@ public class SnakeController {
     }
 
     private void endSnake(){
-        mainController.saveWinToXML(new Game("Snake", true, "0"));
-        mainController.notifyGauntletCompleted();
-        gameIsRunning = false;
+        if(mode == 0) {
+            mainController.saveWinToXML(new Game("Snake", true, "0"));
+            mainController.notifyGauntletCompleted();
+            gameIsRunning = false;
+        }
+        if(mode == 1){
+            mainController.notifyWin();
+            startSnake();
+        }
     }
 
 
@@ -213,7 +215,7 @@ public class SnakeController {
         });
     }
 
-    public void setDirection(){
+    private void setDirection(){
         boolean upPressed = keyboardBitSet.get(KEY.UP.getValue());
         boolean rightPressed = keyboardBitSet.get(KEY.RIGHT.getValue());
         boolean downPressed = keyboardBitSet.get(KEY.DOWN.getValue());

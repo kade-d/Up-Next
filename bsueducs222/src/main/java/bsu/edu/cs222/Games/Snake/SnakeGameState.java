@@ -8,17 +8,15 @@ class SnakeGameState {
 
     ArrayList<Integer> snake = new ArrayList<>();
     private Controller mainController;
-    private int food;
-    private int direction;
+    int food;
+    int direction;
     int lastDirection;
     private int boardWidth;
-    private int boardHeight;
     private int cellCount;
 
     SnakeGameState(Controller mainController, int boardWidth, int boardHeight){
         this.mainController = mainController;
         this.boardWidth = boardWidth;
-        this.boardHeight = boardHeight;
         this.cellCount = boardWidth * boardHeight;
         snake.add(0);
         snake.add(1);
@@ -28,14 +26,14 @@ class SnakeGameState {
         placeFood();
     }
 
-    public void reset(){
+    private void reset(){
         while(snake.size() > 3){
             snake.remove(0);
         }
         placeFood();
     }
 
-    public void placeFood(){
+    private void placeFood(){
         int randomInt = (int)(Math.random() * cellCount);
         System.out.println(randomInt);
         if(snake.contains(randomInt)){
@@ -45,7 +43,7 @@ class SnakeGameState {
         food = randomInt;
     }
 
-    public void moveSnake(){
+    void moveSnake(){
         int snakeHead = snake.get(snake.size() - 1);
         int move = snakeHead;
         if(direction == 0) {
