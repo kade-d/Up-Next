@@ -26,9 +26,6 @@ public class SimonController {
     @FXML
     Button greenButton;
 
-    @FXML
-    Label currentLevelLabel;
-
     private int level = 0;
 
     private int mode;
@@ -219,27 +216,27 @@ public class SimonController {
     private void nextLevel() {
         answer = "";
         level = level + 1;
-        currentLevelLabel.setText("Current Level: " + level + "/6");
         generateOrder();
         playQuestion();
+        mainController.gameNotificationLabel.setText("Goal: Pass level 6 (" + level + "/6)");
     }
 
     private void startNewGame() {
         answer = "";
         question = "";
         level = 1;
-        currentLevelLabel.setText("Current Level: " + level + "/6");
         generateOrder();
         playQuestion();
+        mainController.gameNotificationLabel.setText("Goal: Pass level 6 (" + level + "/6)");
     }
 
     private void restartSimon() {
         level = 1;
         answer = "";
         question = "";
-        currentLevelLabel.setText("");
         generateOrder();
         playQuestion();
+        mainController.gameNotificationLabel.setText("Goal: Pass level 6 (" + level + "/6)");
     }
 
     private void endSimon() {

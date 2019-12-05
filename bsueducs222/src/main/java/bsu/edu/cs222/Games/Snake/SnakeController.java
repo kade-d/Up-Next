@@ -81,7 +81,7 @@ public class SnakeController {
         gameState = new SnakeGameState(mainController, boardWidth, boardHeight, mode);
         resetPane();
         addCellsToGridPane();
-        pane.setFocusTraversable(true);
+        pane.setFocusTraversable(false);
         getFocusForGame();
         getArrowInput();
     }

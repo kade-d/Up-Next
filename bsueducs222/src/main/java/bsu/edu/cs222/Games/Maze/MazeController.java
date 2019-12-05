@@ -76,6 +76,7 @@ public class MazeController {
         resetSprites();
         makeCollisionLoop().start();
         getFocusForGame();
+        mainController.gameNotificationLabel.setText("Goal: Reach the yellow coin.");
     }
 
     private void makeEnemyBalls() {
