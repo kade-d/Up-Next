@@ -11,11 +11,11 @@ import bsu.edu.cs222.UIComponents.LevelPickerController;
 import bsu.edu.cs222.UIComponents.ScoreboardController;
 import bsu.edu.cs222.UIComponents.StopwatchController;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -48,13 +48,13 @@ public class Controller extends MainMenu {
     private Pane snake;
 
     @FXML
-    private Pane hangman;
-
-    @FXML
     private Button scoreboardButton;
 
     @FXML
     private Button startGauntletButton;
+
+    @FXML
+    private Button infoButton;
 
     @FXML
     public Label gameNotificationLabel;
@@ -91,6 +91,8 @@ public class Controller extends MainMenu {
 
     public ArrayList<String> gameList = new ArrayList<>();
 
+    private String currentGame = "Main Menu";
+
     public void initialize(){
         addGamesToGameList();
         stopwatchController.initialize();
@@ -109,8 +111,18 @@ public class Controller extends MainMenu {
                 resetGamePane();
                 scoreboard.setVisible(true);
                 scoreboardController.initialize();
+                gameNotificationLabel.setText("");
+                currentGame = "Main Menu";
+                gameName.setText("Main Menu");
             }
         });
+        infoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                showInformation();
+            }
+        });
+        infoButton.setFocusTraversable(false);
     }
 
     private void addGamesToGameList(){
@@ -121,7 +133,35 @@ public class Controller extends MainMenu {
         gameList.add("Snake");
     }
 
+    private void showInformation(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Pro Tip");
+        alert.setHeaderText(currentGame + " Help");
+        switch (currentGame){
+            case "TicTacToe":
+                alert.setContentText("Click the boxes to place Xs and get 3 in a row to win.");
+                break;
+            case "Simon":
+                alert.setContentText("Watch which boxes light up and then click them in the correct order.");
+                break;
+            case "Minesweeper":
+                alert.setContentText("Left click boxes to clear, right click to flag.\nNumbers in cleared boxes indicate how many mines are in the 8 surrounding tiles.\nFlag all bombs and clear all remaining spaces to win.");
+                break;
+            case "Maze":
+                alert.setContentText("Use the arrow keys or WASD to move.\nDodge the red circles and reach the yellow coin to win.");
+                break;
+            case "Snake":
+                alert.setContentText("Use the arrow keys or WASD to turn.\nEat the red apples to increase in size.\nDon't run into your tail.");
+                break;
+            case "Main Menu":
+                alert.setContentText("This button can be pressed during any of the games to give helpful tips.\nIf you get confused by one of the games please click it.");
+                break;
+        }
+        alert.show();
+    }
+
     public void startTicTacToe(int mode) {
+        currentGame = "TicTacToe";
         resetGamePane();
         restartStopwatch();
         ticTacToeController.initialize(this, mode);
@@ -130,6 +170,7 @@ public class Controller extends MainMenu {
     }
 
     public void startSimon(int mode) {
+        currentGame = "Simon";
         if (mode == 1) {
             restartStopwatch();
         }
@@ -140,6 +181,7 @@ public class Controller extends MainMenu {
     }
 
     public void startMinesweeper(int mode) {
+        currentGame = "Minesweeper";
         if (mode == 1) {
             restartStopwatch();
         }
@@ -150,6 +192,7 @@ public class Controller extends MainMenu {
     }
 
     public void startMaze(int mode) {
+        currentGame = "Maze";
         if (mode == 1) {
             restartStopwatch();
         }
@@ -160,6 +203,7 @@ public class Controller extends MainMenu {
     }
 
     public void startSnake(int mode) {
+        currentGame = "Snake";
         if (mode == 1) {
             restartStopwatch();
         }
@@ -191,7 +235,7 @@ public class Controller extends MainMenu {
         makeBlinkTimer(winBlink).start();
     }
 
-    public void saveWinToXML(Game game) {
+    private void saveWinToXML(Game game) {
         FileIO fileIO = new FileIO();
         String filePath = fileIO.findXMLPath();
         ArrayList<Game> gameProgress = fileIO.readXML(filePath);
@@ -204,11 +248,23 @@ public class Controller extends MainMenu {
     }
 
     public void notifyGauntletCompleted() {
+        currentGame = "Main Menu";
         gameNotificationLabel.setText("Gauntlet completed!");
         notifyWin();
         resetGamePane();
         stopwatchController.stopwatch.stop();
-        saveWinToXML(new Game("Gauntlet", true, stopwatchController.getTime()));
+
+        final TextInputDialog enterUsernameTID = new TextInputDialog("Enter your username");
+        enterUsernameTID.setHeaderText("Username");
+        enterUsernameTID.setOnHidden(new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent dialogEvent) {
+                String username = enterUsernameTID.getEditor().getText();
+                saveWinToXML(new Game("Gauntlet", true, stopwatchController.getTime(), username));
+
+            }
+        });
+        enterUsernameTID.show();
     }
 
     private AnimationTimer makeBlinkTimer(final Rectangle rectangle) {

@@ -4,22 +4,26 @@ public class Game {
     private final String gameName;
     private final Boolean gameCompleted;
     private final String score;
+    private final String username;
 
-    public Game(String gameName, Boolean gameCompleted, String score) {
+    public Game(String gameName, Boolean gameCompleted, String score, String username) {
         this.gameName = gameName;
         this.gameCompleted = gameCompleted;
         this.score = score;
+        this.username = username;
     }
 
-    public String getGameName() {
+    String getGameName() {
         return gameName;
     }
 
-    public Boolean getGameCompleted() {
+    Boolean getGameCompleted() {
         return gameCompleted;
     }
 
     public String getScore() {
         return score;
     }
+
+    public String getUsername(){return username;}
 }

@@ -27,10 +27,6 @@ public class SnakeController {
 
     private ChangeListener<Boolean> listener = null;
 
-    private int direction = 1;
-
-    private Snake game;
-
     private SnakeGameState gameState;
 
     private int boardWidth = 25;
@@ -81,8 +77,8 @@ public class SnakeController {
         pane.focusedProperty().addListener(listener);
     }
 
-    public void startSnake(){
-        gameState = new SnakeGameState(mainController, boardWidth, boardHeight);
+    private void startSnake(){
+        gameState = new SnakeGameState(mainController, boardWidth, boardHeight, mode);
         resetPane();
         addCellsToGridPane();
         pane.setFocusTraversable(false);
@@ -111,7 +107,7 @@ public class SnakeController {
         }
     }
 
-    public void run() {
+    private void run() {
         AnimationTimer snakeTimer = makeSnakeTimer();
         snakeTimer.start();
         if(gameState.snake.size() >= goalLength){
@@ -122,6 +118,15 @@ public class SnakeController {
     private void endSnake(){
         mainController.notifyGauntletCompleted();
         gameIsRunning = false;
+        if(mode == 0) {
+            mainController.notifyGauntletCompleted();
+            gameIsRunning = false;
+        }
+        if(mode == 1){
+            mainController.notifyWin();
+            mainController.restartStopwatch();
+            startSnake();
+        }
     }
 
 
@@ -165,8 +170,12 @@ public class SnakeController {
 
     private void updateSnake(){
         gameState.moveSnake();
-        mainController.gameNotificationLabel.setText("Goal: (" + gameState.snake.size() + "/" + goalLength + ")");
+        updateGoalLabel();
         render();
+    }
+
+    private void updateGoalLabel(){
+        mainController.gameNotificationLabel.setText("Goal: Reach length 30 (" + gameState.snake.size() + "/" + goalLength + ")");
     }
 
     private void getArrowInput() {
@@ -208,7 +217,7 @@ public class SnakeController {
         });
     }
 
-    public void setDirection(){
+    private void setDirection(){
         boolean upPressed = keyboardBitSet.get(KEY.UP.getValue());
         boolean rightPressed = keyboardBitSet.get(KEY.RIGHT.getValue());
         boolean downPressed = keyboardBitSet.get(KEY.DOWN.getValue());

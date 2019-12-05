@@ -3,25 +3,23 @@ package bsu.edu.cs222.Games.Snake;
 import bsu.edu.cs222.Controller;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class SnakeGameState {
+class SnakeGameState {
 
-    private int[] cells = new int[400];
     ArrayList<Integer> snake = new ArrayList<>();
     private Controller mainController;
-    public int food;
-    public int direction;
-    public int lastDirection;
+    int food;
+    int direction;
+    int lastDirection;
     private int boardWidth;
-    private int boardHeight;
     private int cellCount;
+    private int mode;
 
-    SnakeGameState(Controller mainController, int boardWidth, int boardHeight){
+    SnakeGameState(Controller mainController, int boardWidth, int boardHeight, int mode){
         this.mainController = mainController;
         this.boardWidth = boardWidth;
-        this.boardHeight = boardHeight;
         this.cellCount = boardWidth * boardHeight;
+        this.mode = mode;
         snake.add(0);
         snake.add(1);
         snake.add(2);
@@ -30,16 +28,18 @@ public class SnakeGameState {
         placeFood();
     }
 
-    public void reset(){
+    private void reset(){
         while(snake.size() > 3){
             snake.remove(0);
+        }
+        if(mode == 1){
+            mainController.restartStopwatch();
         }
         placeFood();
     }
 
-    public void placeFood(){
+    private void placeFood(){
         int randomInt = (int)(Math.random() * cellCount);
-        System.out.println(randomInt);
         if(snake.contains(randomInt)){
             placeFood();
             return;
@@ -47,7 +47,7 @@ public class SnakeGameState {
         food = randomInt;
     }
 
-    public void moveSnake(){
+    void moveSnake(){
         int snakeHead = snake.get(snake.size() - 1);
         int move = snakeHead;
         if(direction == 0) {

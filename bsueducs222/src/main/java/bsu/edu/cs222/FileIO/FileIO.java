@@ -42,6 +42,7 @@ public class FileIO {
             String gameName = "";
             String gameCompleted = "";
             String score = "";
+            String username = "";
 
             for (int i = 0; i < nList.getLength(); i++) {
                 Node node = nList.item(i);
@@ -50,9 +51,10 @@ public class FileIO {
                     gameName = element.getElementsByTagName("gameName").item(0).getTextContent();
                     gameCompleted = element.getElementsByTagName("gameCompleted").item(0).getTextContent();
                     score = element.getElementsByTagName("gameScore").item(0).getTextContent();
+                    username = element.getElementsByTagName("username").item(0).getTextContent();
                 }
                 Boolean bGameCompleted = Boolean.parseBoolean(gameCompleted);
-                Game newGame = new Game(gameName, bGameCompleted, score);
+                Game newGame = new Game(gameName, bGameCompleted, score, username);
                 gameProgress.add(newGame);
             }
 
@@ -91,6 +93,10 @@ public class FileIO {
                 e = dom.createElement("gameScore");
                 String gameScore = game.getScore();
                 e.appendChild(dom.createTextNode(gameScore));
+                rootEle2.appendChild(e);
+                e = dom.createElement("username");
+                String username = game.getUsername();
+                e.appendChild(dom.createTextNode(username));
                 rootEle2.appendChild(e);
             }
 

@@ -20,6 +20,7 @@ public class StopwatchController {
     }
 
     public void resetStopwatch() {
+        stopwatchLabel.setText("0.0");
         stopwatch = makeTimer(stopwatchLabel);
     }
 

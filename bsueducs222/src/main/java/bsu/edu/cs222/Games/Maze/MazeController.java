@@ -23,15 +23,10 @@ public class MazeController {
     private AnchorPane mazePane;
 
     private Ball ball;
-
     private Coin coin;
-
     private ArrayList<EnemyBall> enemyBalls;
-
     private Controller mainController;
-
     private int mode;
-
     private final double ballSpeed = 150;
     private final double enemySpeed = 300;
     private final double firstEnemyStartingX = 0;
@@ -81,6 +76,7 @@ public class MazeController {
         resetSprites();
         makeCollisionLoop().start();
         getFocusForGame();
+        mainController.gameNotificationLabel.setText("Goal: Reach the yellow coin.");
     }
 
     private void makeEnemyBalls() {
@@ -364,6 +360,7 @@ public class MazeController {
             mainController.startSnake(0);
         }
         else if(mode == 1){
+            coinIsEaten = false;
             mainController.restartStopwatch();
             mainController.notifyWin();
             resetSprites();

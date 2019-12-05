@@ -175,6 +175,7 @@ public class TicTacToeController {
         cellList = new ArrayList<>();
         populateCellList();
         resetBoard();
+        mainController.gameNotificationLabel.setText("Goal: Beat the AI");
     }
 
     private void populateCellList() {

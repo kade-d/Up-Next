@@ -24,7 +24,7 @@ public class ScoreboardController {
     private void populateListView(ArrayList<Game> games) {
         ObservableList<String> observableList = FXCollections.observableArrayList();
         for (Game game : games) {
-            observableList.add("Score: " + game.getScore());
+            observableList.add("User: " + game.getUsername() + "*** Score: " + game.getScore());
         }
         scoreboard.setItems(observableList);
     }
