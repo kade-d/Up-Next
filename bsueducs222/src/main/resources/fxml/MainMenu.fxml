@@ -7,8 +7,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="666.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
-    <Pane fx:id="gamePane" layoutX="264.0" layoutY="146.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
+<AnchorPane prefHeight="625.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.Controller">
+    <Pane fx:id="gamePane" layoutX="264.0" layoutY="104.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
         <fx:include fx:id="scoreboard" source="Scoreboard.fxml" visible="false" />
         <fx:include fx:id="ticTacToe" source="TicTacToe.fxml" visible="false" />
         <fx:include fx:id="simon" source="Simon.fxml" visible="false" />
@@ -18,28 +18,33 @@
       <Rectangle fx:id="winBlink" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
       <Rectangle fx:id="loseBlink" arcHeight="5.0" arcWidth="5.0" fill="RED" height="500.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="500.0" />
     </Pane>
-   <Label fx:id="gameName" layoutX="264.0" layoutY="74.0" prefHeight="60.0" prefWidth="204.0" textAlignment="RIGHT" textOverrun="CLIP">
+   <Label fx:id="gameName" alignment="CENTER" layoutX="18.0" layoutY="24.0" prefHeight="60.0" prefWidth="220.0" text="Main Menu" textOverrun="CLIP">
       <font>
          <Font size="32.0" />
       </font>
    </Label>
-    <Pane layoutX="614.0" layoutY="74.0" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: lightgray;">
+    <Pane layoutX="614.0" layoutY="24.0" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: lightgray;">
         <fx:include fx:id="stopwatch" source="Stopwatch.fxml" />
     </Pane>
-    <Button fx:id="startGauntletButton" layoutX="18.0" layoutY="183.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="219.0" text="Start Gauntlet" textAlignment="CENTER" wrapText="true">
+    <Button fx:id="startGauntletButton" layoutX="18.0" layoutY="104.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="220.0" text="Start Gauntlet" textAlignment="CENTER" wrapText="true">
       <font>
           <Font name="Arial" size="30.0" />
       </font></Button>
-    <Label fx:id="gameNotificationLabel" alignment="CENTER" layoutX="475.0" layoutY="54.0" prefHeight="80.0" prefWidth="122.0" textAlignment="CENTER" wrapText="true">
+    <Label fx:id="gameNotificationLabel" alignment="CENTER" layoutX="324.0" layoutY="24.0" prefHeight="60.0" prefWidth="291.0" textAlignment="CENTER" wrapText="true">
       <font>
-         <Font size="28.0" />
+         <Font size="20.0" />
       </font></Label>
-    <Pane layoutX="62.0" layoutY="433.0" prefHeight="103.0" prefWidth="131.0">
+    <Pane layoutX="18.0" layoutY="388.0" prefHeight="103.0" prefWidth="220.0">
         <fx:include fx:id="levelPicker" source="LevelPicker.fxml" />
     </Pane>
-    <Button fx:id="scoreboardButton" layoutX="18.0" layoutY="297.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="219.0" text="High Scores">
+    <Button fx:id="scoreboardButton" layoutX="18.0" layoutY="245.0" mnemonicParsing="false" prefHeight="122.0" prefWidth="220.0" text="High Scores">
         <font>
             <Font size="30.0" />
         </font>
     </Button>
+   <Button layoutX="264.0" layoutY="24.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="?">
+      <font>
+         <Font size="28.0" />
+      </font>
+   </Button>
 </AnchorPane>

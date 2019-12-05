@@ -23,15 +23,10 @@ public class MazeController {
     private AnchorPane mazePane;
 
     private Ball ball;
-
     private Coin coin;
-
     private ArrayList<EnemyBall> enemyBalls;
-
     private Controller mainController;
-
     private int mode;
-
     private final double ballSpeed = 150;
     private final double enemySpeed = 300;
     private final double firstEnemyStartingX = 0;

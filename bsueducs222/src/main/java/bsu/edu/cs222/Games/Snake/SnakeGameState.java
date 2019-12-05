@@ -13,11 +13,13 @@ class SnakeGameState {
     int lastDirection;
     private int boardWidth;
     private int cellCount;
+    private int mode;
 
-    SnakeGameState(Controller mainController, int boardWidth, int boardHeight){
+    SnakeGameState(Controller mainController, int boardWidth, int boardHeight, int mode){
         this.mainController = mainController;
         this.boardWidth = boardWidth;
         this.cellCount = boardWidth * boardHeight;
+        this.mode = mode;
         snake.add(0);
         snake.add(1);
         snake.add(2);
@@ -30,12 +32,14 @@ class SnakeGameState {
         while(snake.size() > 3){
             snake.remove(0);
         }
+        if(mode == 1){
+            mainController.restartStopwatch();
+        }
         placeFood();
     }
 
     private void placeFood(){
         int randomInt = (int)(Math.random() * cellCount);
-        System.out.println(randomInt);
         if(snake.contains(randomInt)){
             placeFood();
             return;

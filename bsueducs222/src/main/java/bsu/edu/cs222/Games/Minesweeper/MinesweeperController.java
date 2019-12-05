@@ -16,13 +16,9 @@ public class MinesweeperController {
     private List<Button> cellButtons;
 
     private Controller mainController;
-
     private Minesweeper game;
-
     private int bombCount = 9;
-
     private int flagCount = 0;
-
     private int mode;
 
     public void initialize(Controller controller, int mode) {
@@ -36,7 +32,7 @@ public class MinesweeperController {
     }
 
     private void updateGoalLabel(){
-        mainController.gameNotificationLabel.setText("Goal: (" + flagCount + "/" + bombCount + ")");
+        mainController.gameNotificationLabel.setText("Goal: Flag 9 mines (" + flagCount + "/" + bombCount + ")");
     }
 
     private void setCellButtonHandlers() {

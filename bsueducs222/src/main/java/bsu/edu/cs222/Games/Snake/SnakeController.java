@@ -78,7 +78,7 @@ public class SnakeController {
     }
 
     private void startSnake(){
-        gameState = new SnakeGameState(mainController, boardWidth, boardHeight);
+        gameState = new SnakeGameState(mainController, boardWidth, boardHeight, mode);
         resetPane();
         addCellsToGridPane();
         pane.setFocusTraversable(true);
@@ -123,6 +123,7 @@ public class SnakeController {
         }
         if(mode == 1){
             mainController.notifyWin();
+            mainController.restartStopwatch();
             startSnake();
         }
     }
@@ -173,7 +174,7 @@ public class SnakeController {
     }
 
     private void updateGoalLabel(){
-        mainController.gameNotificationLabel.setText("Goal: (" + gameState.snake.size() + "/" + goalLength + ")");
+        mainController.gameNotificationLabel.setText("Goal: Reach length 30 (" + gameState.snake.size() + "/" + goalLength + ")");
     }
 
     private void getArrowInput() {
