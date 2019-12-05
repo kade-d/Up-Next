@@ -244,7 +244,6 @@ public class SimonController {
 
     private void endSimon() {
         mainController.notifyWin();
-        mainController.saveWinToXML(new Game("Simon", true, "0"));
         mainController.startMinesweeper(0);
     }
 }

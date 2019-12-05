@@ -208,6 +208,7 @@ public class Controller extends MainMenu {
         notifyWin();
         resetGamePane();
         stopwatchController.stopwatch.stop();
+        saveWinToXML(new Game("Gauntlet", true, stopwatchController.getTime()));
     }
 
     private AnimationTimer makeBlinkTimer(final Rectangle rectangle) {

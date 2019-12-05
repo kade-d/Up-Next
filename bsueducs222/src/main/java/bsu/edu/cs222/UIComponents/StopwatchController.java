@@ -15,6 +15,10 @@ public class StopwatchController {
         stopwatch = makeTimer(stopwatchLabel);
     }
 
+    public String getTime(){
+        return stopwatchLabel.getText();
+    }
+
     public void resetStopwatch() {
         stopwatch = makeTimer(stopwatchLabel);
     }
