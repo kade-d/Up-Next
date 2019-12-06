@@ -1,7 +1,6 @@
 package bsu.edu.cs222.Games.Minesweeper;
 
 import bsu.edu.cs222.Controller;
-import bsu.edu.cs222.FileIO.Game;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

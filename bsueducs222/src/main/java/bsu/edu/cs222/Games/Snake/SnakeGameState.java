@@ -13,13 +13,11 @@ public class SnakeGameState {
     int lastDirection;
     private int boardWidth;
     private int cellCount;
-    private int mode;
 
-    public SnakeGameState(Controller mainController, int boardWidth, int boardHeight, int mode){
+    public SnakeGameState(Controller mainController, int boardWidth, int boardHeight){
         this.mainController = mainController;
         this.boardWidth = boardWidth;
         this.cellCount = boardWidth * boardHeight;
-        this.mode = mode;
         snake.add(0);
         snake.add(1);
         snake.add(2);
@@ -28,13 +26,13 @@ public class SnakeGameState {
         placeFood();
     }
 
-    private void reset(){
-        while(snake.size() > 3){
-            snake.remove(0);
-        }
-        if(mode == 1){
-            mainController.restartStopwatch();
-        }
+    void restart(){
+        snake.clear();
+        snake.add(0);
+        snake.add(1);
+        snake.add(2);
+        direction = 1;
+        lastDirection = 1;
         placeFood();
     }
 
@@ -53,31 +51,36 @@ public class SnakeGameState {
         if(direction == 0) {
             move = snakeHead - boardWidth;
             if(move < 0){
-                move = move + cellCount;
+                restart();
+                return;
             }
         }
         if(direction == 1) {
             move = snakeHead + 1;
             if(move % boardWidth == 0){
-                move = move - boardWidth;
+                restart();
+                return;
             }
         }
         if(direction == 2) {
             move = snakeHead + boardWidth;
             if(move > cellCount - 1){
-                move = move - cellCount;
+                restart();
+                return;
             }
         }
         if(direction == 3) {
             move = snakeHead - 1;
             if(move % boardWidth == boardWidth - 1 || move == -1){
-                move = move + boardWidth;
+                restart();
+                return;
             }
         }
         lastDirection = direction;
         if(snake.contains(move) && move != snake.get(0)){
             mainController.notifyLoss();
-            reset();
+            restart();
+            return;
         }
         if(move == food){
             snake.add(move);
@@ -88,6 +91,4 @@ public class SnakeGameState {
             snake.remove(0);
         }
     }
-
-
 }

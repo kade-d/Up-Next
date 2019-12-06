@@ -1,7 +1,6 @@
 package bsu.edu.cs222.Games.Simon;
 
 import bsu.edu.cs222.Controller;
-import bsu.edu.cs222.FileIO.Game;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
