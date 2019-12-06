@@ -27355,4 +27355,9 @@
         <gameCompleted>true</gameCompleted>
         <gameScore>0</gameScore>
     </game>
+    <game>
+        <gameName>Maze</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>0</gameScore>
+    </game>
 </gameProgress>

@@ -136,6 +136,8 @@ public class Controller extends MainMenu {
 
     private void showInformation(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setWidth(400);
+        alert.setHeight(300);
         alert.setTitle("Pro Tip");
         alert.setHeaderText(currentGame + " Help");
         switch (currentGame){
@@ -143,10 +145,10 @@ public class Controller extends MainMenu {
                 alert.setContentText("Click the boxes to place Xs and get 3 in a row to win.");
                 break;
             case "Simon":
-                alert.setContentText("Watch which boxes light up and then click them in the correct order.");
+                alert.setContentText("Watch which boxes light up and then click them\nin the correct order.");
                 break;
             case "Minesweeper":
-                alert.setContentText("Left click boxes to clear, right click to flag.\nNumbers in cleared boxes indicate how many mines are in the 8 surrounding tiles.\nFlag all bombs and clear all remaining spaces to win.");
+                alert.setContentText("Left click boxes to clear, right click to flag.\nNumbers in cleared boxes indicate how many mines\nare in the 8 surrounding tiles.\nFlag all bombs and clear all remaining spaces to win.");
                 break;
             case "Maze":
                 alert.setContentText("Use the arrow keys or WASD to move.\nDodge the red circles and reach the yellow coin to win.");
@@ -155,7 +157,7 @@ public class Controller extends MainMenu {
                 alert.setContentText("Use the arrow keys or WASD to turn.\nEat the red apples to increase in size.\nDon't run into your tail.");
                 break;
             case "Main Menu":
-                alert.setContentText("This button can be pressed during any of the games to give helpful tips.\nIf you get confused by one of the games please click it.");
+                alert.setContentText("This button can be pressed during any of the games\nto give helpful tips.\nIf you get confused by one of the games please click it.");
                 break;
         }
         alert.show();
