@@ -41,15 +41,10 @@ public class TicTacToeController {
 
 
     private ArrayList<Button> cellList = new ArrayList<>();
-
     private int turnNumber = 0;
-
     private int mode;
-
     private boolean gameIsPlaying = false;
-
     private TicTacToe game;
-
     private Controller mainController;
 
     public void initialize(Controller controller, int mode) {

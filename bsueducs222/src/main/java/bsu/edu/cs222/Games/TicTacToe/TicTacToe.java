@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class TicTacToe {
 
-    //Author: Adam
-
     public final TicTacToeGameState gameState = new TicTacToeGameState();
     public String victor = null;
 
