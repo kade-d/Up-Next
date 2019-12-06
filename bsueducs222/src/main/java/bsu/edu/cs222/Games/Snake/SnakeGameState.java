@@ -4,9 +4,9 @@ import bsu.edu.cs222.Controller;
 
 import java.util.ArrayList;
 
-class SnakeGameState {
+public class SnakeGameState {
 
-    ArrayList<Integer> snake = new ArrayList<>();
+    public ArrayList<Integer> snake = new ArrayList<>();
     private Controller mainController;
     int food;
     int direction;
@@ -15,7 +15,7 @@ class SnakeGameState {
     private int cellCount;
     private int mode;
 
-    SnakeGameState(Controller mainController, int boardWidth, int boardHeight, int mode){
+    public SnakeGameState(Controller mainController, int boardWidth, int boardHeight, int mode){
         this.mainController = mainController;
         this.boardWidth = boardWidth;
         this.cellCount = boardWidth * boardHeight;
