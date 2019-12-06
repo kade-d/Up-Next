@@ -15,42 +15,43 @@
     <game>
         <gameName>Gauntlet</gameName>
         <gameCompleted>true</gameCompleted>
-        <gameScore>299.0</gameScore>
+        <gameScore>134.2</gameScore>
+        <username>Adam</username>
+    </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>134.2</gameScore>
+        <username>what</username>
+    </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>171.2</gameScore>
+        <username>Clown man</username>
+    </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>171.2</gameScore>
+        <username>Clown man again</username>
+    </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>240.2</gameScore>
+        <username>gg</username>
+    </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>240.2</gameScore>
         <username>Enter your username</username>
     </game>
     <game>
         <gameName>Gauntlet</gameName>
         <gameCompleted>true</gameCompleted>
-        <gameScore>299.0</gameScore>
+        <gameScore>4.7</gameScore>
         <username>Enter your username</username>
-    </game>
-    <game>
-        <gameName>Gauntlet</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>274.5</gameScore>
-        <username>User1</username>
-    </game>
-    <game>
-        <gameName>Gauntlet</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>274.5</gameScore>
-        <username>User1</username>
-    </game>
-    <game>
-        <gameName>Gauntlet</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>1.8</gameScore>
-        <username>kade</username>
-    </game>
-    <game>
-        <gameName>Gauntlet</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>1.4</gameScore>
-        <username>k</username>
-    </game>
-    <game>
-        <gameName>Maze</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>0</gameScore>
     </game>
 </gameProgress>

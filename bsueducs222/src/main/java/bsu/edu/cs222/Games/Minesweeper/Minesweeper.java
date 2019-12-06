@@ -6,7 +6,7 @@ public class Minesweeper {
 
     private int bombNumber;
 
-    Minesweeper(int bombCount){
+    public Minesweeper(int bombCount){
         this.bombNumber = bombCount;
     }
 

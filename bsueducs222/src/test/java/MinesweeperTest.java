@@ -11,7 +11,7 @@ public class MinesweeperTest {
 
     @Test
     public void minesweeperCellsAreFlaggedCorrectly() {
-        Minesweeper minesweeper = new Minesweeper();
+        Minesweeper minesweeper = new Minesweeper(9);
         minesweeper.gameState.flagCell(0);
         assertTrue(minesweeper.gameState.flaggedCells[0]);
     }

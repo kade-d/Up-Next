@@ -356,6 +356,7 @@ public class MazeController {
     private void winMaze(){
         if(mode == 0) {
             resetSprites();
+            coinIsEaten = false;
             mainController.notifyWin();
             mainController.startSnake(0);
         }

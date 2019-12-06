@@ -30,7 +30,7 @@ public class SimonController {
 
     private String answer = "";
 
-    private String question = "";
+    public String question = "";
 
     private Controller mainController;
 
@@ -130,7 +130,7 @@ public class SimonController {
         return level == 6;
     }
 
-    private void generateOrder(){
+    public void generateOrder(){
         int randomInt = (int )(Math.random() * 4 + 1);
         if(randomInt == 1){
             question = question.concat("A");
