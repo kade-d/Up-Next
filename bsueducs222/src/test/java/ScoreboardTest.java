@@ -13,7 +13,7 @@ public class ScoreboardTest {
     }
 
     @Test
-    public void testLeastToGreatestSortingWorks() {
+    public void LeastToGreatestSortingWorks() {
         Game firstGame = new Game("firstGame", true, "999", "Test");
         Game secondGame = new Game("secondGame", true, "0", "Test");
 

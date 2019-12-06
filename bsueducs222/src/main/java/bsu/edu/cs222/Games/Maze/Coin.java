@@ -4,7 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Coin {
+class Coin {
 
     private Circle circle = new Circle();
 
@@ -17,12 +17,12 @@ public class Coin {
         circle.setCenterY(0);
     }
 
-    void setTranslateX(double x) {
-        circle.setTranslateX(x);
+    void setStartingPositionX() {
+        circle.setTranslateX(480);
     }
 
-    void setTranslateY(double y) {
-        circle.setTranslateY(y);
+    void setStartingPositionY() {
+        circle.setTranslateY(250);
     }
 
     double getTranslateX() {
@@ -37,8 +37,8 @@ public class Coin {
         return circle.getRadius();
     }
 
-    void setVisible(boolean bool) {
-        circle.setVisible(bool);
+    void setVisible() {
+        circle.setVisible(true);
     }
 
     void setParent(Pane pane) {

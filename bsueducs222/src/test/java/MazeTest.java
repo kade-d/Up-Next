@@ -11,7 +11,7 @@ public class MazeTest {
     }
 
     @Test
-    public void testAcceptsRightMovement() {
+    public void mazeAcceptsRightMovement() {
         MazeController mazeController = new MazeController();
         mazeController.keyboardBitSet.set(MazeController.KEY.RIGHT.getValue());
         mazeController.setBallVelocityFromBitSet();
@@ -19,7 +19,7 @@ public class MazeTest {
     }
 
     @Test
-    public void testAcceptsLeftMovement() {
+    public void mazeAcceptsLeftMovement() {
         MazeController mazeController = new MazeController();
         mazeController.keyboardBitSet.set(MazeController.KEY.LEFT.getValue());
         mazeController.setBallVelocityFromBitSet();
@@ -27,7 +27,7 @@ public class MazeTest {
     }
 
     @Test
-    public void testAcceptsUpMovement() {
+    public void mazeAcceptsUpMovement() {
         MazeController mazeController = new MazeController();
         mazeController.keyboardBitSet.set(MazeController.KEY.UP.getValue());
         mazeController.setBallVelocityFromBitSet();
@@ -35,7 +35,7 @@ public class MazeTest {
     }
 
     @Test
-    public void testAcceptsDownMovement() {
+    public void mazeAcceptsDownMovement() {
         MazeController mazeController = new MazeController();
         mazeController.keyboardBitSet.set(MazeController.KEY.DOWN.getValue());
         mazeController.setBallVelocityFromBitSet();

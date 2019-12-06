@@ -37,8 +37,8 @@ class EnemyBall {
         return circle.getRadius();
     }
 
-    void setVisible(boolean bool) {
-        circle.setVisible(bool);
+    void setVisible() {
+        circle.setVisible(true);
     }
 
     void setParent(Pane pane) {

@@ -102,7 +102,7 @@ public class MazeController {
             circle.setTranslateX(firstEnemyStartingX + deltaX);
             circle.setTranslateY(250);
             circle.setParent(mazePane);
-            circle.setVisible(true);
+            circle.setVisible();
         }
     }
 
@@ -110,14 +110,14 @@ public class MazeController {
         circle.setTranslateX(minX + 40);
         circle.setTranslateY(250);
         circle.setParent(mazePane);
-        circle.setVisible(true);
+        circle.setVisible();
     }
 
     private void setCoinPosition(Coin circle) {
         circle.setParent(mazePane);
-        circle.setVisible(true);
-        circle.setTranslateX(480);
-        circle.setTranslateY(250);
+        circle.setVisible();
+        circle.setStartingPositionX();
+        circle.setStartingPositionY();
     }
 
     private AnimationTimer makeAnimationLoop(final LongProperty lastUpdateTime) {
