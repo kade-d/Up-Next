@@ -78,7 +78,7 @@ public class SnakeController {
     }
 
     private void startSnake(){
-        gameState = new SnakeGameState(mainController, boardWidth, boardHeight, mode);
+        gameState = new SnakeGameState(mainController, boardWidth, boardHeight);
         resetPane();
         addCellsToGridPane();
         pane.setFocusTraversable(false);
@@ -124,7 +124,7 @@ public class SnakeController {
         if(mode == 1){
             mainController.notifyWin();
             mainController.restartStopwatch();
-            startSnake();
+            gameState.restart();
         }
     }
 

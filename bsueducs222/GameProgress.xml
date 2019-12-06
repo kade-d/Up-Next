@@ -24,4 +24,16 @@
         <gameScore>1.3</gameScore>
         <username>Kade</username>
     </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>382.2</gameScore>
+        <username>jsmesser</username>
+    </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>328.5</gameScore>
+        <username>Adam</username>
+    </game>
 </gameProgress>
