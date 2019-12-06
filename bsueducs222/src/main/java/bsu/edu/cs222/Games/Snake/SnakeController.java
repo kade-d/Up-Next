@@ -116,7 +116,6 @@ public class SnakeController {
     }
 
     private void endSnake(){
-        gameIsRunning = false;
         if(mode == 0) {
             mainController.notifyGauntletCompleted();
             gameIsRunning = false;
