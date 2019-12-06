@@ -1,6 +1,6 @@
 package bsu.edu.cs222.Games.Snake;
+
 import bsu.edu.cs222.Controller;
-import bsu.edu.cs222.FileIO.Game;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -116,7 +116,6 @@ public class SnakeController {
     }
 
     private void endSnake(){
-        mainController.notifyGauntletCompleted();
         gameIsRunning = false;
         if(mode == 0) {
             mainController.notifyGauntletCompleted();
