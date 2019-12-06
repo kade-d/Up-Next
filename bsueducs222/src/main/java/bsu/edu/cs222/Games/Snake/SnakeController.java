@@ -12,7 +12,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
-
 import java.util.ArrayList;
 import java.util.BitSet;
 
@@ -22,23 +21,14 @@ public class SnakeController {
     private GridPane pane;
 
     private Controller mainController;
-
     private BitSet keyboardBitSet = new BitSet();
-
     private ChangeListener<Boolean> listener = null;
-
     private SnakeGameState gameState;
-
     private int boardWidth = 25;
-
     private int boardHeight = 25;
-
     private int gameSpeed = 50;
-
     private int goalLength = 30;
-
     private int mode;
-
     private boolean gameIsRunning = false;
 
     private enum KEY {

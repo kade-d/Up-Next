@@ -1,7 +1,6 @@
 package bsu.edu.cs222.Games.TicTacToe;
 
 import bsu.edu.cs222.Controller;
-import bsu.edu.cs222.FileIO.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -42,15 +41,10 @@ public class TicTacToeController {
 
 
     private ArrayList<Button> cellList = new ArrayList<>();
-
     private int turnNumber = 0;
-
     private int mode;
-
     private boolean gameIsPlaying = false;
-
     private TicTacToe game;
-
     private Controller mainController;
 
     public void initialize(Controller controller, int mode) {

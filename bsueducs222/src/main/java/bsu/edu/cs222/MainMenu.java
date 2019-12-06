@@ -4,14 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
-    /*@author Kade Dentel
-    * */
 
 public class MainMenu extends Application {
 

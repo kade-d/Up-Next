@@ -11,7 +11,6 @@ import bsu.edu.cs222.UIComponents.LevelPickerController;
 import bsu.edu.cs222.UIComponents.ScoreboardController;
 import bsu.edu.cs222.UIComponents.StopwatchController;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
