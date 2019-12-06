@@ -18,14 +18,26 @@ public class ScoreboardController {
         FileIO fileIO = new FileIO();
         String filePath = fileIO.findXMLPath();
         ArrayList<Game> games = fileIO.readXML(filePath);
-        populateListView(games);
+        ArrayList<Game> sortedGames = sortGamesByScore(games);
+        populateListView(sortedGames);
     }
 
-    private void populateListView(ArrayList<Game> games) {
+    private void populateListView(ArrayList<Game> gamesSorted) {
         ObservableList<String> observableList = FXCollections.observableArrayList();
-        for (Game game : games) {
+        for (Game game : gamesSorted) {
             observableList.add("User: " + game.getUsername() + "*** Score: " + game.getScore());
         }
         scoreboard.setItems(observableList);
+    }
+
+    private ArrayList<Game> sortGamesByScore(ArrayList<Game> games) {
+        for (int i = 0; i < games.size() - 1; i++) {
+            if (Float.parseFloat(games.get(i).getScore()) < Float.parseFloat(games.get(i + 1).getScore())) {
+                Game tempGame = games.get(i);
+                games.set(i, games.get(i + 1));
+                games.set(i + 1, tempGame);
+            }
+        }
+        return games;
     }
 }

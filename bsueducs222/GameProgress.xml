@@ -3,26 +3,8 @@
     <game>
         <gameName>Gauntlet</gameName>
         <gameCompleted>true</gameCompleted>
-        <gameScore>2.0</gameScore>
-        <username>kade</username>
-    </game>
-    <game>
-        <gameName>Gauntlet</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>1.2</gameScore>
-        <username>kade</username>
-    </game>
-    <game>
-        <gameName>Gauntlet</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>1.3</gameScore>
-        <username>kade</username>
-    </game>
-    <game>
-        <gameName>Gauntlet</gameName>
-        <gameCompleted>true</gameCompleted>
-        <gameScore>158.3</gameScore>
-        <username>KADE</username>
+        <gameScore>999</gameScore>
+        <username>Kade</username>
     </game>
     <game>
         <gameName>Gauntlet</gameName>
@@ -34,6 +16,12 @@
         <gameName>Gauntlet</gameName>
         <gameCompleted>true</gameCompleted>
         <gameScore>136.3</gameScore>
+        <username>Kade</username>
+    </game>
+    <game>
+        <gameName>Gauntlet</gameName>
+        <gameCompleted>true</gameCompleted>
+        <gameScore>1.3</gameScore>
         <username>Kade</username>
     </game>
 </gameProgress>
