@@ -323,7 +323,6 @@ public class MinesweeperController {
 
     private void endMinesweeper() {
         mainController.notifyWin();
-        mainController.saveWinToXML(new Game("Minesweeper", true, "0"));
         mainController.startMaze(0);
     }
 }

@@ -354,7 +354,6 @@ public class MazeController {
     }
 
     private void winMaze(){
-        mainController.saveWinToXML(new Game("Maze", true, "0"));
         if(mode == 0) {
             resetSprites();
             mainController.notifyWin();

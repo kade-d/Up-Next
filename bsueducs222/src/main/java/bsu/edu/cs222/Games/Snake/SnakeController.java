@@ -116,8 +116,9 @@ public class SnakeController {
     }
 
     private void endSnake(){
+        mainController.notifyGauntletCompleted();
+        gameIsRunning = false;
         if(mode == 0) {
-            mainController.saveWinToXML(new Game("Snake", true, "0"));
             mainController.notifyGauntletCompleted();
             gameIsRunning = false;
         }

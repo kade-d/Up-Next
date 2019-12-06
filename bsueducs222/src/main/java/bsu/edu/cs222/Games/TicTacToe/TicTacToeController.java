@@ -233,7 +233,6 @@ public class TicTacToeController {
 
     private void declareWin() {
         mainController.notifyWin();
-        mainController.saveWinToXML(new Game("TicTacToe", true, "0"));
         if (mode == 0) {
             mainController.startSimon(0);
         } else if (mode == 1) {

@@ -7,8 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -241,7 +239,6 @@ public class SimonController {
 
     private void endSimon() {
         mainController.notifyWin();
-        mainController.saveWinToXML(new Game("Simon", true, "0"));
         mainController.startMinesweeper(0);
     }
 }

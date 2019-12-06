@@ -11,12 +11,11 @@ import bsu.edu.cs222.UIComponents.LevelPickerController;
 import bsu.edu.cs222.UIComponents.ScoreboardController;
 import bsu.edu.cs222.UIComponents.StopwatchController;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -238,7 +237,7 @@ public class Controller extends MainMenu {
         makeBlinkTimer(winBlink).start();
     }
 
-    public void saveWinToXML(Game game) {
+    private void saveWinToXML(Game game) {
         FileIO fileIO = new FileIO();
         String filePath = fileIO.findXMLPath();
         ArrayList<Game> gameProgress = fileIO.readXML(filePath);
@@ -256,6 +255,18 @@ public class Controller extends MainMenu {
         notifyWin();
         resetGamePane();
         stopwatchController.stopwatch.stop();
+
+        final TextInputDialog enterUsernameTID = new TextInputDialog("Enter your username");
+        enterUsernameTID.setHeaderText("Username");
+        enterUsernameTID.setOnHidden(new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent dialogEvent) {
+                String username = enterUsernameTID.getEditor().getText();
+                saveWinToXML(new Game("Gauntlet", true, stopwatchController.getTime(), username));
+
+            }
+        });
+        enterUsernameTID.show();
     }
 
     private AnimationTimer makeBlinkTimer(final Rectangle rectangle) {
