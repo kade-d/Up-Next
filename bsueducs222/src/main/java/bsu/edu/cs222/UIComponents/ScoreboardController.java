@@ -30,14 +30,19 @@ public class ScoreboardController {
         scoreboard.setItems(observableList);
     }
 
-    private ArrayList<Game> sortGamesByScore(ArrayList<Game> games) {
+    public ArrayList<Game> sortGamesByScore(ArrayList<Game> games) {
         for (int i = 0; i < games.size() - 1; i++) {
-            if (Float.parseFloat(games.get(i).getScore()) < Float.parseFloat(games.get(i + 1).getScore())) {
-                Game tempGame = games.get(i);
-                games.set(i, games.get(i + 1));
-                games.set(i + 1, tempGame);
+            for (int j = 0; j < games.size() - i - 1; j++) {
+
+                if (Float.parseFloat(games.get(j).getScore()) > Float.parseFloat(games.get(j + 1).getScore())) {
+                    Game tempGame = games.get(j);
+                    games.set(j, games.get(j + 1));
+                    games.set(j + 1, tempGame);
+                }
+
             }
         }
+
         return games;
     }
 }

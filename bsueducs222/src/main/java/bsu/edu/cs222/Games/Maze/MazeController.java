@@ -1,7 +1,6 @@
 package bsu.edu.cs222.Games.Maze;
 
 import bsu.edu.cs222.Controller;
-import bsu.edu.cs222.FileIO.Game;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -27,23 +26,17 @@ public class MazeController {
     private ArrayList<EnemyBall> enemyBalls;
     private Controller mainController;
     private int mode;
-    private final double ballSpeed = 150;
-    private final double enemySpeed = 300;
-    private final double firstEnemyStartingX = 0;
-    private final int distanceBetweenEnemies = 85;
-    private final int enemyBallCount = 5;
     private double minX = 0;
-    private double maxX = 500;
     private double minY = 0;
     private double maxY = 500;
     private boolean coinIsEaten = false;
-    private BitSet keyboardBitSet = new BitSet();
+    public BitSet keyboardBitSet = new BitSet();
     private DoubleProperty enemyBallVelocity = new SimpleDoubleProperty();
-    private DoubleProperty circleXVelocity = new SimpleDoubleProperty();
-    private DoubleProperty circleYVelocity = new SimpleDoubleProperty();
+    public DoubleProperty circleXVelocity = new SimpleDoubleProperty();
+    public DoubleProperty circleYVelocity = new SimpleDoubleProperty();
     private LongProperty lastUpdateTime = new SimpleLongProperty();
 
-    private enum KEY {
+    public enum KEY {
         RIGHT(0),
         LEFT(1),
         UP(2),
@@ -81,6 +74,7 @@ public class MazeController {
 
     private void makeEnemyBalls() {
         enemyBalls = new ArrayList<>();
+        int enemyBallCount = 5;
         for (int i = 0; i < enemyBallCount; i++) {
             enemyBalls.add(new EnemyBall());
         }
@@ -90,6 +84,7 @@ public class MazeController {
         mazePane.getChildren().clear();
         circleXVelocity.set(0);
         circleYVelocity.set(0);
+        double enemySpeed = 300;
         enemyBallVelocity.set(enemySpeed);
         setCoinPosition(coin);
         setBallStartingPosition(ball);
@@ -101,7 +96,9 @@ public class MazeController {
         int deltaX;
         for (EnemyBall circle : circles) {
             count += 1;
+            int distanceBetweenEnemies = 85;
             deltaX = count * distanceBetweenEnemies;
+            double firstEnemyStartingX = 0;
             circle.setTranslateX(firstEnemyStartingX + deltaX);
             circle.setTranslateY(250);
             circle.setParent(mazePane);
@@ -218,6 +215,7 @@ public class MazeController {
         final double oldX = ball.getTranslateX();
         final double oldY = ball.getTranslateY();
         final double radius = ball.getRadius();
+        double maxX = 500;
         final double newX = Math.max(minX + radius, Math.min(maxX - radius, oldX + deltaX));
         final double newY = Math.max(minY + radius, Math.min(maxY - radius, oldY + deltaY));
         ball.setTranslateX(newX);
@@ -275,12 +273,13 @@ public class MazeController {
         });
     }
 
-    private void setBallVelocityFromBitSet() {
+    public void setBallVelocityFromBitSet() {
         boolean rightPressed = keyboardBitSet.get(KEY.RIGHT.getValue());
         boolean leftPressed = keyboardBitSet.get(KEY.LEFT.getValue());
         boolean upPressed = keyboardBitSet.get(KEY.UP.getValue());
         boolean downPressed = keyboardBitSet.get(KEY.DOWN.getValue());
 
+        double ballSpeed = 150;
         if (rightPressed && !leftPressed) {
             circleXVelocity.set(ballSpeed);
         }
